@@ -1,7 +1,7 @@
 ---
 title: "Season 5 Final Preview: Blood or Roots?"
 subtitle: "Every former champion is out. On December 1, Paradice crowns a new one."
-date: 2026-11-29
+date: 2026-11-22T12:00:00
 section: "The Daily Skull"
 image: "/images/season-5-final-illustration.jpg"
 imageCaption: "Blood against roots. Illustration: AI-generated."

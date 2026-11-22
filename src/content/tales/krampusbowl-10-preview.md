@@ -1,7 +1,7 @@
 ---
 title: "Krampusbowl 10: Chasing the Casualty Crown"
 subtitle: "Two third places, two snow globes and one award that slipped away. Your correspondent brings Black Orcs again."
-date: 2026-11-28
+date: 2026-11-22T10:00:00
 section: "The Daily Skull"
 image: "/images/krampusbowl-trophies.jpg"
 ---
@@ -10,7 +10,7 @@ Ten years, ten tournaments. On Saturday, December 5, the Krampusbowl celebrates 
 
 ## Two podiums and a near miss
 
-At the last two Krampusbowls, I finished third. Two podiums in a strong field, and two of those wonderful snow globe trophies now sitting on my shelf. I'm proud of both. You can see them, and the rest of the shelf, on the [trophy page](/trophies/).
+At the last two Krampusbowls, I finished third. Two podiums in a strong field, and two of those wonderful snow globe trophies now sitting on my shelf. I'm proud of both.
 
 There's just one funny detail. At Krampusbowl 8, with Black Orcs, I also caused the most casualties of the tournament. But every coach can only take home one trophy, so the podium came first and the casualty award went to the next coach in line. Not the worst problem a coach can have, but it does leave a gap on the shelf.
 
