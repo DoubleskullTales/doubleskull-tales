@@ -12,7 +12,6 @@ const nav = [
   { href: '/about/', label: 'About' },
 ];
 const isActive = (href: string) => href === '/' ? path === '/' : path.startsWith(href);
-const today = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +30,7 @@ const today = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'l
 <body>
   <div class="topbar"><div class="wrap">
     <span>Vienna Edition</span>
-    <span class="hide-sm">{today}</span>
+    <span class="hide-sm">Coaching since 1996</span>
     <span><a href={SITE.instagram}>Instagram</a> &middot; <a href={SITE.youtube}>YouTube</a></span>
   </div></div>
   <header class="masthead"><div class="wrap">
