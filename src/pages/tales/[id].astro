@@ -18,7 +18,12 @@ const d = tale.data.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'l
     {tale.data.subtitle && <p class="sub">{tale.data.subtitle}</p>}
     <div class="meta">By {SITE.author} &middot; {d}</div>
   </header>
-  {tale.data.image && <img class="hero-img" src={tale.data.image} alt="" />}
+  {tale.data.image && (
+    <figure class="hero-fig">
+      <img class="hero-img" src={tale.data.image} alt="" />
+      {tale.data.imageCaption && <figcaption>{tale.data.imageCaption}</figcaption>}
+    </figure>
+  )}
   <div class="prose"><Content /></div>
   <p style="text-align:center;margin-top:50px"><a class="btn dark" href="/tales/">More tales</a></p>
 </Base>

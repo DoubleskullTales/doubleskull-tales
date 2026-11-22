@@ -202,3 +202,8 @@ footer .fine { color: var(--muted); font-size: .75rem; margin-top: 8px; max-widt
 .tbody h3 { font-family: 'Anton'; text-transform: uppercase; font-weight: 400; font-size: 1.5rem; line-height: 1.05; margin: 0; }
 .tmeta { font-family: 'Inter'; font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
 .tbody p { font-style: italic; font-size: 1.1rem; margin-top: 6px; }
+
+.hero-fig { max-width: 900px; margin: 0 auto 36px; }
+.hero-fig .hero-img { margin: 0; }
+.hero-fig figcaption { font-family: 'Inter', sans-serif; font-size: .78rem; color: var(--muted); margin-top: 8px; }
+.lead .pic img { object-position: 60% center; }

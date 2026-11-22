@@ -9,6 +9,7 @@ const tales = defineCollection({
     date: z.coerce.date(),
     section: z.enum(['The Daily Skull', 'Team Portraits', 'Orcs Illustrated', 'Coaching Corner']),
     image: z.string().optional(),
+    imageCaption: z.string().optional(),
     draft: z.boolean().default(false),
   }),
 });
