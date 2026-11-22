@@ -3,13 +3,14 @@ title: "Krampusbowl 10: Chasing the Casualty Crown"
 subtitle: "Two third places, two glass trophies and one award that keeps slipping away. Your correspondent brings Black Orcs again."
 date: 2026-11-28
 section: "The Daily Skull"
+image: "/images/krampusbowl-trophies.jpg"
 ---
 
 Ten years, ten tournaments. On Saturday, December 5, the Krampusbowl celebrates its tenth edition at the Louis Braille Haus in Vienna, and your correspondent will be there again. With a small side quest.
 
 ## Two podiums and a near miss
 
-At the last two Krampusbowls, I finished third. Two podiums in a strong field, and two of those wonderful glass trophies now sitting on my shelf. I'm proud of both.
+At the last two Krampusbowls, I finished third. Two podiums in a strong field, and two of those wonderful snow globe trophies now sitting on my shelf. I'm proud of both. You can see them, and the rest of the shelf, on the [trophy page](/trophies/).
 
 There's just one funny detail. Both years, I also caused the most casualties of the tournament. But every coach can only take home one trophy, so the podium came first and the casualty award went to the next coach in line. Twice. Not the worst problem a coach can have, but it does leave a gap on the shelf.
 
