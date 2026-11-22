@@ -1,7 +1,7 @@
 ---
 title: "Krampusbowl 10: Chasing the Casualty Crown"
 subtitle: "Two third places, two glass trophies and one award that keeps slipping away. Your correspondent brings Black Orcs again."
-date: 2026-12-02
+date: 2026-11-28
 section: "The Daily Skull"
 ---
 
@@ -28,6 +28,6 @@ Of course, the best Black Orc plan is still to win games. If that ends in a thir
 - **Teams:** four tiers, each with its own treasury and skill budget. Black Orcs sit in Tier 3 with 1,200k to spend on the roster and 230k for skills, one skill per player. No star players.
 - **Awards:** Best Offense, Most Brutal and Best Stunty, plus the Nice & Naughty Challenge with achievements for clean play and for, well, the other kind.
 
-Entry is 15 €, sign-up runs through Tourplay. All details are on the [Krampusbowl website](https://krampusbowl.jimdofree.com/).
+Entry is 15 €, sign-up runs through Tourplay. All details are on the <a href="https://krampusbowl.jimdofree.com/" target="_blank" rel="noopener noreferrer">Krampusbowl website</a>.
 
 > Third glass trophy or first casualty crown? The Daily Skull will report back after December 5.

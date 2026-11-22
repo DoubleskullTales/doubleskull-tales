@@ -29,9 +29,8 @@ const isActive = (href: string) => href === '/' ? path === '/' : path.startsWith
 </head>
 <body>
   <div class="topbar"><div class="wrap">
-    <span>Vienna Edition</span>
-    <span class="hide-sm">Coaching since 1996</span>
-    <span><a href={SITE.instagram}>Instagram</a> &middot; <a href={SITE.youtube}>YouTube</a></span>
+    <span>Coaching since 1996</span>
+    <span><a href={SITE.instagram} target="_blank" rel="noopener noreferrer">Instagram</a> &middot; <a href={SITE.youtube} target="_blank" rel="noopener noreferrer">YouTube</a></span>
   </div></div>
   <header class="masthead"><div class="wrap">
     <a class="brand" href="/">
@@ -45,7 +44,7 @@ const isActive = (href: string) => href === '/' ? path === '/' : path.startsWith
   <main><div class="wrap"><slot /></div></main>
   <footer><div class="wrap">
     <div>
-      <a href="/impressum/">Impressum</a><a href="/privacy/">Privacy</a><a href={`mailto:${SITE.email}`}>Contact</a>
+      <a href="/impressum/">Legal notice</a><a href="/privacy/">Privacy</a><a href={`mailto:${SITE.email}`}>Contact</a>
       <p class="fine">Doubleskull Tales is an independent fan site and is not affiliated with or endorsed by Games Workshop. Blood Bowl and all associated names are trademarks of Games Workshop Ltd.</p>
     </div>
     <div class="muted">&copy; {new Date().getFullYear()} Doubleskull Tales</div>

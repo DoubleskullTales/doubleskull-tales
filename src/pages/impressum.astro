@@ -2,21 +2,23 @@
 import Base from '../layouts/Base.astro';
 import { SITE } from '../site';
 ---
-<Base title="Impressum">
+<Base title="Legal notice">
   <div class="page">
-    <h1>Impressum</h1>
-    <p class="muted"><em>Legal notice according to § 25 Austrian Media Act (MedienG).</em></p>
-    <h2>Medieninhaber und Herausgeber</h2>
+    <h1>Legal notice</h1>
+    <p class="muted"><em>Impressum according to § 25 of the Austrian Media Act (Mediengesetz).</em></p>
+    <h2>Media owner and publisher</h2>
+    <p class="muted" style="margin-top:0"><em>Medieninhaber und Herausgeber</em></p>
     <p>Stephan Orth<br>
     Perchtoldsdorfer Straße 7/6<br>
-    1230 Wien<br>
-    Österreich</p>
-    <p>E-Mail: <a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
-    <h2>Blattlinie</h2>
-    <p>Doubleskull Tales ist ein unabhängiges Fan-Magazin über Fantasy Football als Tabletop-Spiel: Liga-Berichte, Team-Porträts, bemalte Miniaturen und Spieltipps.</p>
-    <h2>Haftung für Links</h2>
-    <p>Für die Inhalte externer Seiten, auf die diese Seite verlinkt, sind ausschließlich deren Betreiber verantwortlich.</p>
-    <h2>Hinweis zu Marken</h2>
-    <p>Doubleskull Tales steht in keiner Verbindung zu Games Workshop. Blood Bowl und alle zugehörigen Namen sind Marken der Games Workshop Ltd.</p>
+    1230 Vienna<br>
+    Austria</p>
+    <p>Email: <a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+    <h2>Editorial policy</h2>
+    <p class="muted" style="margin-top:0"><em>Blattlinie</em></p>
+    <p>Doubleskull Tales is an independent fan magazine about fantasy football as a tabletop game: league reports, team portraits, painted miniatures and coaching tips.</p>
+    <h2>Links to other websites</h2>
+    <p>The operators of external websites linked from this site are solely responsible for their content.</p>
+    <h2>Trademarks</h2>
+    <p>Doubleskull Tales is not affiliated with or endorsed by Games Workshop. Blood Bowl and all associated names are trademarks of Games Workshop Ltd.</p>
   </div>
 </Base>
