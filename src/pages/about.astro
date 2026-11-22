@@ -2,13 +2,17 @@
 import Base from '../layouts/Base.astro';
 import { SITE } from '../site';
 ---
-<Base title="About" description="Who writes Doubleskull Tales: a Vienna-based coach since 1996.">
+<Base title="About" description="Who writes Doubleskull Tales: a Vienna-based coach since 1996." image="/images/stephan-eurobowl-2026.jpg">
   <div class="page">
     <h1>About</h1>
     <p><em>Every coach has a doubleskull story. This site is where I collect mine.</em></p>
+    <figure class="photo">
+      <img src="/images/stephan-eurobowl-2026.jpg" alt="Stephan, alias Lewdgrip, moving a player at the Eurobowl 2026 in Warsaw, wearing the Austrian national team jersey" />
+      <figcaption>Lewdgrip in action for Austria at the Eurobowl 2026 in Warsaw.</figcaption>
+    </figure>
     <p>I'm Stephan, a coach from Vienna. It started in 1996 in the comic shop in my hometown. There was a box of Chaos Dwarves on the shelf, and I knew I had to have them. They were my first team and they're still my old love.</p>
     <p>The love for bashing teams has stayed with me ever since. Every now and then I switch sides and try my luck with an agility team, mostly to remind myself why I love bashing.</p>
-    <p>I started out on the tabletop, found my way online through the OLBBL and eventually landed on <a href="https://fumbbl.com">FUMBBL</a>, where I still play today. My first tournament was the World Cup in Lucca in 2015. These days I play for the Austrian national team and run the Paradice League in Vienna, where I won the very first season with my Orcs.</p>
+    <p>I started out on the tabletop, found my way online through the OLBBL and eventually landed on <a href="https://fumbbl.com">FUMBBL</a>, where I still play today. My first tournament was the World Cup in Lucca in 2015. These days I play for the Austrian national team, most recently at the Eurobowl 2026 in Warsaw, and run the Paradice League in Vienna, where I won the very first season with my Orcs.</p>
     <p>What I love most about this game are the teams themselves: their character, their history and the stories that happen on the pitch. Doubleskull Tales is my fantasy sports magazine for exactly that. Team portraits, league reports from The Daily Skull, painted teams and the odd coaching lesson learned the hard way.</p>
     <h2>Say hello</h2>
     <p>Questions, stories or a team that needs painting: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. You can also find me on <a href={SITE.instagram}>Instagram</a> and <a href={SITE.youtube}>YouTube</a>.</p>
