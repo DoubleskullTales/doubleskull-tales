@@ -137,3 +137,46 @@ footer .fine { color: var(--muted); font-size: .75rem; margin-top: 8px; max-widt
   .cards { grid-template-columns: 1fr; }
   body { font-size: 1.15rem; }
 }
+
+/* ===== Player cards ===== */
+.pcards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 1.5em 0; }
+.pcard { background: var(--paper); border: 3px solid var(--ink); font-family: 'Inter', sans-serif; }
+.pcard .ph { color: var(--paper); padding: 14px 16px 12px; display: flex; gap: 12px; align-items: center; }
+.pcard.red .ph { background: var(--red); } .pcard.green .ph { background: var(--green); }
+.pcard .no { font-family: 'Anton'; font-size: 2.6rem; line-height: 1; opacity: .9; }
+.pcard .nm { font-family: 'Anton'; text-transform: uppercase; font-size: 1.55rem; line-height: 1; }
+.pcard .pos { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; margin-top: 5px; opacity: .9; }
+.pcard .stats { display: grid; grid-template-columns: repeat(5, 1fr); border-bottom: 2px solid var(--ink); }
+.pcard .stats div { text-align: center; padding: 8px 0 6px; border-right: 1px solid var(--ink); }
+.pcard .stats div:last-child { border-right: none; }
+.pcard .stats b { display: block; font-size: .62rem; letter-spacing: .12em; color: var(--muted); font-weight: 700; }
+.pcard .stats span { font-family: 'Anton'; font-size: 1.6rem; line-height: 1.1; }
+.pcard .stats .up span { color: var(--red); }
+.pcard.green .stats .up span { color: var(--green); }
+.pcard .skills { display: flex; flex-wrap: wrap; gap: 6px; padding: 12px 14px; }
+.pcard .skills i { font-style: normal; font-size: .78rem; font-weight: 600; background: var(--ink); color: var(--paper); padding: 4px 8px; }
+.pcard .skills i.new { background: transparent; color: var(--ink); border: 2px solid var(--ink); padding: 2px 6px; }
+.pcard .season { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--paper-dark); border-top: 2px solid var(--ink); }
+.pcard .season div { text-align: center; padding: 8px 0; }
+.pcard .season span { font-family: 'Anton'; font-size: 1.5rem; line-height: 1; display: block; }
+.pcard .season b { font-size: .62rem; letter-spacing: .12em; color: var(--muted); }
+.pcard .quip { font-family: 'Crimson Text'; font-style: italic; font-size: 1.1rem; padding: 10px 14px 12px; border-top: 1px solid var(--ink); }
+
+/* ===== Tale of the tape ===== */
+.tape { width: 100%; border-collapse: collapse; margin: 1.2em 0; font-family: 'Inter', sans-serif; font-size: .95rem; }
+.tape th { font-family: 'Anton'; font-weight: 400; text-transform: uppercase; font-size: 1.3rem; color: var(--paper); padding: 10px; }
+.tape th.r { background: var(--red); } .tape th.g { background: var(--green); } .tape th.m { background: var(--ink); font-size: .9rem; letter-spacing: .1em; }
+.tape td { padding: 9px 10px; border-bottom: 1px solid var(--ink); text-align: center; }
+.tape td.l { font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.tape td.win { font-weight: 700; }
+.tape-note { font-family: 'Inter'; font-size: .75rem; color: var(--muted); margin-top: -.6em; }
+
+/* results list */
+.results-list { list-style: none; padding: 0 !important; font-family: 'Inter', sans-serif; font-size: .95rem; }
+.results-list li { display: grid; grid-template-columns: 34px 1fr auto; gap: 10px; align-items: center; padding: 7px 0; border-bottom: 1px solid rgba(27,23,18,.25); }
+.results-list .r { font-family: 'Anton'; text-align: center; color: var(--paper); font-size: .9rem; padding: 2px 0; }
+.results-list .W { background: var(--green); } .results-list .D { background: var(--muted); } .results-list .L { background: var(--red); } .results-list .F { background: #a8833a; }
+.results-list .s { font-family: 'Anton'; font-size: 1.15rem; }
+.results-list small { color: var(--muted); }
+
+@media (max-width: 640px) { .pcards { grid-template-columns: 1fr; } }
