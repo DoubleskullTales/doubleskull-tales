@@ -84,7 +84,7 @@ The Wood Elves rolled through the group stage with five wins, one draw and a sin
 
 Four former champions entered Season 5. None of them made the final, and both finalists left their mark on the list.
 
-- **Lewdgrip (Season 1):** your correspondent went out with his Orcs in an Orc mirror match against Spitsens' Goffz Raidaz. For the record: his team was clearly the better one. The dice disagreed. That's Blood Bowl.
+- **Lewdgrip (Season 1):** your correspondent went out with his Orcs in an Orc mirror match against Spitsens' Goffz Raidaz. They were then knocked out by Xurpils' Wood Elves in the semi-final.
 - **Tok Janne (Season 2):** his Gnomes, You're Out-Gnome-Bered!, lost 1:2 to Pop Khorne in the group stage.
 - **Bachmut (Season 3):** his Goblins, The Gobstoppers, were run over 5:0 by Back to the Roots in the playoffs.
 - **Outcaarst (Season 4):** the reigning champion held Back to the Roots to a 1:1 draw in the group stage, then went out 0:1 against Pop Khorne in the playoffs.
