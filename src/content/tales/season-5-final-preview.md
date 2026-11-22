@@ -49,21 +49,9 @@ It wasn't free. Somewhere along the way, a Treeman put the team's Bloodspawn int
 
 ### Players to watch
 
-<div class="pcards">
-<div class="pcard red">
-<div class="ph"><div class="no">4</div><div><div class="nm">Pop Seeker Master</div><div class="pos">Bloodseeker · Emerging Star</div></div></div>
-<div class="stats"><div><b>MA</b><span>5</span></div><div><b>ST</b><span>4</span></div><div><b>AG</b><span>4+</span></div><div><b>PA</b><span>6+</span></div><div><b>AV</b><span>10+</span></div></div>
-<div class="skills"><i>Frenzy</i><i class="new">Block</i><i class="new">Guard</i><i class="new">Stand Firm</i></div>
-<div class="season"><div><span>1</span><b>TD</b></div><div><span>5</span><b>CAS</b></div><div><span>2</span><b>MVP</b></div><div><span>185k</span><b>VALUE</b></div></div>
-<div class="quip">You don't move him. He moves you.</div>
-</div>
-<div class="pcard red">
-<div class="ph"><div class="no">3</div><div><div class="nm">Pop Gor Goat</div><div class="pos">Khorngor · Emerging Star</div></div></div>
-<div class="stats"><div><b>MA</b><span>6</span></div><div><b>ST</b><span>3</span></div><div><b>AG</b><span>3+</span></div><div><b>PA</b><span>4+</span></div><div><b>AV</b><span>9+</span></div></div>
-<div class="skills"><i>Horns</i><i>Juggernaut</i><i>Jump Up</i><i>Thick Skull</i><i class="new">Two Heads</i><i class="new">Block</i><i class="new">Arm Bar</i></div>
-<div class="season"><div><span>7</span><b>TD</b></div><div><span>1</span><b>CAS</b></div><div><span>2</span><b>MVP</b></div><div><span>140k</span><b>VALUE</b></div></div>
-<div class="quip">Two heads, one goal line. Pop Khorne's top scorer.</div>
-</div>
+<div class="starcards">
+<img src="/images/card-seeker.jpg" alt="Player card Pop Seeker Master, Bloodseeker: MA 5, ST 4, AG 4+, PA 6+, AV 10+. Frenzy, Block, Guard, Stand Firm. Season 5: 1 TD, 5 CAS, 2 MVP." />
+<img src="/images/card-gorgoat.jpg" alt="Player card Pop Gor Goat, Khorngor: MA 6, ST 3, AG 3+, PA 4+, AV 9+. Horns, Juggernaut, Jump Up, Thick Skull, Two Heads, Block, Arm Bar. Season 5: 7 TD, 1 CAS, 2 MVP." />
 </div>
 
 ## Back to the Roots
@@ -87,21 +75,9 @@ The Wood Elves rolled through the group stage with five wins, one draw and a sin
 
 ### Players to watch
 
-<div class="pcards">
-<div class="pcard green">
-<div class="ph"><div class="no">2</div><div><div class="nm">Khiacas</div><div class="pos">Wardancer · Emerging Star</div></div></div>
-<div class="stats"><div><b>MA</b><span>8</span></div><div><b>ST</b><span>3</span></div><div class="up"><b>AG</b><span>1+</span></div><div><b>PA</b><span>3+</span></div><div><b>AV</b><span>8+</span></div></div>
-<div class="skills"><i>Block</i><i>Dodge</i><i>Leap</i><i class="new">Strip Ball</i><i class="new">Sidestep</i></div>
-<div class="season"><div><span>8</span><b>TD</b></div><div><span>4</span><b>CAS</b></div><div><span>2</span><b>MVP</b></div><div><span>200k</span><b>VALUE</b></div></div>
-<div class="quip">AG 1+. Good luck catching him.</div>
-</div>
-<div class="pcard green">
-<div class="ph"><div class="no">3</div><div><div class="nm">Silmef</div><div class="pos">Wood Elf Catcher · Emerging Star</div></div></div>
-<div class="stats"><div class="up"><b>MA</b><span>9</span></div><div><b>ST</b><span>2</span></div><div><b>AG</b><span>2+</span></div><div><b>PA</b><span>3+</span></div><div><b>AV</b><span>8+</span></div></div>
-<div class="skills"><i>Catch</i><i>Dodge</i><i>Sprint</i><i class="new">Sidestep</i><i class="new">Block</i></div>
-<div class="season"><div><span>10</span><b>TD</b></div><div><span>0</span><b>CAS</b></div><div><span>2</span><b>MVP</b></div><div><span>160k</span><b>VALUE</b></div></div>
-<div class="quip">Ten touchdowns. The finalists' top scorer.</div>
-</div>
+<div class="starcards">
+<img src="/images/card-khiacas.jpg" alt="Player card Khiacas, Wardancer: MA 8, ST 3, AG 1+, PA 3+, AV 8+. Block, Dodge, Leap, Strip Ball, Sidestep. Season 5: 8 TD, 4 CAS, 2 MVP." />
+<img src="/images/card-silmef.jpg" alt="Player card Silmef, Wood Elf Catcher: MA 9, ST 2, AG 2+, PA 3+, AV 8+. Catch, Dodge, Sprint, Sidestep, Block. Season 5: 10 TD, 0 CAS, 2 MVP." />
 </div>
 
 ## The fallen champions

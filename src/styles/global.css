@@ -207,3 +207,8 @@ footer .fine { color: var(--muted); font-size: .75rem; margin-top: 8px; max-widt
 .hero-fig .hero-img { margin: 0; }
 .hero-fig figcaption { font-family: 'Inter', sans-serif; font-size: .78rem; color: var(--muted); margin-top: 8px; }
 .lead .pic img { object-position: 60% center; }
+
+/* star player cards (images) */
+.starcards { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 1.4em 0; }
+.prose .starcards img { border: none; margin: 0; width: 100%; }
+@media (max-width: 560px) { .starcards { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; } }
