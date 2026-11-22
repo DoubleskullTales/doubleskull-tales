@@ -1,0 +1,37 @@
+---
+import Base from '../layouts/Base.astro';
+import TaleCard from '../components/TaleCard.astro';
+import { getTales } from '../lib';
+const tales = await getTales();
+const [lead, ...rest] = tales;
+---
+<Base>
+  {lead && (
+    <section class="lead">
+      <div>
+        <div class="label kicker">{lead.data.section} &middot; Lead story</div>
+        <h1><a href={`/tales/${lead.id}/`}>{lead.data.title}</a></h1>
+        {lead.data.subtitle && <p class="sub">{lead.data.subtitle}</p>}
+        <p style="margin-top:22px"><a class="btn dark" href={`/tales/${lead.id}/`}>Read the tale</a></p>
+      </div>
+      <div class="pic">
+        {lead.data.image ? <img src={lead.data.image} alt="" /> : <img class="emblem" src="/images/emblem.svg" alt="" />}
+      </div>
+    </section>
+  )}
+
+  <div class="section-head"><h2>Latest tales</h2><a href="/tales/">All tales &rarr;</a></div>
+  {rest.length > 0 ? (
+    <div class="cards">{rest.slice(0, 6).map((t) => <TaleCard tale={t} />)}</div>
+  ) : (
+    <p class="muted"><em>More tales are on their way. Team portraits, league stories and painted teams, fresh from the pitch.</em></p>
+  )}
+
+  <section class="band">
+    <div>
+      <h2>Want your team painted?</h2>
+      <p>From freshly built rookies to a full championship roster. Painted by a coach, for coaches.</p>
+    </div>
+    <a class="btn" href="/painting/">Painting service</a>
+  </section>
+</Base>

@@ -1,0 +1,28 @@
+---
+import Base from '../../layouts/Base.astro';
+import TaleCard from '../../components/TaleCard.astro';
+import { getTales } from '../../lib';
+const tales = await getTales();
+const sections = ['The Daily Skull', 'Team Portraits', 'Orcs Illustrated', 'Coaching Corner'];
+const blurbs: Record<string, string> = {
+  'The Daily Skull': 'News, previews and match reports from the Paradice League in Vienna.',
+  'Team Portraits': 'The character, history and playstyle of every team on the pitch.',
+  'Orcs Illustrated': 'Painted teams, colour schemes and how they came to life.',
+  'Coaching Corner': 'Tactics and lessons from almost thirty years of coaching.',
+};
+---
+<Base title="Tales" description="All tales from Doubleskull Tales: league stories, team portraits, painted teams and coaching.">
+  <div class="page" style="max-width:none">
+    <h1>All tales</h1>
+  </div>
+  {sections.map((s) => {
+    const list = tales.filter((t) => t.data.section === s);
+    return (
+      <section>
+        <div class="section-head"><h2>{s}</h2></div>
+        <p class="muted" style="margin:-10px 0 20px"><em>{blurbs[s]}</em></p>
+        {list.length ? <div class="cards">{list.map((t) => <TaleCard tale={t} />)}</div> : <p class="muted">Coming soon.</p>}
+      </section>
+    );
+  })}
+</Base>

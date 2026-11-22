@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../site';
+---
+<Base title="About" description="Who writes Doubleskull Tales: a Vienna-based coach since 1996.">
+  <div class="page">
+    <h1>About</h1>
+    <p><em>Every coach has a doubleskull story. This site is where I collect mine.</em></p>
+    <p>I'm Stephan, a coach from Vienna. I rolled my first block dice in 1996 and never really stopped. These days I play for the Austrian national team and run the Paradice League in Vienna, where coaches from all over the city fight for the trophy season after season.</p>
+    <p>What I love most about this game are the teams themselves: their character, their history and the stories that happen on the pitch. Doubleskull Tales is my fantasy sports magazine for exactly that. Team portraits, league reports from The Daily Skull, painted teams and the odd coaching lesson learned the hard way.</p>
+    <p><span class="todo">TODO: 2 bis 3 persönliche Sätze ergänzen (erstes Team, legendärstes Spiel, Lieblingsrasse).</span></p>
+    <h2>Say hello</h2>
+    <p>Questions, stories or a team that needs painting: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. You can also find me on <a href={SITE.instagram}>Instagram</a> and <a href={SITE.youtube}>YouTube</a>.</p>
+  </div>
+</Base>

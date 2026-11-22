@@ -1,0 +1,55 @@
+---
+import '../styles/global.css';
+import { SITE } from '../site';
+interface Props { title?: string; description?: string; image?: string; }
+const { title, description = SITE.tagline, image = '/images/og-default.png' } = Astro.props;
+const fullTitle = title ? `${title} | ${SITE.name}` : `${SITE.name} | ${SITE.tagline}`;
+const path = Astro.url.pathname;
+const nav = [
+  { href: '/', label: 'Home' },
+  { href: '/tales/', label: 'Tales' },
+  { href: '/painting/', label: 'Painting' },
+  { href: '/about/', label: 'About' },
+];
+const isActive = (href: string) => href === '/' ? path === '/' : path.startsWith(href);
+const today = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="canonical" href={new URL(path, Astro.site)} />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={new URL(image, Astro.site)} />
+  <meta property="og:type" content="website" />
+</head>
+<body>
+  <div class="topbar"><div class="wrap">
+    <span>Vienna Edition</span>
+    <span class="hide-sm">{today}</span>
+    <span><a href={SITE.instagram}>Instagram</a> &middot; <a href={SITE.youtube}>YouTube</a></span>
+  </div></div>
+  <header class="masthead"><div class="wrap">
+    <a class="brand" href="/">
+      <img src="/images/emblem.svg" alt="Doubleskull Tales emblem" />
+      <span><span class="name">Doubleskull</span><span class="tales">Tales</span></span>
+    </a>
+    <nav class="main">
+      {nav.map((n) => <a href={n.href} class={isActive(n.href) ? 'active' : ''}>{n.label}</a>)}
+    </nav>
+  </div></header>
+  <main><div class="wrap"><slot /></div></main>
+  <footer><div class="wrap">
+    <div>
+      <a href="/impressum/">Impressum</a><a href="/privacy/">Privacy</a><a href={`mailto:${SITE.email}`}>Contact</a>
+      <p class="fine">Doubleskull Tales is an independent fan site and is not affiliated with or endorsed by Games Workshop. Blood Bowl and all associated names are trademarks of Games Workshop Ltd.</p>
+    </div>
+    <div class="muted">&copy; {new Date().getFullYear()} Doubleskull Tales</div>
+  </div></footer>
+</body>
+</html>

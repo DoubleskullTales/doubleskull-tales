@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../site';
+---
+<Base title="Painting service" description="Commission painting for fantasy football teams. Painted by a coach, for coaches.">
+  <div class="page">
+    <h1>Painting service</h1>
+    <p><em>Your team deserves to look as good as it plays. Or at least better than it rolls.</em></p>
+    <p>I paint fantasy football teams for coaches who would rather spend their evenings planning blitzes than thinning paints. Every team is painted by someone who has been on the pitch since 1996 and knows which details matter on the table: readable positions, clear team colours and models that survive a season of being knocked down.</p>
+
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step"><div class="anton">1</div><h3>Tell me about your team</h3><p>Race, number of models, colour ideas and your deadline. Send me an email.</p></div>
+      <div class="step"><div class="anton">2</div><h3>Get a quote</h3><p>You get a fixed price and a timeline before anything starts.</p></div>
+      <div class="step"><div class="anton">3</div><h3>Painting</h3><p>Progress photos along the way, so you can see your team come to life.</p></div>
+      <div class="step"><div class="anton">4</div><h3>Kick-off</h3><p>Pick-up in Vienna or shipping, safely packed and ready for the next match.</p></div>
+    </div>
+
+    <h2>Gallery</h2>
+    <div class="gallery">
+      <div class="ph">Galadrieth Gladiators<br>photo coming soon</div>
+      <div class="ph">Team photo<br>coming soon</div>
+      <div class="ph">Team photo<br>coming soon</div>
+    </div>
+
+    <h2>Prices</h2>
+    <p><span class="todo">TODO: Preisspanne eintragen, sobald die ersten Aufträge kalkuliert sind.</span></p>
+
+    <h2>Get in touch</h2>
+    <p>Commission slots open soon. Want to be first in line? Write to <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+  </div>
+</Base>

@@ -1,0 +1,10 @@
+---
+const { tale } = Astro.props;
+const d = tale.data.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<article class="card">
+  <div class="label">{tale.data.section}</div>
+  <h3><a href={`/tales/${tale.id}/`}>{tale.data.title}</a></h3>
+  {tale.data.subtitle && <p>{tale.data.subtitle}</p>}
+  <div class="date">{d}</div>
+</article>
