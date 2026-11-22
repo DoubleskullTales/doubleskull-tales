@@ -1,6 +1,6 @@
 ---
 title: "Krampusbowl 10: Chasing the Casualty Crown"
-subtitle: "Two third places, two glass trophies and one award that keeps slipping away. Your correspondent brings Black Orcs again."
+subtitle: "Two third places, two snow globes and one award that slipped away. Your correspondent brings Black Orcs again."
 date: 2026-11-28
 section: "The Daily Skull"
 image: "/images/krampusbowl-trophies.jpg"
@@ -12,13 +12,15 @@ Ten years, ten tournaments. On Saturday, December 5, the Krampusbowl celebrates 
 
 At the last two Krampusbowls, I finished third. Two podiums in a strong field, and two of those wonderful snow globe trophies now sitting on my shelf. I'm proud of both. You can see them, and the rest of the shelf, on the [trophy page](/trophies/).
 
-There's just one funny detail. Both years, I also caused the most casualties of the tournament. But every coach can only take home one trophy, so the podium came first and the casualty award went to the next coach in line. Twice. Not the worst problem a coach can have, but it does leave a gap on the shelf.
+There's just one funny detail. At Krampusbowl 8, with Black Orcs, I also caused the most casualties of the tournament. But every coach can only take home one trophy, so the podium came first and the casualty award went to the next coach in line. Not the worst problem a coach can have, but it does leave a gap on the shelf.
+
+Last year I tried my luck with Ogres. Another third place, this time without the casualty lead. Ogres hit hard, but they mostly hit the ground themselves.
 
 ## The side quest: Most Brutal
 
-So this year, I'm bringing Black Orcs again. The plan is simple: hit everything that moves, then hit it again. Every casualty counts, whether it comes from a block, a foul, a failed dodge or a push into the crowd. Black Orcs don't do subtle, and for once, that's exactly the point.
+So this year, the Black Orcs are back. The plan is simple: hit everything that moves, then hit it again. Every casualty counts, whether it comes from a block, a foul, a failed dodge or a push into the crowd. Black Orcs don't do subtle, and for once, that's exactly the point.
 
-Of course, the best Black Orc plan is still to win games. If that ends in a third glass trophy, I won't complain for a second. And if the dice decide that this is finally the year of the casualty crown, I'll take that just as happily.
+Of course, the best Black Orc plan is still to win games. If that ends in a third snow globe, I won't complain for a second. And if the dice decide that this is finally the year of the casualty crown, I'll take that just as happily.
 
 ## The tournament
 
@@ -31,4 +33,4 @@ Of course, the best Black Orc plan is still to win games. If that ends in a thir
 
 Entry is 15 €, sign-up runs through Tourplay. All details are on the <a href="https://krampusbowl.jimdofree.com/" target="_blank" rel="noopener noreferrer">Krampusbowl website</a>.
 
-> Third glass trophy or first casualty crown? The Daily Skull will report back after December 5.
+> Third snow globe or first casualty crown? The Daily Skull will report back after December 5.
