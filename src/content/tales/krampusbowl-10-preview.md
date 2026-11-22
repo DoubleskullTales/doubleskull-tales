@@ -1,25 +1,23 @@
 ---
-title: "Krampusbowl 10: Too Good to Be Brutal"
-subtitle: "Two podiums, two glass trophies, one award that keeps slipping away. Your correspondent brings Black Orcs to fix that."
+title: "Krampusbowl 10: Chasing the Casualty Crown"
+subtitle: "Two third places, two glass trophies and one award that keeps slipping away. Your correspondent brings Black Orcs again."
 date: 2026-12-02
 section: "The Daily Skull"
 ---
 
-Ten years, ten tournaments. On Saturday, December 5, the Krampusbowl celebrates its tenth edition at the Louis Braille Haus in Vienna, and your correspondent will be there again. With a very specific mission.
+Ten years, ten tournaments. On Saturday, December 5, the Krampusbowl celebrates its tenth edition at the Louis Braille Haus in Vienna, and your correspondent will be there again. With a small side quest.
 
-## The curse of third place
+## Two podiums and a near miss
 
-At the last two Krampusbowls, I finished third. Two podiums, two of those wonderful glass trophies on my shelf. Not bad, you might say.
+At the last two Krampusbowls, I finished third. Two podiums in a strong field, and two of those wonderful glass trophies now sitting on my shelf. I'm proud of both.
 
-Here's the problem. Both years, I had also done enough damage to win Most Brutal, the award for the most casualties caused by blocks. But every coach can only take home one trophy. Third place came first, so the brutality award went to someone else. Twice.
+There's just one funny detail. Both years, I also caused the most casualties of the tournament. But every coach can only take home one trophy, so the podium came first and the casualty award went to the next coach in line. Twice. Not the worst problem a coach can have, but it does leave a gap on the shelf.
 
-I am, in other words, the only coach in Vienna who keeps getting punished for playing too well.
+## The side quest: Most Brutal
 
-## The mission: Most Brutal
+So this year, I'm bringing Black Orcs again. The plan is simple: hit everything that moves, then hit it again. Every casualty counts, whether it comes from a block, a foul, a failed dodge or a push into the crowd. Black Orcs don't do subtle, and for once, that's exactly the point.
 
-So this year, I'm bringing Black Orcs again. The plan is simple: hit everything that moves, then hit it again. The award goes to the coach with the most casualties from blocks, with kills and fouls as tiebreakers. Black Orcs don't do subtle, and for once, that's exactly the point.
-
-Which leaves me with a dilemma. Win too much, and I'm back on the podium with a third glass trophy and no brutality award. Hit hard but finish fourth, and I finally get the one I've been chasing. Every coach dreams of winning. I might be the first one secretly hoping to finish just off the podium.
+Of course, the best Black Orc plan is still to win games. If that ends in a third glass trophy, I won't complain for a second. And if the dice decide that this is finally the year of the casualty crown, I'll take that just as happily.
 
 ## The tournament
 
@@ -32,4 +30,4 @@ Which leaves me with a dilemma. Win too much, and I'm back on the podium with a 
 
 Entry is 15 €, sign-up runs through Tourplay. All details are on the [Krampusbowl website](https://krampusbowl.jimdofree.com/).
 
-> Third trophy or first casualty crown? The Daily Skull will report back after December 5.
+> Third glass trophy or first casualty crown? The Daily Skull will report back after December 5.

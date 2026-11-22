@@ -4,5 +4,6 @@ export const SITE = {
   tagline: 'Teams, tales & painted miniatures for the Blood Bowl community',
   email: 'hello@doubleskulltales.com',
   instagram: 'https://www.instagram.com/doubleskulltales/',
+  author: 'Lewdgrip',
   youtube: 'https://www.youtube.com/channel/UCWamD68O_-Tj5uE-HO8rk5Q/',
 };

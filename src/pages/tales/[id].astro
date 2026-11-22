@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import { render } from 'astro:content';
 import { getTales } from '../../lib';
+import { SITE } from '../../site';
 export async function getStaticPaths() {
   const tales = await getTales();
   return tales.map((tale) => ({ params: { id: tale.id }, props: { tale } }));
@@ -15,7 +16,7 @@ const d = tale.data.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'l
     <div class="label">{tale.data.section}</div>
     <h1>{tale.data.title}</h1>
     {tale.data.subtitle && <p class="sub">{tale.data.subtitle}</p>}
-    <div class="meta">By Stephan &middot; {d}</div>
+    <div class="meta">By {SITE.author} &middot; {d}</div>
   </header>
   {tale.data.image && <img class="hero-img" src={tale.data.image} alt="" />}
   <div class="prose"><Content /></div>
