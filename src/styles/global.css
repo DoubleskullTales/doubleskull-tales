@@ -225,3 +225,6 @@ html, body { overflow-x: hidden; }
   .topbar .wrap span { white-space: nowrap; }
   .article-head .meta { font-size: .7rem; letter-spacing: .1em; }
 }
+
+/* single star card, centered */
+.starcards.single { grid-template-columns: minmax(0, 400px); justify-content: center; }
