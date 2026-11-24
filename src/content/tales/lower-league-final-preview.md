@@ -116,4 +116,10 @@ Caliritus, the Scorpion Kings' best scorer, has Hatred (Human). There isn't a si
 
 And then there's Santa. The Troll hasn't earned a single SPP all season. On December 1, of all days, that could change.
 
+## Make your call
+
+Who lifts the trophy, and how bloody does it get? One call per coach, voting closes at kick-off.
+
+<div class="tippspiel" data-poll="paradice-s5-lower-final"></div>
+
 > Sand or sewer? Both finals kick off on Tuesday, December 1, at 18:00 at Jo&Jo by Westbahnhof. The Daily Skull will be pitchside.

@@ -1,0 +1,80 @@
+{
+  "id": "paradice-s5-final",
+  "title": "Season 5 Final",
+  "closes": "2026-12-01T18:00:00+01:00",
+  "note": "Counted as recorded on Tourplay, both teams together, including extra time.",
+  "questions": [
+    {
+      "id": "winner",
+      "text": "Who wins the final?",
+      "hint": "Knockout game. Extra time and penalties count.",
+      "options": [
+        {
+          "id": "a",
+          "label": "Pop Khorne",
+          "color": "#9b1c1c"
+        },
+        {
+          "id": "b",
+          "label": "Back to the Roots",
+          "color": "#2e5a33"
+        }
+      ]
+    },
+    {
+      "id": "td",
+      "text": "How many touchdowns?",
+      "options": [
+        {
+          "id": "0-1",
+          "label": "0 to 1"
+        },
+        {
+          "id": "2-3",
+          "label": "2 to 3"
+        },
+        {
+          "id": "4+",
+          "label": "4 or more"
+        }
+      ]
+    },
+    {
+      "id": "cas",
+      "text": "How many casualties?",
+      "options": [
+        {
+          "id": "0-2",
+          "label": "0 to 2"
+        },
+        {
+          "id": "3-5",
+          "label": "3 to 5"
+        },
+        {
+          "id": "6+",
+          "label": "6 or more"
+        }
+      ]
+    },
+    {
+      "id": "com",
+      "text": "How many completed passes?",
+      "options": [
+        {
+          "id": "0",
+          "label": "None"
+        },
+        {
+          "id": "1-2",
+          "label": "1 to 2"
+        },
+        {
+          "id": "3+",
+          "label": "3 or more"
+        }
+      ]
+    }
+  ],
+  "result": null
+}

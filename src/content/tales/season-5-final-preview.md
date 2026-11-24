@@ -103,4 +103,10 @@ Pop Khorne already lost their Bloodspawn to a Treeman this season. Now they face
 
 And there is Dhandeddel, a Wardancer with Hatred (Human). Nine of Pop Khorne's eleven players are human. Grudges have been settled for less.
 
+## Make your call
+
+Who lifts the trophy, and how bloody does it get? One call per coach, voting closes at kick-off.
+
+<div class="tippspiel" data-poll="paradice-s5-final"></div>
+
 > Blood or roots? Kick-off is Tuesday, December 1, at 18:00. The Daily Skull will be pitchside.
