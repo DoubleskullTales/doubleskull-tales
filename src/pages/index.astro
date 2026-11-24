@@ -15,7 +15,7 @@ const [lead, ...rest] = tales;
         <p style="margin-top:22px"><a class="btn dark" href={`/tales/${lead.id}/`}>Read the tale</a></p>
       </div>
       <div class="pic">
-        {lead.data.image ? <img src={lead.data.image} alt="" /> : <img class="emblem" src="/images/emblem.svg" alt="" />}
+        {(lead.data.teaser || lead.data.image) ? <img src={lead.data.teaser || lead.data.image} alt="" /> : <img class="emblem" src="/images/emblem.svg" alt="" />}
       </div>
     </section>
   )}

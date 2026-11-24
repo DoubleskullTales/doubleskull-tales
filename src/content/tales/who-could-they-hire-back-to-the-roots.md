@@ -4,6 +4,7 @@ subtitle: "Five mercenaries, one final, one very interesting tree. Pick two for 
 date: 2026-11-25T12:00:00
 section: "The Daily Skull"
 image: "/images/mercs-roots-hero.jpg"
+teaser: "/images/mercs-roots-teaser.jpg"
 imageCaption: "Five for hire: Vorith, Celebrimbor, Maccherone, Makwess and Jibbrugock. Illustrations: AI-generated."
 ---
 
@@ -11,7 +12,7 @@ In the Paradice League, old players don't retire. They send an invoice. And not 
 
 We start with Coach Xurpils' Back to the Roots. Five mercenaries are willing to play for the Wood Elves. Two of them are elves, two are gnomes, and one is a tree with a very long memory.
 
-One thing to keep in mind: Back to the Roots go into the final with the higher team value. Any mercenary Xurpils wants would have to come out of his own treasury. So choose wisely. Which is exactly what we're asking you to do at the end.
+One thing to keep in mind: Back to the Roots go into the final with the higher team value, so any mercenary has to come out of Xurpils' own treasury. Luckily, the treasury is well stocked, and the whole league expects him to open it. If not for a final, then when? The only question is who he spends it on. Which is exactly what we're asking you at the end.
 
 ## Vorith: the roll you never saw coming
 
