@@ -3,9 +3,9 @@ title: "Who Could They Hire? Back to the Roots"
 subtitle: "Five mercenaries, one final, one very interesting tree. Pick two for Xurpils."
 date: 2026-11-25T12:00:00
 section: "The Daily Skull"
-image: "/images/mercs-roots-hero.jpg"
+image: "/images/mercs-roots-tavern.jpg"
 teaser: "/images/mercs-roots-teaser.jpg"
-imageCaption: "Five for hire: Vorith, Celebrimbor, Maccherone, Makwess and Jibbrugock. Illustrations: AI-generated."
+imageCaption: "The hiring hall is open. Illustration: AI-generated."
 ---
 
 In the Paradice League, old players don't retire. They send an invoice. And not every mercenary works for everyone: each one only signs for certain teams. So before the Season 5 final on Tuesday, December 1, we looked at the list and asked a simple question: who could the finalists bring along?
