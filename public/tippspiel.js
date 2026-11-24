@@ -49,11 +49,11 @@ const TIPPSPIEL_API = 'https://tippspiel.spring-violet-cdfb.workers.dev';
     const result = poll.result || null;
 
     const head = el('div', 'tp-head');
-    head.append(el('div', 'tp-kicker', 'Prediction game'));
+    head.append(el('div', 'tp-kicker', poll.kicker || 'Prediction game'));
     head.append(el('h3', 'tp-title', poll.title));
     head.append(el('p', 'tp-sub', closed
       ? (result ? 'Final whistle. Here is who called it.' : 'Voting is closed. Here is who called what.')
-      : `Make your call before kick-off: ${fmtClose(poll.closes)}. One call per coach.`));
+      : (poll.intro || `Make your call before kick-off: ${fmtClose(poll.closes)}.`) + ' One call per coach.'));
     box.append(head);
 
     if (flash) box.append(el('p', 'tp-flash ' + flash.type, flash.text));
@@ -62,17 +62,25 @@ const TIPPSPIEL_API = 'https://tippspiel.spring-violet-cdfb.workers.dev';
     poll.questions.forEach((q) => {
       const fs = el('fieldset', 'tp-q');
       fs.append(el('legend', null, q.text));
-      if (q.hint) fs.append(el('p', 'tp-hint', q.hint));
+      const multi = q.max > 1;
+      fs.append(el('p', 'tp-hint', [q.hint, multi ? `Pick ${q.max}.` : ''].filter(Boolean).join(' ') || null));
+      if (!fs.lastChild.textContent) fs.lastChild.remove();
       q.options.forEach((o) => {
         const count = stats.counts[q.id] ? stats.counts[q.id][o.id] || 0 : 0;
         const lab = el('label', 'tp-opt');
         if (result && result[q.id] === o.id) lab.classList.add('tp-correct');
         const inp = document.createElement('input');
-        inp.type = 'radio'; inp.name = q.id; inp.value = o.id; inp.required = true;
+        inp.type = multi ? 'checkbox' : 'radio'; inp.name = q.id; inp.value = o.id; inp.required = !multi;
+        if (multi) inp.addEventListener('change', () => {
+          const boxes = [...fs.querySelectorAll('input')];
+          const n = boxes.filter((b) => b.checked).length;
+          boxes.forEach((b) => { if (!b.checked) b.disabled = n >= q.max; });
+        });
         if (closed) inp.disabled = true;
         const txt = el('span', 'tp-label', o.label);
-        const num = el('span', 'tp-pct', `${pct(count, stats.total)}%`);
-        lab.append(inp, txt, num, bar(count, stats.total, o.color));
+        const num = el('span', 'tp-pct', multi ? `${count}` : `${pct(count, stats.total)}%`);
+        const maxCount = multi ? Math.max(1, ...Object.values(stats.counts[q.id] || {})) : stats.total;
+        lab.append(inp, txt, num, bar(count, maxCount, o.color));
         fs.append(lab);
       });
       form.append(fs);
@@ -97,7 +105,17 @@ const TIPPSPIEL_API = 'https://tippspiel.spring-violet-cdfb.workers.dev';
         ev.preventDefault();
         const fd = new FormData(form);
         const answers = {};
-        poll.questions.forEach((q) => { answers[q.id] = fd.get(q.id); });
+        for (const q of poll.questions) {
+          if (q.max > 1) {
+            answers[q.id] = fd.getAll(q.id);
+            if (answers[q.id].length !== (q.min || q.max)) {
+              let f = box.querySelector('.tp-flash');
+              if (!f) { f = el('p'); head.after(f); }
+              f.className = 'tp-flash error'; f.textContent = `Please pick ${q.max}: ${q.text}`;
+              return;
+            }
+          } else answers[q.id] = fd.get(q.id);
+        }
         btn.disabled = true; btn.textContent = 'Sending...';
         try {
           const r = await fetch(`${TIPPSPIEL_API}/polls/${poll.id}/vote`, {
@@ -113,7 +131,7 @@ const TIPPSPIEL_API = 'https://tippspiel.spring-violet-cdfb.workers.dev';
             f.className = 'tp-flash error'; f.textContent = data.error || 'Something went wrong.';
             return;
           }
-          render(box, poll, data, { type: 'ok', text: `Call locked in, Coach ${data.name}. Good luck!` });
+          render(box, poll, data, { type: 'ok', text: (poll.thanks || 'Call locked in, Coach {name}. Good luck!').replace('{name}', data.name) });
         } catch {
           btn.disabled = false; btn.textContent = 'Lock it in';
         }
@@ -124,7 +142,8 @@ const TIPPSPIEL_API = 'https://tippspiel.spring-violet-cdfb.workers.dev';
     box.append(form);
 
     if (closed && stats.votes && stats.votes.length) {
-      const label = (q, id) => (q.options.find((o) => o.id === id) || {}).label || '?';
+      const one = (q, id) => (q.options.find((o) => o.id === id) || {}).label || '?';
+      const label = (q, v) => (Array.isArray(v) ? v.map((id) => one(q, id)).join(', ') : one(q, v));
       const list = stats.votes.map((v) => ({
         ...v,
         score: result ? poll.questions.filter((q) => result[q.id] && result[q.id] === v.answers[q.id]).length : null,
@@ -134,7 +153,7 @@ const TIPPSPIEL_API = 'https://tippspiel.spring-violet-cdfb.workers.dev';
       const t = el('table', 'tp-table');
       const hr = el('tr');
       hr.append(el('th', null, 'Coach'));
-      poll.questions.forEach((q) => hr.append(el('th', null, q.id === 'winner' ? 'Winner' : q.id.toUpperCase())));
+      poll.questions.forEach((q) => hr.append(el('th', null, q.short || (q.id === 'winner' ? 'Winner' : q.id.toUpperCase()))));
       if (result) hr.append(el('th', null, 'Right'));
       t.append(hr);
       list.forEach((v) => {

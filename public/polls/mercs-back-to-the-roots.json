@@ -1,0 +1,24 @@
+{
+  "id": "mercs-back-to-the-roots",
+  "title": "Who should Xurpils hire?",
+  "kicker": "Fan vote",
+  "intro": "Pick two mercenaries for Back to the Roots. Voting closes at kick-off of the final.",
+  "thanks": "Picks locked in, Coach {name}. Xurpils has been informed. Probably.",
+  "closes": "2026-12-01T18:00:00+01:00",
+  "questions": [
+    {
+      "id": "mercs",
+      "text": "Which two mercenaries should Back to the Roots hire?",
+      "short": "Picks",
+      "max": 2,
+      "options": [
+        { "id": "vorith", "label": "Vorith (Wardancer, 220k)" },
+        { "id": "celebrimbor", "label": "Celebrimbor (Catcher, 190k)" },
+        { "id": "maccherone", "label": "Maccherone (Treeman, 190k)" },
+        { "id": "makwess", "label": "Makwess (Gnome Beastmaster, 105k)" },
+        { "id": "jibbrugock", "label": "Jibbrugock (Gnome, 120k)" }
+      ]
+    }
+  ],
+  "result": null
+}
