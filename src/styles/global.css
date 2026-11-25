@@ -186,6 +186,15 @@ footer .fine { color: var(--muted); font-size: .75rem; margin-top: 8px; max-widt
 .photo img { border: 3px solid var(--ink); width: 100%; }
 .photo figcaption { font-family: 'Inter', sans-serif; font-size: .8rem; letter-spacing: .05em; color: var(--muted); margin-top: 8px; }
 
+/* About: real photo and illustration side by side (4fr/5fr keeps a 4:5 photo and a 1:1 image the same height) */
+.photo-duo { display: grid; grid-template-columns: 4fr 5fr; gap: 16px; align-items: start; margin: 1.6em 0; }
+.photo-duo .photo { margin: 0; }
+.photo-duo .photo img { display: block; }
+@media (max-width: 520px) {
+  .photo-duo { grid-template-columns: 1fr; gap: 20px; }
+  .photo-duo .photo:first-child { max-width: 300px; }
+}
+
 /* ===== Trophy shelf ===== */
 .shelf-stats { display: grid; grid-template-columns: repeat(3, 1fr); border: 3px solid var(--ink); margin: 28px 0; }
 .shelf-stats div { text-align: center; padding: 16px 6px; border-right: 1px solid var(--ink); }
