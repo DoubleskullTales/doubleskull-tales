@@ -1,0 +1,55 @@
+{
+  "id": "mercs-pop-khorne",
+  "title": "Who should Umberto hire?",
+  "kicker": "Fan vote",
+  "intro": "Pick two mercenaries for Pop Khorne. Voting closes at kick-off of the final.",
+  "thanks": "Picks locked in, Coach {name}. Umberto has been informed. The Blood God too.",
+  "closes": "2026-12-01T18:00:00+01:00",
+  "questions": [
+    {
+      "id": "mercs",
+      "text": "Which two mercenaries should Pop Khorne hire?",
+      "short": "Picks",
+      "max": 2,
+      "options": [
+        {
+          "id": "beelzebub",
+          "label": "Beelzebub (Chaos Troll, 185k)"
+        },
+        {
+          "id": "mcleod",
+          "label": "Connor McLeod (Bloodseeker, 200k)"
+        },
+        {
+          "id": "kholguc",
+          "label": "Kholguc (Beastman Runner, 105k)"
+        },
+        {
+          "id": "pestcarrier",
+          "label": "Pestcarrier Of Nurgle (Chosen Blocker, 195k)"
+        },
+        {
+          "id": "dorjak",
+          "label": "Dorjak Sureclaw (Renegade Lineman, 145k)"
+        },
+        {
+          "id": "borg",
+          "label": "Borg 'Th N'Throg (Ogre Blocker, 210k)"
+        },
+        {
+          "id": "vuk",
+          "label": "Vuk Flammenfaust (Ogre Blocker, 200k)"
+        },
+        {
+          "id": "finish",
+          "label": "Finish (Pestigor, 165k)"
+        },
+        {
+          "id": "vreamnili",
+          "label": "Vreamnili The Leechlord (Chosen Blocker, 185k)"
+        }
+      ]
+    }
+  ],
+  "result": null
+}
