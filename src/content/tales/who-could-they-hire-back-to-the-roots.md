@@ -74,4 +74,4 @@ Five mercenaries, one treasury. Every coach gets two picks. Voting closes at kic
 
 <div class="tippspiel" data-poll="mercs-back-to-the-roots"></div>
 
-> Next up: the mercenaries Umberto could bring for Pop Khorne. And there's a familiar troll on that list.
+> Part two is out: read [who Umberto could bring for Pop Khorne](/tales/who-could-they-hire-pop-khorne/), and cast your vote there too. Yes, there's a familiar troll on that list.
