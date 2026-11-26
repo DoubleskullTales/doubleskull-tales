@@ -1,12 +1,13 @@
 ---
 import Base from '../../layouts/Base.astro';
 ---
-<Base title="Goblin Toss" description="A winter mini game: pick a big guy, pick a stunty and throw him as far as you can. Krampusbowl weather included.">
+<Base title="Goblin Toss" image="/images/play-goblin-toss.jpg" description="A winter mini game: pick a big guy, pick a stunty and throw him as far as you can. Krampusbowl weather included.">
   <div class="page gt-page">
     <p class="gt-back"><a href="/play/">← All mini games</a></p>
     <p class="gt-kicker">Mini game · Winter edition</p>
     <h1>Goblin Toss</h1>
     <p class="gt-intro"><em>One big guy, one small volunteer, one frozen pitch. Halflings and gnomes welcome too. The weather is rolled on the Krampusbowl table before every throw. How far can you go?</em></p>
+    <figure class="gt-hero"><img src="/images/play-goblin-toss.jpg" alt="A troll throws a panicking goblin across a snowy pitch towards a cheering crowd." width="1200" height="670" /><figcaption>One troll, one volunteer, one very excited front row. Illustration: AI-generated.</figcaption></figure>
 
     <div class="gt-pickers">
       <div class="gt-pickrow"><span class="gt-l">Thrower</span>
@@ -52,6 +53,9 @@ import Base from '../../layouts/Base.astro';
     .gt-back { font-family: 'Inter', sans-serif; font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin: 0 0 .6em; }
     .gt-back a { text-decoration: none; }
     .gt-kicker { font-family: 'Inter', sans-serif; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; font-size: .8rem; color: var(--red); }
+    .gt-hero { margin: 1.2em 0 0; }
+    .gt-hero img { display: block; width: 100%; height: auto; aspect-ratio: 12 / 5; object-fit: cover; border: 3px solid var(--ink); }
+    .gt-hero figcaption { font-family: 'Inter', sans-serif; font-size: .78rem; color: var(--muted); margin-top: 6px; }
     .gt-intro { font-size: 1.2rem; }
     .gt-pickers { margin: 1.4em 0 0; display: flex; flex-direction: column; gap: 8px; }
     .gt-pickrow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }

@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 ---
-<Base title="Play" description="Winter mini games from Doubleskull Tales: throw a goblin through Krampusbowl weather or slide as close to the sideline as you dare.">
+<Base title="Play" image="/images/play-sideline-slide.jpg" description="Winter mini games from Doubleskull Tales: throw a goblin through Krampusbowl weather or slide as close to the sideline as you dare.">
   <div class="page pl-page">
     <p class="pl-kicker">Mini games · Winter edition</p>
     <h1>Play</h1>
@@ -9,6 +9,7 @@ import Base from '../layouts/Base.astro';
 
     <div class="pl-grid">
       <a class="pl-card" href="/play/goblin-toss/">
+        <img class="pl-img" src="/images/play-goblin-toss.jpg" alt="A troll throws a panicking goblin across a snowy pitch towards a cheering crowd." width="1200" height="670" loading="lazy" />
         <span class="pl-label">Throw Team-mate</span>
         <span class="pl-title">Goblin Toss</span>
         <span class="pl-text">Pick a big guy and a small volunteer, then throw him as far as you can. The Krampusbowl weather table rolls before every throw.</span>
@@ -16,6 +17,7 @@ import Base from '../layouts/Base.astro';
         <span class="btn dark pl-btn">Play Goblin Toss</span>
       </a>
       <a class="pl-card" href="/play/sideline-slide/">
+        <img class="pl-img" src="/images/play-sideline-slide.jpg" alt="A werewolf, an elf and a ratman slide across a frozen pitch towards the sideline and a cheering crowd." width="1200" height="670" loading="lazy" />
         <span class="pl-label">Frozen Pitch</span>
         <span class="pl-title">Sideline Slide</span>
         <span class="pl-text">Werewolf, Wardancer or Gutter Runner: sprint onto the ice and slide as close to the sideline as you dare. One square too far and the crowd rolls for injury.</span>
@@ -23,6 +25,7 @@ import Base from '../layouts/Base.astro';
         <span class="btn dark pl-btn">Play Sideline Slide</span>
       </a>
     </div>
+    <p class="pl-fine">Illustrations: AI-generated.</p>
 
     <p>Want to know what the weather really does at the Krampusbowl? Read <a href="/tales/krampusbowl-weather/">Brisk, With a Chance of Broken Ribs</a>.</p>
   </div>
@@ -33,6 +36,8 @@ import Base from '../layouts/Base.astro';
     .pl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 1.6em 0 2em; }
     .pl-card { display: flex; flex-direction: column; gap: 10px; border: 3px solid var(--ink); border-top-width: 10px; padding: 20px 22px 22px; color: var(--ink); text-decoration: none; background: var(--paper-dark, #e4d9c1); }
     .pl-card:hover { border-top-color: var(--red); color: var(--ink); }
+    .pl-img { display: block; width: calc(100% + 44px); max-width: none; height: auto; aspect-ratio: 1200 / 670; object-fit: cover; margin: -20px -22px 6px; border-bottom: 3px solid var(--ink); }
+    .pl-fine { font-family: 'Inter', sans-serif; font-size: .8rem; color: var(--muted); margin-top: -1.2em; }
     .pl-label { font-family: 'Inter', sans-serif; font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--red); }
     .pl-title { font-family: 'Anton', sans-serif; font-size: 2.2rem; line-height: 1; text-transform: uppercase; }
     .pl-text { font-size: 1.1rem; flex: 1; }

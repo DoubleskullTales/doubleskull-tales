@@ -1,12 +1,13 @@
 ---
 import Base from '../../layouts/Base.astro';
 ---
-<Base title="Sideline Slide" description="A winter mini game: sprint, hit the Frozen Pitch and slide as close to the sideline as you dare. One square too far and the crowd rolls for injury.">
+<Base title="Sideline Slide" image="/images/play-sideline-slide.jpg" description="A winter mini game: sprint, hit the Frozen Pitch and slide as close to the sideline as you dare. One square too far and the crowd rolls for injury.">
   <div class="page ss-page">
     <p class="ss-back"><a href="/play/">← All mini games</a></p>
     <p class="ss-kicker">Mini game · Winter edition</p>
     <h1>Sideline Slide</h1>
     <p class="ss-intro"><em>Frozen Pitch. Anyone who runs more than six squares keeps sliding. Get as close to the sideline as you can, but don't end up in the stands. The crowd in Vienna is friendly. Its Injury rolls are not.</em></p>
+    <figure class="ss-hero"><img src="/images/play-sideline-slide.jpg" alt="A werewolf, an elf and a ratman slide across a frozen pitch towards the sideline and a cheering crowd." width="1200" height="670" /><figcaption>Three sliders, one sideline, a crowd that would love to help. Illustration: AI-generated.</figcaption></figure>
 
     <div class="ss-pickers">
       <div class="ss-pickrow"><span class="ss-l">Slider</span>
@@ -46,6 +47,9 @@ import Base from '../../layouts/Base.astro';
     .ss-back { font-family: 'Inter', sans-serif; font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin: 0 0 .6em; }
     .ss-back a { text-decoration: none; }
     .ss-kicker { font-family: 'Inter', sans-serif; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; font-size: .8rem; color: var(--red); }
+    .ss-hero { margin: 1.2em 0 0; }
+    .ss-hero img { display: block; width: 100%; height: auto; aspect-ratio: 12 / 5; object-fit: cover; border: 3px solid var(--ink); }
+    .ss-hero figcaption { font-family: 'Inter', sans-serif; font-size: .78rem; color: var(--muted); margin-top: 6px; }
     .ss-intro { font-size: 1.2rem; }
     .ss-pickers { margin: 1.4em 0 0; display: flex; flex-direction: column; gap: 8px; }
     .ss-pickrow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
