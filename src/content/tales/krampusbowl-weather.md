@@ -100,6 +100,8 @@ Rats and runners take the coldest seat. Their whole game is speed, light armour 
 
 Five times out of six, none of this matters. The sixth time, the coach who read the table before kick-off has an edge. Our winter tips: Sure Feet on your runners, a plan for scoring short, and no long runs along the sideline.
 
+Can't wait until December 5? Throw a goblin through the Krampusbowl weather in our winter mini game, <a href="/play/">Goblin Toss</a>.
+
 Still want to test your team against the weather? Sign-up for Krampusbowl 10 is open until Sunday, November 29, on <a href="https://tourplay.net/en/blood-bowl/krampusbowl-10" target="_blank" rel="noopener noreferrer">Tourplay</a>. Rules, tiers and the full weather table are on the <a href="https://krampusbowl.jimdofree.com/" target="_blank" rel="noopener noreferrer">Krampusbowl website</a>.
 
 > The roster deadline is this Sunday. Once the rosters are public, we'll know exactly who should be checking the forecast.
