@@ -283,7 +283,12 @@ html, body { overflow-x: hidden; }
 .slider-nav button { font-family: 'Inter', sans-serif; font-weight: 700; font-size: .85rem; background: transparent; color: var(--ink); border: 2px solid var(--ink); width: 34px; height: 34px; cursor: pointer; line-height: 1; }
 .slider-nav button:hover { background: var(--ink); color: var(--paper); }
 .slider-nav .dot.is-active { background: var(--red); border-color: var(--red); color: var(--paper); }
-.slider-nav .dots { display: flex; gap: 8px; }
+.slider-nav .dots { display: flex; gap: 8px; flex-wrap: wrap; }
+@media (max-width: 520px) {
+  .slider-nav { gap: 4px; }
+  .slider-nav .dots { gap: 4px; flex-wrap: nowrap; }
+  .slider-nav button { flex: none; width: min(28px, calc((100vw - 84px) / 11)); height: min(28px, calc((100vw - 84px) / 11)); padding: 0; font-size: .72rem; border-width: 2px; }
+}
 .slider-nav .bar { position: absolute; top: -1px; left: 0; right: 0; height: 3px; }
 .slider-nav .bar span { display: block; height: 100%; width: 0; background: var(--red); }
 @media (prefers-reduced-motion: reduce) { .lead-slider .slide, .lead-slider .slide.is-active { transition: none; } }

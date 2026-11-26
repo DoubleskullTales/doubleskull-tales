@@ -3,9 +3,10 @@ import Base from '../layouts/Base.astro';
 import TaleCard from '../components/TaleCard.astro';
 import { getTales } from '../lib';
 const tales = await getTales();
-// The newest three tales take turns in the lead slot, the rest go into "Latest tales"
-const leads = tales.slice(0, 3);
-const rest = tales.slice(leads.length);
+// Up to nine of the newest tales take turns in the lead slot
+const leads = tales.slice(0, 9);
+// "Latest tales" lists the newest tales after the first lead story
+const rest = tales.slice(1);
 ---
 <Base>
   {leads.length > 0 && (
