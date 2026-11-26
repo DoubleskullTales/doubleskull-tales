@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Tools" description="Small tools for coaches from Doubleskull Tales. Start with the Odds Desk: how likely is that dodge, rush and pick-up?">
+  <div class="page tl-page">
+    <p class="tl-kicker">Tools · For coaches</p>
+    <h1>Tools</h1>
+    <p class="tl-intro"><em>Small helpers for the moments between "I've got this" and "why did I do that". They run in your browser, they're free, and they don't judge. Much.</em></p>
+
+    <div class="tl-grid">
+      <a class="tl-card" href="/tools/odds-desk/">
+        <span class="tl-label">Dice maths</span>
+        <span class="tl-title">The Odds Desk</span>
+        <span class="tl-text">Dodge, rush, pick-up, pass, catch: line up your rolls and see your real chances, with team re-roll, skills, Pro and Loner spent in the smartest order.</span>
+        <span class="btn dark tl-btn">Open the Odds Desk</span>
+      </a>
+      <div class="tl-card tl-soon">
+        <span class="tl-label">Coming later</span>
+        <span class="tl-title">More on the way</span>
+        <span class="tl-text">Got an idea for a tool you'd actually use at the table? <a href="mailto:hello@doubleskulltales.com?subject=Tool%20idea">Send it in</a>.</span>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .tl-kicker { font-family: 'Inter', sans-serif; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; font-size: .8rem; color: var(--red); }
+    .tl-intro { font-size: 1.2rem; }
+    .tl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 1.6em 0 2em; }
+    .tl-card { display: flex; flex-direction: column; gap: 10px; border: 3px solid var(--ink); border-top-width: 10px; padding: 20px 22px 22px; color: var(--ink); text-decoration: none; background: var(--paper-dark); }
+    a.tl-card:hover { border-top-color: var(--red); color: var(--ink); }
+    .tl-soon { background: transparent; border-style: dashed; border-top-style: solid; border-top-color: var(--muted); }
+    .tl-label { font-family: 'Inter', sans-serif; font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--red); }
+    .tl-title { font-family: 'Anton', sans-serif; font-size: 2.2rem; line-height: 1; text-transform: uppercase; }
+    .tl-text { font-size: 1.1rem; flex: 1; }
+    .tl-btn { text-align: center; }
+    a.tl-card:hover .tl-btn { background: var(--red); border-color: var(--red); color: var(--paper); }
+    @media (max-width: 640px) { .tl-grid { grid-template-columns: 1fr; } }
+  </style>
+</Base>
