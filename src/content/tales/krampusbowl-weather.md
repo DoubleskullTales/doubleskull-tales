@@ -3,8 +3,8 @@ title: "Brisk, With a Chance of Broken Ribs"
 subtitle: "Winter reached Vienna today. At the Krampusbowl it comes with its own weather table. A frostbite guide for every team."
 date: 2026-11-26T17:00:00
 section: "Coaching Corner"
-image: "/images/krampusbowl-weather.jpg"
-imageCaption: "The Krampusbowl forecast. Five results, one of them pleasant."
+image: "/images/winter-brisk.jpg"
+imageCaption: "Brisk: four goblins, one scarf, one unimpressed dwarf. Illustration: AI-generated."
 ---
 
 The first snow fell on Vienna today. Pretty on the rooftops, less pretty on a pitch. And at the Krampusbowl, winter is more than a mood. The tournament uses its own weather table, and that table has teeth.
@@ -29,6 +29,10 @@ So who should pack a scarf?
 
 ## Howling Winds (2)
 
+![An elf thrower watches his pass leave without him.](/images/winter-winds.jpg)
+
+<p class="tape-note">An elf thrower watches his pass leave without him. Illustration: AI-generated.</p>
+
 **What it does:** every pass gets an extra -1. Before a kick-off or an inaccurate pass scatters, the wind pushes the ball two squares down the pitch. A roll-off decides the direction: the wind blows towards the loser's end zone.
 
 **Who freezes:** everyone who lives by the pass. The -1 lands on every throw, Throw Team-mate included, and the ball drifts wherever it likes. Kick-offs turn into a lottery for both sides.
@@ -39,6 +43,10 @@ So who should pack a scarf?
 
 ## Freezing (3)
 
+![Nobody touched him. The ground did all the work.](/images/winter-freezing.jpg)
+
+<p class="tape-note">Nobody touched him. The ground did all the work. Illustration: AI-generated.</p>
+
 **What it does:** whenever a player falls over, for example after a failed Dodge or Rush, add 1 to the Armour roll. It doesn't stack with Arm Bar.
 
 **Who freezes:** teams that dodge and rush for a living, especially in light armour. Elves, rat runners, Amazons and above all the Stunties. Every failed dodge now hurts like a hit from a Mighty Blow.
@@ -46,6 +54,10 @@ So who should pack a scarf?
 **Who shrugs:** armoured teams that stand still and hit things. Being knocked down by a block isn't falling over, so blocks work as usual. One footnote: Arm Bar loses its edge for the day, because the frozen ground now does the same job for everybody.
 
 ## Frozen Pitch (11)
+
+![Seven squares planned, eight delivered. The crowd is ready.](/images/winter-frozen.jpg)
+
+<p class="tape-note">Seven squares planned, eight delivered. The crowd is ready. Illustration: AI-generated.</p>
 
 **What it does:** a player who moves more than six squares in one action, Rushes included, slides one extra square in the same direction. If that square is occupied, he's Knocked Down where he stands. If it's free, he makes an Agility test, ignoring tackle zones. Fail, and he's Placed Prone, without an Armour roll. That's only a turnover if he carries the ball.
 
@@ -56,6 +68,10 @@ So who should pack a scarf?
 **Mind the sideline:** if the extra square is off the pitch, the crowd catches him. That means an Injury roll, just like any other push into the stands.
 
 ## Blizzard (12)
+
+![Dwarves, unbothered. A rat, less so.](/images/winter-blizzard.jpg)
+
+<p class="tape-note">Dwarves, unbothered. A rat, less so. Illustration: AI-generated.</p>
 
 **What it does:** a player who Rushes slips and is Knocked Down on a 1 or 2 instead of just a 1. Only Quick or Short passes are allowed.
 
