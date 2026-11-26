@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 ---
-<Base title="Tools" description="Small tools for coaches from Doubleskull Tales. Start with the Odds Desk: how likely is that dodge, rush and pick-up?">
+<Base title="Tools" description="Small tools for coaches from Doubleskull Tales. The Odds Desk for dodges, rushes and pick-ups, the Block Desk for everything that hits.">
   <div class="page tl-page">
     <p class="tl-kicker">Tools · For coaches</p>
     <h1>Tools</h1>
@@ -13,6 +13,12 @@ import Base from '../layouts/Base.astro';
         <span class="tl-title">The Odds Desk</span>
         <span class="tl-text">Dodge, rush, pick-up, pass, catch: line up your rolls and see your real chances, with team re-roll, skills, Pro and Loner spent in the smartest order.</span>
         <span class="btn dark tl-btn">Open the Odds Desk</span>
+      </a>
+      <a class="tl-card" href="/tools/block-desk/">
+        <span class="tl-label">Dice maths</span>
+        <span class="tl-title">The Block Desk</span>
+        <span class="tl-text">Strength, assists and all the usual hitting skills: see how often he goes down, how often you do, and how often he leaves on a stretcher.</span>
+        <span class="btn dark tl-btn">Open the Block Desk</span>
       </a>
       <div class="tl-card tl-soon">
         <span class="tl-label">Coming later</span>
@@ -28,7 +34,7 @@ import Base from '../layouts/Base.astro';
     .tl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 1.6em 0 2em; }
     .tl-card { display: flex; flex-direction: column; gap: 10px; border: 3px solid var(--ink); border-top-width: 10px; padding: 20px 22px 22px; color: var(--ink); text-decoration: none; background: var(--paper-dark); }
     a.tl-card:hover { border-top-color: var(--red); color: var(--ink); }
-    .tl-soon { background: transparent; border-style: dashed; border-top-style: solid; border-top-color: var(--muted); }
+    .tl-soon { grid-column: 1 / -1; background: transparent; border-style: dashed; border-top-style: solid; border-top-color: var(--muted); }
     .tl-label { font-family: 'Inter', sans-serif; font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--red); }
     .tl-title { font-family: 'Anton', sans-serif; font-size: 2.2rem; line-height: 1; text-transform: uppercase; }
     .tl-text { font-size: 1.1rem; flex: 1; }
