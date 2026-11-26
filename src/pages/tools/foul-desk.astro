@@ -1,0 +1,139 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../site';
+---
+<Base title="The Foul Desk" description="He's down. You've got a boot. Set assists, Dirty Player and Sneaky Git and the Foul Desk shows the odds of hurting him, and of the referee sending you off.">
+  <div class="page fd-page">
+    <p class="fd-back"><a href="/tools/">← All tools</a></p>
+    <p class="fd-kicker">Tools · Dice maths</p>
+    <h1>The Foul Desk</h1>
+    <p class="fd-intro"><em>Nobody likes a fouler. Everybody fouls anyway. Before you put the boot in, see how likely it is to hurt him, and how likely it is that the referee was watching.</em></p>
+
+    <div id="fd-app">
+      <div class="fd-sides">
+        <fieldset class="fd-side">
+          <legend>Your fouler</legend>
+          <div class="fd-st"><span class="fd-l">Assists for you</span>
+            <span class="fd-stepper"><button type="button" class="fd-step" data-who="f" data-d="-1" aria-label="One assist less">&minus;</button><span class="fd-stv" id="fd-fa">1</span><button type="button" class="fd-step" data-who="f" data-d="1" aria-label="One assist more">+</button></span>
+          </div>
+          <p class="fd-hint">Team-mates with Put the Boot In assist even when they're marked. Count them in.</p>
+          <div class="fd-skills">
+            <label><input type="checkbox" id="fd-f-dirtyPlayer"> Dirty Player</label>
+            <label><input type="checkbox" id="fd-f-sneakyGit"> Sneaky Git</label>
+            <label><input type="checkbox" id="fd-f-loneFouler"> Lone Fouler</label>
+          </div>
+        </fieldset>
+        <fieldset class="fd-side">
+          <legend>Him <span>(on the floor)</span></legend>
+          <div class="fd-st"><span class="fd-l">Assists for him</span>
+            <span class="fd-stepper"><button type="button" class="fd-step" data-who="t" data-d="-1" aria-label="One assist less">&minus;</button><span class="fd-stv" id="fd-ta">0</span><button type="button" class="fd-step" data-who="t" data-d="1" aria-label="One assist more">+</button></span>
+          </div>
+          <div class="fd-st fd-av"><span class="fd-l">Armour value</span>
+            <select id="fd-av"><option value="6">6+</option><option value="7">7+</option><option value="8">8+</option><option value="9" selected>9+</option><option value="10">10+</option><option value="11">11+</option></select>
+          </div>
+          <div class="fd-skills">
+            <label><input type="checkbox" id="fd-t-thickSkull"> Thick Skull</label>
+            <label><input type="checkbox" id="fd-t-stunty"> Stunty</label>
+            <label><input type="checkbox" id="fd-t-regeneration"> Regeneration</label>
+            <label><input type="checkbox" id="fd-t-ironHardSkin"> Iron Hard Skin</label>
+          </div>
+        </fieldset>
+        <fieldset class="fd-side">
+          <legend>The referee</legend>
+          <div class="fd-skills">
+            <label><input type="checkbox" id="fd-argue" checked> Argue the call</label>
+            <label><input type="checkbox" id="fd-bribe"> Use a Bribe</label>
+          </div>
+          <p class="fd-sidenote">Armour needs <strong id="fd-need">-</strong><br><span id="fd-needsub"></span></p>
+        </fieldset>
+      </div>
+
+      <div class="fd-result" aria-live="polite">
+        <div class="fd-bigs">
+          <div class="fd-big"><span class="fd-l">KO or worse</span><span class="fd-pct" id="fd-ko">-</span></div>
+          <div class="fd-big fd-big2"><span class="fd-l">You get sent off</span><span class="fd-pct" id="fd-off">-</span></div>
+        </div>
+        <div class="fd-say">
+          <p class="fd-verdict" id="fd-verdict"></p>
+          <p class="fd-sub" id="fd-sub"></p>
+          <ul class="fd-rows" id="fd-rows"></ul>
+          <p class="fd-facts" id="fd-ref"></p>
+        </div>
+      </div>
+      <button type="button" class="btn dark fd-share" id="fd-share">Copy link to this foul</button>
+      <input type="text" class="fd-link" id="fd-link" readonly hidden aria-label="Link to this foul" />
+    </div>
+
+    <h2>How the Foul Desk counts</h2>
+    <ul class="fd-rules">
+      <li>Armour roll: 2D6, +1 for each assist for you, -1 for each assist for him. It breaks when it reaches his armour value. Iron Hard Skin: no modifiers at all on the armour roll.</li>
+      <li>Dirty Player: +1 to the armour roll or the injury roll, added after the roll. The Foul Desk puts it on the armour if that breaks it, otherwise on the injury.</li>
+      <li>Injury: 2 to 7 Stunned, 8 or 9 KO, 10 or more Casualty. Thick Skull turns an 8 into Stunned. Stunty: 2 to 6 Stunned, 7 or 8 KO, 9 or more Casualty (with Thick Skull, a 7 is Stunned). Regeneration: a 4+ sends a casualty to the reserves instead. Dead is a 15 or 16 on the casualty roll.</li>
+      <li>Sent off: a natural double on the armour roll or the injury roll. Sneaky Git ignores a double on the armour roll when the armour holds. A send-off is always a turnover.</li>
+      <li>Argue the call: a 6 keeps your fouler on the pitch (the turnover still happens). Bribe: a 2+ keeps him on the pitch. With both, you argue first and only use the Bribe if the referee isn't convinced.</li>
+      <li>Lone Fouler: with no assists on either side, a failed armour roll can be re-rolled. Only the roll that counts is checked for a double. Put the Boot In: that team-mate can assist even when marked, so just add him to your assists.</li>
+      <li>Apart from Lone Fouler, re-rolls don't work on armour or injury rolls. Mighty Blow and Claw don't count on a foul. Pile Driver works the same way as a normal foul.</li>
+    </ul>
+    <p>Want to knock him down first? <a href="/tools/block-desk/">The Block Desk</a> has you covered.</p>
+    <p class="fd-fine">Rules as we read them in the current rulebook. Spotted something that doesn't match your book? <a href={`mailto:${SITE.email}?subject=Foul%20Desk`}>Tell us</a> and we'll fix it.</p>
+    <p class="fd-fine"><strong>Unofficial fan tool.</strong> Not affiliated with or endorsed by Games Workshop. Everything is calculated in your browser. Nothing is stored or sent anywhere.</p>
+  </div>
+
+  <style>
+    .fd-back { font-family: 'Inter', sans-serif; font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin: 0 0 .6em; }
+    .fd-back a { text-decoration: none; }
+    .fd-kicker { font-family: 'Inter', sans-serif; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; font-size: .8rem; color: var(--red); }
+    .fd-intro { font-size: 1.2rem; }
+    .fd-l { font-family: 'Inter', sans-serif; font-size: .68rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); }
+    .fd-sides { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-top: 1.4em; }
+    .fd-side { border: 3px solid var(--ink); border-top-width: 10px; padding: 10px 14px 14px; min-width: 0; }
+    .fd-side legend { font-family: 'Anton', sans-serif; font-size: 1.3rem; text-transform: uppercase; padding: 0 6px; }
+    .fd-side legend span { font-family: 'Crimson Text', serif; font-style: italic; text-transform: none; font-size: .95rem; color: var(--muted); }
+    .fd-st { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .fd-av { margin-top: 10px; }
+    .fd-stepper { display: flex; align-items: center; border: 2.5px solid var(--ink); }
+    .fd-step { width: 34px; height: 34px; border: none; background: transparent; font-size: 1.3rem; cursor: pointer; color: var(--ink); }
+    .fd-step:hover { background: var(--ink); color: var(--paper); }
+    .fd-stv { font-family: 'Anton', sans-serif; font-size: 1.4rem; min-width: 34px; text-align: center; border-left: 2px solid var(--ink); border-right: 2px solid var(--ink); line-height: 34px; }
+    .fd-page select { font-family: 'Inter', sans-serif; font-size: .85rem; padding: 3px 4px; border: 2px solid var(--ink); background: var(--paper); color: var(--ink); }
+    .fd-hint { font-family: 'Inter', sans-serif; font-size: .74rem; color: var(--muted); margin-top: 8px !important; }
+    .fd-skills { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; font-family: 'Inter', sans-serif; font-size: .85rem; }
+    .fd-skills label { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+    .fd-page input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--red); }
+    .fd-sidenote { font-family: 'Inter', sans-serif; font-size: .8rem; color: var(--muted); margin-top: 14px !important; border-top: 2px solid var(--ink); padding-top: 8px; }
+    .fd-sidenote strong { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 1.3rem; color: var(--ink); }
+    .fd-result { display: grid; grid-template-columns: 210px 1fr; margin-top: 1.4em; border: 3px solid var(--ink); border-top-width: 10px; background: var(--paper-dark); }
+    .fd-bigs { display: flex; flex-direction: column; border-right: 3px solid var(--ink); }
+    .fd-big { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 14px 18px; }
+    .fd-big2 { border-top: 2px solid var(--ink); }
+    .fd-pct { font-family: 'Anton', sans-serif; font-size: 3.2rem; line-height: 1; color: var(--red); }
+    .fd-big2 .fd-pct { color: var(--ink); font-size: 2.2rem; }
+    .fd-say { padding: 16px 20px; }
+    .fd-say p { margin: 0 !important; }
+    .fd-verdict { font-family: 'Anton', sans-serif; font-size: 1.7rem; text-transform: uppercase; line-height: 1.05; }
+    .fd-sub { font-style: italic; font-size: 1.15rem; margin-top: 4px !important; }
+    .fd-rows { list-style: none; padding: 0 !important; margin: 12px 0 10px !important; display: flex; flex-direction: column; gap: 6px; }
+    :global(.fd-row) { display: grid; grid-template-columns: 200px 1fr 54px; align-items: center; gap: 10px; font-family: 'Inter', sans-serif; font-size: .82rem; }
+    :global(.fd-rb) { height: 10px; border: 2px solid var(--ink); background: var(--paper); }
+    :global(.fd-rb span) { display: block; height: 100%; background: var(--muted); }
+    :global(.fd-red .fd-rb span) { background: var(--red); }
+    :global(.fd-ink .fd-rb span) { background: var(--ink); }
+    :global(.fd-rv) { font-family: 'Anton', sans-serif; font-size: 1rem; text-align: right; }
+    .fd-facts { font-family: 'Inter', sans-serif; font-size: .82rem; color: var(--muted); line-height: 1.6; }
+    .fd-facts :global(strong) { color: var(--ink); }
+    .fd-share { display: block; width: 100%; margin-top: 12px; cursor: pointer; }
+    .fd-link { width: 100%; margin-top: 8px; padding: 8px; font-family: 'Inter', sans-serif; font-size: .8rem; border: 2px solid var(--ink); background: var(--paper); }
+    .fd-rules li { margin-top: .3em; }
+    .fd-fine { font-family: 'Inter', sans-serif; font-size: .8rem; color: var(--muted); }
+    @media (max-width: 760px) {
+      .fd-sides { grid-template-columns: 1fr; }
+      .fd-skills { flex-direction: row; flex-wrap: wrap; gap: 6px 16px; }
+      .fd-result { grid-template-columns: 1fr; }
+      .fd-bigs { flex-direction: row; border-right: none; border-bottom: 3px solid var(--ink); }
+      .fd-big2 { border-top: none; border-left: 2px solid var(--ink); }
+      :global(.fd-row) { grid-template-columns: 1fr 50px; }
+      :global(.fd-rb) { grid-column: 1 / 3; grid-row: 2; }
+    }
+  </style>
+  <script is:inline src="/foul-desk.js" defer></script>
+</Base>

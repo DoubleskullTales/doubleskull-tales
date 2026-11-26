@@ -117,6 +117,8 @@
       var okCat = kind === 'superb' ? (t.bullseye ? 'target' : 'feet') : kind === 'subpar' ? 'feet' : 'feetFumble';
       var once = function (rest) { return mix([{ w: pl, d: one(okCat) }, { w: 1 - pl, d: rest }]); };
       var opts = [once(one('fell'))];
+      var swoops = p.swoop && kind !== 'fumbled' && !(kind === 'superb' && t.bullseye);
+      if (swoops) opts.push(once(once(one('fell')))); // Swoop: skip the scatter, re-roll the landing
       if (tr) opts.push(once(mix([{ w: lonerP, d: once(one('fell')) }, { w: 1 - lonerP, d: one('fell') }])));
       return best(opts);
     }
@@ -183,7 +185,7 @@
       '&c=' + (c.ag || 3) + '.' + (c.marked || 0) + '.' + bits(c, C_SK) + '.' + (c.loner || 0) + '.' + (c.dp || 0) +
       '&i=' + (o.intercept ? 1 : 0) + '.' + (x.ag || 3) + '.' + (x.marked || 0) + '.' + bits(x, X_SK) + '.' + (x.dp || 0) +
       '&k=' + (k.pa || 3) + '.' + (k.marked || 0) + '.' + bits(k, K_SK) + '.' + (k.loner || 0) + '.' + (k.dp || 0) +
-      '&p=' + (p.ag || 3) + '.' + (p.marked || 0) + '.' + (p.loner || 0) +
+      '&p=' + (p.ag || 3) + '.' + (p.marked || 0) + '.' + (p.loner || 0) + '.' + (p.swoop ? 1 : 0) +
       '&rr=' + (o.teamRR ? 1 : 0) + '&w=' + (o.weather || 'nice');
   }
   function decode(h) {
@@ -196,7 +198,7 @@
     var ca = flags(cp[2], C_SK); ca.ag = cl(cp[0], 1, 6, 3); ca.marked = cl(cp[1], 0, 4, 0); ca.loner = lon(cp[3]); ca.dp = cl(cp[4], 0, 3, 0);
     var ic = flags(ip[3], X_SK); ic.ag = cl(ip[1], 1, 6, 3); ic.marked = cl(ip[2], 0, 4, 0); ic.dp = cl(ip[4], 0, 3, 0);
     var kt = flags(kp[2], K_SK); kt.pa = cl(kp[0], 1, 6, 3); kt.marked = cl(kp[1], 0, 4, 0); kt.loner = lon(kp[3]); kt.dp = cl(kp[4], 0, 3, 0);
-    var tn = { ag: cl(pp[0], 1, 6, 3), marked: cl(pp[1], 0, 4, 0), loner: lon(pp[2]) };
+    var tn = { ag: cl(pp[0], 1, 6, 3), marked: cl(pp[1], 0, 4, 0), loner: lon(pp[2]), swoop: pp[3] === '1' };
     var w = ['nice', 'sunny', 'rain', 'blizzard'].indexOf(q.w) >= 0 ? q.w : 'nice';
     return { mode: q.m === 'ttm' ? 'ttm' : 'pass', dx: cl(m[1], 0, 13, 4), dy: cl(m[2], 0, 13, 2), thrower: th, catcher: ca, intercept: ip[0] === '1', interceptor: ic, tthrower: kt, thrown: tn, teamRR: q.rr !== '0', weather: w };
   }
@@ -214,7 +216,7 @@
     var fh = decode(location.hash); if (fh) st = fh;
     var pct = function (v) { v *= 100; return (v >= 99.95 || v < 0.05 || Math.abs(v - Math.round(v)) < 0.05) ? Math.round(v) + '%' : v.toFixed(1) + '%'; };
     var LABELS = { caught: 'Caught', dropped: 'Dropped', intercepted: 'Intercepted', inaccurate: 'Inaccurate (scatters)', stumble: 'Safe Pass: keeps the ball', fumble: 'Fumbled' };
-    var TLABELS = { target: 'Lands in the target square (Bullseye)', feet: 'Lands on his feet (after the scatter)', feetFumble: 'Fumbled, but lands on his feet', fell: 'Falls over', eaten: 'Eaten' };
+    var TLABELS = { target: 'Lands in the target square (Bullseye)', feet: 'Lands on his feet', feetFumble: 'Fumbled, but lands on his feet', fell: 'Falls over', eaten: 'Eaten' };
 
     var grid = $('pd-grid'), h = '';
     for (var y = 13; y >= 0; y--) {
@@ -246,7 +248,7 @@
     C_SK.forEach(function (k) { bindBox('pd-c-' + k, C, k); });
     X_SK.forEach(function (k) { bindBox('pd-i-' + k, X, k); });
     K_SK.forEach(function (k) { bindBox('pd-k-' + k, K, k); });
-    bindBox('pd-int', S, 'intercept'); bindBox('pd-rr', S, 'teamRR');
+    bindBox('pd-p-swoop', Pn, 'swoop'); bindBox('pd-int', S, 'intercept'); bindBox('pd-rr', S, 'teamRR');
     document.querySelectorAll('[data-mode-btn]').forEach(function (b) { b.addEventListener('click', function () { st.mode = b.dataset.modeBtn; sync(); }); });
 
     function sync() {
@@ -296,7 +298,7 @@
         $('pd-needs').innerHTML = nd;
         $('pd-rows').innerHTML = rowsHtml(r.dist, TCATS, TLABELS);
         var reT = st.teamRR || st.tthrower.pro;
-        $('pd-facts').innerHTML = (reT ? 'Without any re-rolls: <strong>' + pct(r.rawComplete) + '</strong> lands on his feet. ' : '') + (st.tthrower.bullseye ? '' : 'Even a superb throw scatters three squares from the target before he lands.');
+        $('pd-facts').innerHTML = (reT ? 'Without any re-rolls: <strong>' + pct(r.rawComplete) + '</strong> lands on his feet. ' : '') + (st.thrown.swoop ? 'With Swoop he skips the scatter and drifts D6 squares in a D6 direction instead, with a re-roll on the landing.' : st.tthrower.bullseye ? '' : 'Even a superb throw scatters three squares from the target before he lands.');
         return;
       }
       var o = { band: band, thrower: st.thrower, catcher: st.catcher, intercept: st.intercept, interceptor: st.interceptor, teamRR: st.teamRR, weather: st.weather };

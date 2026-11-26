@@ -106,6 +106,9 @@ const sel = (min: number, max: number, suffix = '') => Array.from({ length: max 
             <label>Marked where he lands <select id="pd-pm">{sel(0, 4).map((o) => <option value={o.v}>{o.l}</option>)}</select></label>
             <label>Loner <select id="pd-pl"><option value="0">No</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option><option value="5">5+</option></select></label>
           </div>
+          <div class="pd-skills">
+            <label><input type="checkbox" id="pd-p-swoop"> Swoop</label>
+          </div>
           <p class="pd-sidenote">If he falls over, it's only a turnover when he was holding the ball.</p>
         </fieldset>
       </div>
@@ -143,7 +146,8 @@ const sel = (min: number, max: number, suffix = '') => Array.from({ length: max 
       <li>Throw Team-mate: Quick or Short range only. Roll against Passing Ability: Quick 0, Short -1, -1 per marker, Strong Arm +1, -1 in Very Sunny weather. Natural 6 or a pass is superb, a natural 1 or 1 or less after modifiers is fumbled, anything else is subpar.</li>
       <li>Superb and subpar throws scatter three times from the target square (Bullseye: a superb throw lands in the target square). A fumbled throw bounces from the thrower. Landing: Agility test, -1 after a subpar or fumbled throw, -1 per marker on the landing square. Where exactly he lands, and whether that square is free, isn't counted.</li>
       <li>Always Hungry: roll a D6 before the throw. On a 1, roll again: another 1 and he's eaten, otherwise he squirms free and it's a fumbled throw. The Pass Desk lets you use Pro or the team re-roll on the first roll.</li>
-      <li>Not included: Hail Mary Pass, Leader, Swoop, Throw Bomb, and where an inaccurate pass ends up.</li>
+      <li>Swoop: instead of scattering, he moves D6 squares in a D6 direction on the throw template and may re-roll the landing. The Pass Desk counts the re-roll, not where he ends up. After a fumbled throw, or a superb throw with Bullseye, there's no scatter to skip, so no re-roll.</li>
+      <li>Not included: Hail Mary Pass, Leader, Throw Bomb, Kick Team-mate, and where an inaccurate pass ends up.</li>
     </ul>
     <p>Rather run it in? <a href="/tools/odds-desk/">The Odds Desk</a> does dodges and rushes, <a href="/tools/block-desk/">The Block Desk</a> does the hitting.</p>
     <p class="pd-fine">Rules as we read them in the current rulebook. Spotted something that doesn't match your book? <a href={`mailto:${SITE.email}?subject=Pass%20Desk`}>Tell us</a> and we'll fix it.</p>
