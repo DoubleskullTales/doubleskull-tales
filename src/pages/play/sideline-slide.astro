@@ -1,0 +1,544 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base title="Sideline Slide" description="A winter mini game: sprint, hit the Frozen Pitch and slide as close to the sideline as you dare. One square too far and the crowd rolls for injury.">
+  <div class="page ss-page">
+    <p class="ss-back"><a href="/play/">← All mini games</a></p>
+    <p class="ss-kicker">Mini game · Winter edition</p>
+    <h1>Sideline Slide</h1>
+    <p class="ss-intro"><em>Frozen Pitch. Anyone who runs more than six squares keeps sliding. Get as close to the sideline as you can, but don't end up in the stands. The crowd in Vienna is friendly. Its Injury rolls are not.</em></p>
+
+    <div class="ss-pickers">
+      <div class="ss-pickrow"><span class="ss-l">Slider</span>
+        <button type="button" class="ss-pick" data-id="werewolf" aria-pressed="true">Werewolf</button>
+        <button type="button" class="ss-pick" data-id="wardancer" aria-pressed="false">Wardancer</button>
+        <button type="button" class="ss-pick" data-id="gutter" aria-pressed="false">Gutter Runner</button>
+      </div>
+      <p class="ss-pickinfo" id="ss-pickinfo"></p>
+    </div>
+
+    <div class="ss-hud">
+      <div><span class="ss-l">Ice check</span><span class="ss-v" id="ss-ag">-</span><span class="ss-s" id="ss-agsub"></span></div>
+      <div><span class="ss-l">Brakes</span><span class="ss-bar"><span id="ss-brake"></span></span><span class="ss-s" id="ss-brakesub">Full</span></div>
+      <div><span class="ss-l">Last slide</span><span class="ss-v" id="ss-last">-</span></div>
+      <div><span class="ss-l">Your best</span><span class="ss-v" id="ss-best">-</span><span class="ss-s" id="ss-bestby"></span></div>
+    </div>
+
+    <div class="ss-stage">
+      <canvas id="ss-canvas" width="960" height="440" aria-label="Sideline Slide game"></canvas>
+      <div class="ss-msg" id="ss-msg"></div>
+    </div>
+    <button class="btn dark ss-btn" id="ss-btn" type="button">Start the sprint</button>
+
+    <h2>How to play</h2>
+    <ul>
+      <li>Pick your slider. Tap the button (or the pitch, or hit the space bar) to start the sprint, then tap again to lock the <strong>speed</strong>.</li>
+      <li>After six squares the ice takes over. Your slider makes an <strong>Agility test</strong>. Pass and he slides on his feet. Fail and he goes down and slides on his belly, where braking barely works.</li>
+      <li><strong>Press and hold</strong> to brake. The brakes only last so long, so pick your moment.</li>
+      <li>Your score is where he stops, in squares. The sideline is at <strong>15</strong>. Cross it and he lands in the crowd: an Injury roll and no score.</li>
+    </ul>
+    <p>The ice is never quite the same twice, so the same speed won't always end in the same square. That's what the brakes are for.</p>
+    <p class="ss-fine">Your best slide is saved only in this browser. Nothing is sent anywhere.</p>
+    <p>Want to know what Frozen Pitch really does at the Krampusbowl? Read <a href="/tales/krampusbowl-weather/">Brisk, With a Chance of Broken Ribs</a>. Prefer throwing to sliding? Try <a href="/play/goblin-toss/">Goblin Toss</a>.</p>
+  </div>
+
+  <style>
+    .ss-back { font-family: 'Inter', sans-serif; font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin: 0 0 .6em; }
+    .ss-back a { text-decoration: none; }
+    .ss-kicker { font-family: 'Inter', sans-serif; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; font-size: .8rem; color: var(--red); }
+    .ss-intro { font-size: 1.2rem; }
+    .ss-pickers { margin: 1.4em 0 0; display: flex; flex-direction: column; gap: 8px; }
+    .ss-pickrow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+    .ss-pickrow .ss-l { width: 76px; }
+    .ss-pick { font-family: 'Inter', sans-serif; font-weight: 700; font-size: .85rem; letter-spacing: .08em; text-transform: uppercase; padding: 7px 14px; border: 2.5px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; }
+    .ss-pick[aria-pressed="true"] { background: var(--ink); color: var(--paper, #efe6d2); }
+    .ss-pick:disabled { opacity: .45; cursor: not-allowed; }
+    .ss-pickinfo { font-family: 'Inter', sans-serif; font-size: .8rem; color: var(--muted); margin: 2px 0 0; }
+    .ss-hud { display: grid; grid-template-columns: repeat(4, 1fr); border: 3px solid var(--ink); margin: 1em 0 0; font-family: 'Inter', sans-serif; }
+    .ss-hud > div { padding: 10px 12px; border-right: 2px solid var(--ink); display: flex; flex-direction: column; gap: 2px; }
+    .ss-hud > div:last-child { border-right: none; }
+    .ss-l { font-family: 'Inter', sans-serif; font-size: .68rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); }
+    .ss-v { font-family: 'Anton', sans-serif; font-size: 1.35rem; text-transform: uppercase; line-height: 1.1; }
+    .ss-s { font-size: .75rem; color: var(--muted); }
+    .ss-bar { display: block; height: 14px; margin: 6px 0 3px; border: 2px solid var(--ink); background: var(--paper, #efe6d2); }
+    .ss-bar span { display: block; height: 100%; width: 100%; background: var(--red); }
+    .ss-stage { position: relative; border: 3px solid var(--ink); border-top: none; background: #dfe8ee; }
+    #ss-canvas { display: block; width: 100%; height: auto; touch-action: none; cursor: pointer; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+    .ss-msg { position: absolute; left: 50%; top: 10%; transform: translateX(-50%); width: 86%; text-align: center; font-family: 'Anton', sans-serif; text-transform: uppercase; font-size: clamp(1.2rem, 3.6vw, 2.2rem); line-height: 1.05; color: var(--ink); text-shadow: 0 0 6px #f4f1ea, 0 0 12px #f4f1ea; pointer-events: none; }
+    .ss-msg :global(small) { display: block; font-family: 'Crimson Text', serif; font-style: italic; text-transform: none; font-size: .6em; margin-top: 6px; }
+    .ss-btn { display: block; width: 100%; margin-top: 12px; font-size: 1.05rem; padding: 14px; cursor: pointer; touch-action: none; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+    .ss-btn.braking { background: var(--red); border-color: var(--red); }
+    .ss-fine { font-family: 'Inter', sans-serif; font-size: .8rem; color: var(--muted); }
+    @media (max-width: 560px) {
+      .ss-hud { grid-template-columns: 1fr 1fr; }
+      .ss-hud > div:nth-child(2) { border-right: none; }
+      .ss-hud > div:nth-child(-n+2) { border-bottom: 2px solid var(--ink); }
+      .ss-pick { padding: 6px 10px; font-size: .78rem; }
+    }
+  </style>
+
+  <script is:inline>
+  (function () {
+    const cv = document.getElementById('ss-canvas');
+    const ctx = cv.getContext('2d');
+    const W = 960, H = 440, GROUND = 352, SQ = 50, X0 = 70, ICE = 6, LINE = 15;
+    const BAR_X = X0 + LINE * SQ + 22;
+    const INK = '#1b1712', RED = '#9b1c1c', PAPER = '#efe6d2', BRONZE = '#a8833a', GREEN = '#2e5a33';
+    const FRICTION = 1.5;
+    const $ = (id) => document.getElementById(id);
+    const btn = $('ss-btn'), msg = $('ss-msg');
+    const sx = (sq) => X0 + sq * SQ;
+
+    const SLIDERS = {
+      werewolf: { name: 'Werewolf', ag: 3, reach: 1, meter: 4.6, brake: 4.2, stamina: .7,
+        info: 'MA 8, AG 3+. Claws bite deep into the ice: the strongest brake in the game, but it runs out fast. Regeneration helps if the crowd wins.' },
+      wardancer: { name: 'Wardancer', ag: 2, reach: .95, meter: 4.3, brake: 3, stamina: 1.2,
+        info: 'MA 8, AG 2+. Best balance on the ice and a long, smooth brake.' },
+      gutter: { name: 'Gutter Runner', ag: 2, reach: 1.1, meter: 5.9, brake: 2.2, stamina: 1.3,
+        info: 'MA 9, AG 2+. The fastest legs and the twitchiest speed bar. Light, so the brakes barely bite.' },
+    };
+    let sel = 'werewolf';
+    const C = () => SLIDERS[sel];
+
+    function fit() {
+      const r = Math.min(window.devicePixelRatio || 1, 2);
+      cv.width = W * r; cv.height = H * r; ctx.setTransform(r, 0, 0, r, 0, 0);
+    }
+    fit(); window.addEventListener('resize', fit);
+
+    // Best score (local only)
+    let best = null, bestBy = '';
+    try {
+      const b = parseFloat(localStorage.getItem('dst-sideline-slide-best')); if (!isNaN(b)) best = b;
+      bestBy = localStorage.getItem('dst-sideline-slide-best-by') || '';
+    } catch (e) {}
+    const fmt = (d) => d.toFixed(1) + ' sq';
+    function showBest() { $('ss-best').textContent = best != null ? fmt(best) : '-'; $('ss-bestby').textContent = bestBy; }
+    showBest();
+
+    const d6 = () => 1 + Math.floor(Math.random() * 6);
+
+    // State: ready, speed, run, slide, crowd, done
+    let state = 'ready', t0 = 0, power = 0, phase = 0;
+    let p = null, held = false, stamina = 1, crowdT = 0, inj = null, spray = [], flakes = [];
+    function setSnow(n) { flakes = Array.from({ length: n }, () => ({ x: Math.random() * W, y: Math.random() * H, r: .8 + Math.random() * 2, s: 18 + Math.random() * 30 })); }
+    setSnow(30);
+
+    function say(main, sub) { msg.innerHTML = main ? main + (sub ? '<small>' + sub + '</small>' : '') : ''; }
+    function idleText() { say('Tap to start the sprint', 'Then lock the speed and hold to brake'); btn.textContent = 'Start the sprint'; }
+    function pickInfo() { $('ss-pickinfo').textContent = C().info; }
+    function brakeHud() {
+      $('ss-brake').style.width = Math.round(stamina * 100) + '%';
+      $('ss-brakesub').textContent = stamina <= 0 ? 'Empty' : (stamina >= 1 ? 'Full' : Math.round(stamina * 100) + '%');
+    }
+    idleText(); pickInfo(); brakeHud();
+
+    const picks = document.querySelectorAll('.ss-pick');
+    picks.forEach((b) => b.addEventListener('click', () => {
+      if (state !== 'ready' && state !== 'done') return;
+      sel = b.dataset.id;
+      picks.forEach((o) => o.setAttribute('aria-pressed', String(o === b)));
+      pickInfo();
+      if (state === 'done') { state = 'ready'; p = null; }
+      idleText();
+    }));
+    const lockPicks = (on) => picks.forEach((b) => { b.disabled = on; });
+
+    function press() {
+      const now = performance.now();
+      if (state === 'ready' || state === 'done') {
+        p = { x: 0, v: 0, prone: false, careful: false, wob: 0, fly: null };
+        stamina = 1; brakeHud(); inj = null; spray = [];
+        $('ss-ag').textContent = '-'; $('ss-agsub').textContent = '';
+        state = 'speed'; t0 = now; say(''); btn.textContent = 'Lock the speed'; lockPicks(true);
+        return;
+      }
+      if (state === 'speed') {
+        held = false;
+        if (power < .12) {
+          p.careful = true; p.v = 2.2;
+        } else {
+          const dist = (.6 + 13.4 * power) * C().reach * (.9 + Math.random() * .2);
+          p.v = Math.sqrt(2 * FRICTION * dist);
+        }
+        p.runV = Math.max(p.v, 3.4);
+        state = 'run'; btn.textContent = 'Hold to brake';
+        return;
+      }
+      if (state === 'run' || state === 'slide') held = true;
+    }
+    function release() { held = false; }
+
+    function startSlide() {
+      const roll = d6(), need = C().ag, ok = roll !== 1 && roll >= need;
+      p.prone = !ok; p.x = ICE;
+      $('ss-ag').textContent = ok ? 'Passed' : 'Failed';
+      $('ss-agsub').textContent = 'Rolled ' + roll + ', needs ' + need + '+';
+      if (!ok) { p.v *= 1.05; for (let i = 0; i < 14; i++) addSpray(sx(p.x), 1.4); }
+      state = 'slide';
+    }
+
+    function addSpray(x, k) {
+      spray.push({ x: x + (Math.random() * 10 - 5), y: GROUND - 2, vx: -(40 + Math.random() * 120) * k, vy: -(40 + Math.random() * 130) * k, life: .5 + Math.random() * .4 });
+    }
+
+    function verdict(x) {
+      const gap = LINE - x;
+      if (gap < .2) return 'Toes on the paint! The front row can smell his breath.';
+      if (gap < .8) return 'Inches from the stands. The crowd groans with disappointment.';
+      if (gap < 2) return 'Close. A fan leans over the barrier, just in case.';
+      if (gap < 4) return 'Decent. The ice wanted more.';
+      return 'Plenty of pitch left. The crowd starts throwing snowballs at the coach.';
+    }
+
+    function finish(score, title, sub) {
+      state = 'done'; held = false;
+      btn.disabled = false; btn.classList.remove('braking'); lockPicks(false); btn.textContent = 'Slide again';
+      $('ss-last').textContent = score == null ? 'Crowd' : fmt(score);
+      if (score != null && (best == null || score > best)) {
+        best = score; bestBy = C().name;
+        try { localStorage.setItem('dst-sideline-slide-best', String(best)); localStorage.setItem('dst-sideline-slide-best-by', bestBy); } catch (e) {}
+        showBest(); sub = (sub ? sub + ' ' : '') + 'New personal best!';
+      }
+      say(title, sub);
+    }
+
+    function rollInjury() {
+      const a = d6(), b = d6(), s = a + b;
+      let res, txt;
+      if (s <= 7) { res = 'Stunned'; txt = 'The fans pass him back to the dugout. He\'ll sit out the next drive.'; }
+      else if (s <= 9) { res = 'KO\'d'; txt = 'Out cold. Somebody fetch the smelling salts.'; }
+      else { res = 'Casualty'; txt = 'The front row keeps him as a souvenir.'; }
+      if (res === 'Casualty' && sel === 'werewolf') {
+        const r = d6();
+        txt = r >= 4 ? 'Regeneration ' + r + ': fur grows back, bones snap into place. Back in the reserves, slightly embarrassed.' : 'Regeneration ' + r + ': no luck. Even werewolves have bad days.';
+      }
+      return { a, b, s, res, txt };
+    }
+
+    // Input: tap to start and lock, hold to brake
+    btn.addEventListener('pointerdown', (e) => { if (e.button > 0) return; e.preventDefault(); if (!btn.disabled) press(); });
+    btn.addEventListener('click', (e) => { if (e.detail === 0 && !btn.disabled) { press(); setTimeout(release, 250); } });
+    cv.addEventListener('pointerdown', (e) => { e.preventDefault(); if (!btn.disabled) press(); });
+    ['pointerup', 'pointercancel', 'pointerleave'].forEach((ev) => { btn.addEventListener(ev, release); cv.addEventListener(ev, release); });
+    window.addEventListener('pointerup', release);
+    [btn, cv].forEach((el) => el.addEventListener('contextmenu', (e) => e.preventDefault()));
+    const visible = () => { const r = cv.getBoundingClientRect(); return r.bottom > 0 && r.top < window.innerHeight; };
+    window.addEventListener('keydown', (e) => {
+      if (e.code !== 'Space' || !visible()) return;
+      e.preventDefault();
+      if (e.repeat) return;
+      if (!btn.disabled) press();
+    });
+    window.addEventListener('keyup', (e) => { if (e.code === 'Space') release(); });
+    window.addEventListener('blur', release);
+
+    // Physics
+    function update(dt) {
+      const now = performance.now();
+      if (state === 'speed') power = .5 - .5 * Math.cos((now - t0) / 1000 * C().meter);
+      if (state === 'run') {
+        p.x += p.runV * dt; phase += dt * (6 + p.runV * 2.2);
+        if (p.careful && p.x >= ICE - .6) {
+          p.x = ICE - .6;
+          finish(p.x, fmt(p.x).replace('sq', 'squares'), 'Too careful. Six squares or less and the ice ignores you. So does the crowd.');
+        } else if (p.x >= ICE) startSlide();
+      }
+      const braking = state === 'slide' && held && stamina > 0;
+      btn.classList.toggle('braking', braking);
+      if (state === 'slide') {
+        const fr = p.prone ? FRICTION * .8 : FRICTION;
+        const br = braking ? (p.prone ? C().brake * .3 : C().brake) : 0;
+        if (braking) { stamina = Math.max(0, stamina - dt / C().stamina); brakeHud(); if (Math.random() < dt * 40) addSpray(sx(p.x) + (p.prone ? 10 : 14), .6 + p.v * .12); }
+        p.v = Math.max(0, p.v - (fr + br) * dt);
+        p.x += p.v * dt;
+        p.wob += dt * (8 + p.v * 2);
+        if (Math.random() < dt * p.v * 2) addSpray(sx(p.x), .25);
+        if (p.x >= LINE) {
+          state = 'crowd'; crowdT = 0; held = false; btn.disabled = true; btn.classList.remove('braking'); btn.textContent = 'Uh oh...';
+          p.fly = { x: sx(LINE), y: GROUND, vx: 125 + Math.min(p.v, 4) * 3, vy: -520, rot: 0, landed: false };
+          inj = rollInjury();
+        } else if (p.v <= 0) {
+          const x = Math.round(p.x * 10) / 10;
+          let sub = verdict(p.x) + (p.prone ? ' He did it lying down, mind you.' : '');
+          finish(x, fmt(x).replace('sq', 'squares'), sub);
+        }
+      }
+      if (state === 'crowd') {
+        crowdT += dt;
+        const f = p.fly;
+        if (!f.landed) {
+          f.vy += 900 * dt; f.x += f.vx * dt; f.y += f.vy * dt; f.rot += dt * 7;
+          if (f.vy > 0 && f.y >= GROUND - 104) { f.landed = true; f.y = GROUND - 104; }
+        } else {
+          const r = ((f.rot % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2); f.rot = r + (Math.PI * 1.5 - r) * Math.min(1, dt * 8);
+          f.y = GROUND - 104 + Math.sin(crowdT * 14) * 3;
+        }
+        if (crowdT > 2.4) finish(null, 'Into the crowd! ' + inj.res, 'Injury roll ' + inj.a + ' + ' + inj.b + ' = ' + inj.s + '. ' + inj.txt + ' No score.');
+      }
+      for (const s of spray) { s.vy += 500 * dt; s.x += s.vx * dt; s.y += s.vy * dt; s.life -= dt; }
+      spray = spray.filter((s) => s.life > 0 && s.y < GROUND + 4);
+      for (const f of flakes) {
+        f.y += f.s * dt; f.x += Math.sin(f.y / 30) * 6 * dt;
+        if (f.y > H) { f.y = -4; f.x = Math.random() * W; }
+      }
+    }
+
+    // Drawing helpers
+    function line(x1, y1, x2, y2, w, c) { ctx.strokeStyle = c || INK; ctx.lineWidth = w; ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke(); }
+    function ell(x, y, rx, ry, fill, w, rot) { ctx.beginPath(); ctx.ellipse(x, y, rx, ry, rot || 0, 0, Math.PI * 2); ctx.fillStyle = fill; ctx.fill(); ctx.lineWidth = w == null ? 3 : w; ctx.strokeStyle = INK; if (ctx.lineWidth > 0) ctx.stroke(); }
+    function poly(pts, fill, w) { ctx.beginPath(); ctx.moveTo(pts[0], pts[1]); for (let i = 2; i < pts.length; i += 2) ctx.lineTo(pts[i], pts[i + 1]); ctx.closePath(); ctx.fillStyle = fill; ctx.fill(); ctx.lineWidth = w || 2.5; ctx.strokeStyle = INK; ctx.stroke(); }
+    function limb(x1, y1, ang, len, w, col) {
+      const x2 = x1 + Math.sin(ang) * len, y2 = y1 + Math.cos(ang) * len;
+      ctx.lineCap = 'round'; line(x1, y1, x2, y2, w + 6, INK); line(x1, y1, x2, y2, w, col); ctx.lineCap = 'butt';
+      return { x: x2, y: y2 };
+    }
+
+    // Pose: legs and arms as angles from vertical (positive = forward)
+    function pose() {
+      if (!p || state === 'ready' || state === 'speed') {
+        const bounce = state === 'speed' ? Math.sin(performance.now() / 90) * .12 : 0;
+        return { lean: .08, legs: [.12 + bounce, -.1 - bounce], arms: [.3, -.2], kind: 'stand' };
+      }
+      if (state === 'run') {
+        const s = Math.sin(phase);
+        return { lean: .28, legs: [s * .75, -s * .75], arms: [-s * .9, s * .9], kind: 'run' };
+      }
+      if (state === 'done') return { lean: 0, legs: [.1, -.1], arms: [.2, -.2], kind: 'stand' };
+      const braking = state === 'slide' && held && stamina > 0;
+      if (braking) return { lean: -.32, legs: [.75, .15], arms: [-1.3, -1.7], kind: 'brake' };
+      const w = Math.sin(p.wob), k = Math.min(1, p.v / 4);
+      return { lean: .05 + w * .1 * k, legs: [.38, -.38], arms: [1.6 + Math.sin(p.wob * 1.7) * .9 * k, -1.7 + Math.cos(p.wob * 1.7) * .9 * k], kind: 'slide' };
+    }
+
+    function drawSlider(x, y, rot, flying) {
+      const P = flying ? { lean: 0, legs: [.6, -.6], arms: [2.6, -2.6], kind: 'fly' } : pose();
+      ctx.save(); ctx.translate(x, y);
+      if (rot) ctx.rotate(rot);
+      if (!flying && p && p.prone && (state === 'slide' || state === 'done')) {
+        ctx.translate(-60, -20); ctx.rotate(Math.PI / 2);
+        P.legs = [-.15, .1]; P.arms = [2.9, 2.6]; P.lean = 0;
+      }
+      if (sel === 'werewolf') drawWerewolf(P); else if (sel === 'wardancer') drawWardancer(P); else drawGutter(P);
+      ctx.restore();
+    }
+
+    function drawWerewolf(P) {
+      const fur = '#6d6258', dark = '#4e463f', light = '#9a8e80';
+      const hip = { x: 0, y: -46 };
+      ctx.save(); ctx.translate(hip.x, hip.y); ctx.rotate(P.lean);
+      // tail
+      ctx.beginPath(); ctx.moveTo(-16, 2); ctx.quadraticCurveTo(-46, -2, -50, 22); ctx.quadraticCurveTo(-36, 8, -14, 12); ctx.closePath(); ctx.fillStyle = dark; ctx.fill(); ctx.lineWidth = 2.5; ctx.strokeStyle = INK; ctx.stroke();
+      // back arm
+      const ba = limb(-2, -44, P.arms[1], 40, 12, dark);
+      for (let i = -1; i <= 1; i++) line(ba.x, ba.y, ba.x + 4 + i * 3, ba.y + 8, 2, '#f4f1ea');
+      ctx.restore();
+      // legs from hip in world-space (not leaned)
+      for (let i = 1; i >= 0; i--) {
+        const knee = limb(hip.x, hip.y, P.legs[i], 24, 14, i ? dark : fur);
+        const foot = limb(knee.x, knee.y, P.legs[i] - .5, 22, 10, i ? dark : fur);
+        ell(foot.x + 5, Math.min(foot.y, -3), 9, 4.5, i ? dark : fur, 2);
+        line(foot.x + 12, Math.min(foot.y, -3), foot.x + 17, Math.min(foot.y, -3) + 3, 2, '#f4f1ea');
+      }
+      ctx.save(); ctx.translate(hip.x, hip.y); ctx.rotate(P.lean);
+      // torso, hunched
+      ell(4, -30, 22, 34, fur, 3.5, .35);
+      ell(12, -26, 10, 20, light, 0, .35);
+      // head
+      ctx.save(); ctx.translate(18, -66);
+      poly([-10, -10, -6, -30, 2, -12], fur, 2.5);
+      ell(0, 0, 15, 13, fur, 3);
+      poly([8, -8, 32, -2, 32, 5, 8, 8], fur, 2.5);
+      ell(32, 0, 3.4, 3, INK, 0);
+      poly([16, 6, 18, 11, 21, 6], '#f4f1ea', 1.4); poly([24, 6, 26, 10, 28, 6], '#f4f1ea', 1.4);
+      line(2, -6, 12, -5, 2.5);
+      ell(6, -3, 2.6, 2.6, '#e8d36a', 1.4);
+      ctx.restore();
+      // front arm with claws
+      const fa = limb(10, -48, P.arms[0], 42, 13, fur);
+      for (let i = -1; i <= 1; i++) line(fa.x, fa.y, fa.x + 5 + i * 3, fa.y + 9, 2.2, '#f4f1ea');
+      ctx.restore();
+    }
+
+    function drawWardancer(P) {
+      const skin = '#efc9a0', tunic = GREEN, hair = '#8a3a1a', leg = '#3c4a3a';
+      const hip = { x: 0, y: -50 };
+      ctx.save(); ctx.translate(hip.x, hip.y); ctx.rotate(P.lean);
+      limb(-2, -40, P.arms[1], 38, 7, '#d9b38a');
+      ctx.restore();
+      for (let i = 1; i >= 0; i--) {
+        const knee = limb(hip.x, hip.y, P.legs[i], 26, 8, leg);
+        const foot = limb(knee.x, knee.y, P.legs[i] - .45, 24, 7, leg);
+        ell(foot.x + 4, Math.min(foot.y, -3), 8, 3.5, '#6b4f32', 2);
+      }
+      ctx.save(); ctx.translate(hip.x, hip.y); ctx.rotate(P.lean);
+      poly([-12, 4, 12, 4, 9, -42, -9, -42], tunic, 3);
+      line(-11, -6, 11, -6, 3, BRONZE);
+      ell(0, -42, 11, 5, BRONZE, 2);
+      // head and long ponytail
+      ctx.save(); ctx.translate(2, -58);
+      const wave = Math.sin(performance.now() / 120) * 4;
+      ctx.beginPath(); ctx.moveTo(-6, -8); ctx.quadraticCurveTo(-30, -10 + wave, -40, 4 + wave); ctx.quadraticCurveTo(-26, 0 + wave, -6, 2); ctx.closePath(); ctx.fillStyle = hair; ctx.fill(); ctx.lineWidth = 2.5; ctx.strokeStyle = INK; ctx.stroke();
+      ell(0, 0, 10, 11, skin, 3);
+      ctx.fillStyle = hair; ctx.beginPath(); ctx.arc(0, -3, 10.5, Math.PI * 1.05, Math.PI * 1.95); ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = INK; ctx.stroke();
+      poly([-2, -2, -16, -12, -4, 4], skin, 2);
+      ell(5, -1, 1.8, 1.8, INK, 0);
+      line(3, 6, 8, 5, 1.8);
+      ctx.restore();
+      limb(6, -40, P.arms[0], 38, 7, skin);
+      ctx.restore();
+    }
+
+    function drawGutter(P) {
+      const fur = '#5e5248', cloak = '#3a3530', pink = '#d99a9a';
+      const hip = { x: 0, y: -40 };
+      ctx.save(); ctx.translate(hip.x, hip.y); ctx.rotate(P.lean);
+      // tail
+      ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(-10, 2); ctx.quadraticCurveTo(-40, 6 + Math.sin(performance.now() / 140) * 6, -62, -10);
+      ctx.lineWidth = 7; ctx.strokeStyle = INK; ctx.stroke(); ctx.lineWidth = 3.5; ctx.strokeStyle = pink; ctx.stroke(); ctx.lineCap = 'butt';
+      limb(-2, -34, P.arms[1], 30, 6, '#4a4038');
+      ctx.restore();
+      for (let i = 1; i >= 0; i--) {
+        const knee = limb(hip.x, hip.y, P.legs[i], 20, 7, i ? '#4a4038' : fur);
+        const foot = limb(knee.x, knee.y, P.legs[i] - .6, 20, 6, i ? '#4a4038' : fur);
+        ell(foot.x + 5, Math.min(foot.y, -3), 8, 3, pink, 2);
+      }
+      ctx.save(); ctx.translate(hip.x, hip.y); ctx.rotate(P.lean);
+      // body and cloak
+      ell(4, -18, 15, 22, fur, 3, .4);
+      poly([-14, -4, -4, -40, 16, -36, 4, -2], cloak, 2.5);
+      // head with hood, long snout
+      ctx.save(); ctx.translate(16, -44);
+      ell(0, 0, 11, 10, fur, 3);
+      poly([6, -6, 30, 2, 6, 7], fur, 2.5);
+      ell(30, 2, 3, 2.6, pink, 1.5);
+      ell(4, -3, 2.3, 2.3, '#c23b3b', 0);
+      ctx.fillStyle = cloak; ctx.beginPath(); ctx.arc(-2, -1, 12, Math.PI * .75, Math.PI * 1.75); ctx.closePath(); ctx.fill(); ctx.lineWidth = 2.5; ctx.strokeStyle = INK; ctx.stroke();
+      ell(-4, -12, 6, 6, pink, 2);
+      for (const yy of [0, 3]) line(22, yy, 34, yy - 3 + yy, 1.2);
+      ctx.restore();
+      limb(8, -34, P.arms[0], 30, 6, fur);
+      ctx.restore();
+    }
+
+    function drawPitch() {
+      const g = ctx.createLinearGradient(0, 0, 0, GROUND);
+      g.addColorStop(0, '#cfdbe3'); g.addColorStop(1, '#eef0ee');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      // distant stands
+      for (let i = 0; i < 5; i++) {
+        const x = i * 260 - 40;
+        ctx.fillStyle = '#b9b0a2'; ctx.fillRect(x, 150, 240, 110);
+        ctx.fillStyle = '#a89d8d'; for (let r = 0; r < 4; r++) ctx.fillRect(x, 168 + r * 24, 240, 6);
+        ctx.fillStyle = '#8f8476'; ctx.fillRect(x - 4, 140, 248, 12);
+      }
+      // ground: frost before the ice, glossy ice after
+      ctx.fillStyle = '#f2f4f5'; ctx.fillRect(0, GROUND, W, H - GROUND);
+      ctx.fillStyle = 'rgba(140,190,230,.35)'; ctx.fillRect(sx(ICE), GROUND, sx(LINE) - sx(ICE), H - GROUND);
+      ctx.strokeStyle = 'rgba(255,255,255,.9)'; ctx.lineWidth = 2;
+      for (let i = 0; i < 9; i++) { const x = sx(ICE) + 30 + i * 48; ctx.beginPath(); ctx.moveTo(x, GROUND + 14 + (i % 3) * 18); ctx.lineTo(x + 26, GROUND + 8 + (i % 3) * 18); ctx.stroke(); }
+      line(0, GROUND, W, GROUND, 3);
+      ctx.font = '600 13px Inter, sans-serif'; ctx.textAlign = 'center';
+      for (let i = 0; i <= LINE; i++) {
+        const x = sx(i);
+        line(x, GROUND + 2, x, H, i % 3 === 0 ? 2 : 1, i % 3 === 0 ? '#9aa6b0' : '#d3dae0');
+        if (i % 3 === 0 && i < LINE) { ctx.fillStyle = '#7a8590'; ctx.fillText(String(i), x, H - 12); }
+      }
+      ctx.font = '700 12px Inter, sans-serif'; ctx.fillStyle = '#4f7a99'; ctx.textAlign = 'left';
+      ctx.fillText('ICE FROM HERE', sx(ICE) + 8, GROUND + 22);
+      // sideline
+      ctx.fillStyle = '#ffffff'; ctx.fillRect(sx(LINE) - 5, GROUND + 1, 10, H - GROUND);
+      line(sx(LINE) - 5, GROUND + 2, sx(LINE) - 5, H, 1.5, '#9aa6b0'); line(sx(LINE) + 5, GROUND + 2, sx(LINE) + 5, H, 1.5, '#9aa6b0');
+      ctx.font = '700 12px Inter, sans-serif'; ctx.fillStyle = RED; ctx.textAlign = 'center'; ctx.fillText('15', sx(LINE), H - 12);
+    }
+
+    function drawCrowd() {
+      const near = p && (state === 'slide' || state === 'crowd') ? Math.max(0, 1 - (LINE - p.x) / 6) : 0;
+      const cols = [RED, GREEN, BRONZE, '#4a5a6a'];
+      const now = performance.now();
+      for (let i = 0; i < 5; i++) {
+        const fx = BAR_X + 14 + i * 34, cheer = state === 'crowd' ? 1 : near;
+        const bob = Math.sin(now / (300 - cheer * 180) + i * 1.3) * (2 + cheer * 6);
+        ell(fx, GROUND - 62 + bob, 13, 16, cols[i % 4], 2.5);
+        if (cheer > .4) { line(fx - 9, GROUND - 70 + bob, fx - 16, GROUND - 92 + bob, 4); line(fx + 9, GROUND - 70 + bob, fx + 16, GROUND - 92 + bob, 4); }
+        ell(fx, GROUND - 86 + bob, 9, 9, '#e2c3a0', 2.5);
+        ctx.fillStyle = cols[(i + 1) % 4]; ctx.fillRect(fx - 9, GROUND - 96 + bob, 18, 6);
+      }
+      // barrier in front of the crowd
+      ctx.fillStyle = '#6b4f32'; ctx.fillRect(BAR_X, GROUND - 50, W - BAR_X + 10, 50);
+      line(BAR_X, GROUND - 50, W + 10, GROUND - 50, 3); line(BAR_X, GROUND - 50, BAR_X, GROUND, 3);
+      for (let i = 0; i < 4; i++) line(BAR_X + 8 + i * 40, GROUND - 40, BAR_X + 8 + i * 40, GROUND - 6, 1.5, '#4e3a24');
+    }
+
+    function draw() {
+      drawPitch();
+      drawCrowd();
+
+      // start marker
+      ctx.font = '700 11px Inter, sans-serif'; ctx.fillStyle = '#7a8590'; ctx.textAlign = 'center'; ctx.fillText('START', sx(0), H - 12);
+
+      // ice spray
+      ctx.fillStyle = 'rgba(255,255,255,.95)'; ctx.strokeStyle = '#9ec3dd'; ctx.lineWidth = 1;
+      for (const s of spray) { ctx.beginPath(); ctx.arc(s.x, s.y, 2.6, 0, Math.PI * 2); ctx.fill(); ctx.stroke(); }
+
+      if (p && p.fly) {
+        drawSlider(p.fly.x, p.fly.y, p.fly.rot, true);
+        if (crowdT > .9) drawDice();
+      } else {
+        const x = p ? sx(p.x) : sx(0);
+        // speed lines while sliding fast
+        if (state === 'slide' && p.v > 1.5) for (let i = 0; i < 3; i++) line(x - 60 - i * 8, GROUND - 30 - i * 16, x - 30 - p.v * 6 - i * 8, GROUND - 30 - i * 16, 2, 'rgba(27,23,18,.35)');
+        drawSlider(x, GROUND, 0, false);
+      }
+
+      if (state === 'speed') {
+        const px = sx(0) + 60, py = GROUND - 200, ph = 150;
+        ctx.fillStyle = PAPER; ctx.fillRect(px, py, 22, ph);
+        const grd = ctx.createLinearGradient(0, py + ph, 0, py);
+        grd.addColorStop(0, BRONZE); grd.addColorStop(1, RED);
+        ctx.fillStyle = grd; ctx.fillRect(px, py + ph * (1 - power), 22, ph * power);
+        ctx.lineWidth = 3; ctx.strokeStyle = INK; ctx.strokeRect(px, py, 22, ph);
+        line(px - 4, py + ph * .88, px + 26, py + ph * .88, 2, INK);
+        ctx.font = '700 12px Inter, sans-serif'; ctx.fillStyle = INK; ctx.textAlign = 'left'; ctx.fillText('SPEED', px + 30, py + 12);
+      }
+
+      ctx.fillStyle = 'rgba(255,255,255,.9)';
+      for (const f of flakes) { ctx.beginPath(); ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2); ctx.fill(); }
+
+      if (p && state !== 'speed' && state !== 'ready') {
+        const d = Math.min(LINE, Math.max(0, p.x));
+        ctx.font = '400 30px Anton, sans-serif'; ctx.textAlign = 'right'; ctx.fillStyle = p.fly ? RED : INK;
+        ctx.fillText(p.fly ? 'CROWD!' : d.toFixed(1) + ' SQ', W - 20, 44);
+      }
+    }
+
+    function die(x, y, v) {
+      ctx.fillStyle = '#f4f1ea'; ctx.lineWidth = 3; ctx.strokeStyle = INK;
+      ctx.beginPath(); ctx.rect(x - 22, y - 22, 44, 44); ctx.fill(); ctx.stroke();
+      const pts = { 1: [[0, 0]], 2: [[-1, -1], [1, 1]], 3: [[-1, -1], [0, 0], [1, 1]], 4: [[-1, -1], [1, -1], [-1, 1], [1, 1]], 5: [[-1, -1], [1, -1], [0, 0], [-1, 1], [1, 1]], 6: [[-1, -1], [1, -1], [-1, 0], [1, 0], [-1, 1], [1, 1]] }[v];
+      ctx.fillStyle = INK;
+      for (const [a, b] of pts) { ctx.beginPath(); ctx.arc(x + a * 11, y + b * 11, 4, 0, Math.PI * 2); ctx.fill(); }
+    }
+    function drawDice() {
+      const rolling = crowdT < 1.7;
+      const a = rolling ? d6() : inj.a, b = rolling ? d6() : inj.b;
+      const cx = W / 2 - 40, cy = 245;
+      ctx.fillStyle = 'rgba(239,230,210,.92)'; ctx.fillRect(cx - 120, cy - 60, 320, 130);
+      ctx.lineWidth = 3; ctx.strokeStyle = INK; ctx.strokeRect(cx - 120, cy - 60, 320, 130);
+      ctx.font = '700 12px Inter, sans-serif'; ctx.fillStyle = INK; ctx.textAlign = 'center'; ctx.fillText('INJURY ROLL', cx + 40, cy - 38);
+      die(cx - 20, cy + 4, a); die(cx + 40, cy + 4, b);
+      ctx.font = '400 28px Anton, sans-serif'; ctx.textAlign = 'left'; ctx.fillStyle = rolling ? INK : RED;
+      ctx.fillText(rolling ? '?' : String(inj.s), cx + 82, cy + 14);
+      if (!rolling) { ctx.font = '400 20px Anton, sans-serif'; ctx.textAlign = 'center'; ctx.fillStyle = INK; ctx.fillText(inj.res.toUpperCase(), cx + 40, cy + 56); }
+    }
+
+    let last = performance.now();
+    function loop(now) {
+      const dt = Math.min(.05, (now - last) / 1000); last = now;
+      update(dt); draw();
+      requestAnimationFrame(loop);
+    }
+    (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => requestAnimationFrame(loop));
+  })();
+  </script>
+</Base>
