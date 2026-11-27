@@ -7,6 +7,13 @@ const tales = await getTales();
 const leads = tales.slice(0, 9);
 // "Latest tales" lists the newest tales after the first lead story
 const rest = tales.slice(1);
+// Tool shortcuts in the left rail
+const tools = [
+  { href: '/tools/odds-desk/', img: '/images/tool-head-odds.jpg', name: 'The Odds Desk', what: 'Dodge, rush, pick-up' },
+  { href: '/tools/block-desk/', img: '/images/tool-head-block.jpg', name: 'The Block Desk', what: 'Blocks and blitzes' },
+  { href: '/tools/pass-desk/', img: '/images/tool-head-pass.jpg', name: 'The Pass Desk', what: 'Passes and throws' },
+  { href: '/tools/foul-desk/', img: '/images/tool-head-foul.jpg', name: 'The Foul Desk', what: 'Fouls and the ref' },
+];
 ---
 <Base>
   {leads.length > 0 && (
@@ -43,12 +50,29 @@ const rest = tales.slice(1);
     </section>
   )}
 
-  <div class="section-head"><h2>Latest tales</h2><a href="/tales/">All tales &rarr;</a></div>
-  {rest.length > 0 ? (
-    <div class="cards">{rest.slice(0, 6).map((t) => <TaleCard tale={t} />)}</div>
-  ) : (
-    <p class="muted"><em>More tales are on their way. Team portraits, league stories and painted teams, fresh from the pitch.</em></p>
-  )}
+  <div class="home-grid">
+    <aside class="tool-rail" aria-labelledby="tools-head">
+      <div class="section-head"><h2 id="tools-head">Tools</h2><a href="/tools/">All &rarr;</a></div>
+      <ul>
+        {tools.map((t) => (
+          <li>
+            <a href={t.href}>
+              <img src={t.img} alt="" width="240" height="240" loading="lazy" />
+              <span><strong>{t.name}</strong><small>{t.what}</small></span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </aside>
+    <div class="home-main">
+      <div class="section-head"><h2>Latest tales</h2><a href="/tales/">All tales &rarr;</a></div>
+      {rest.length > 0 ? (
+        <div class="cards">{rest.slice(0, 6).map((t) => <TaleCard tale={t} />)}</div>
+      ) : (
+        <p class="muted"><em>More tales are on their way. Team portraits, league stories and painted teams, fresh from the pitch.</em></p>
+      )}
+    </div>
+  </div>
 
   <section class="band">
     <div>

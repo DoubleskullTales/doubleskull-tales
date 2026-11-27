@@ -292,3 +292,24 @@ html, body { overflow-x: hidden; }
 .slider-nav .bar { position: absolute; top: -1px; left: 0; right: 0; height: 3px; }
 .slider-nav .bar span { display: block; height: 100%; width: 0; background: var(--red); }
 @media (prefers-reduced-motion: reduce) { .lead-slider .slide, .lead-slider .slide.is-active { transition: none; } }
+
+/* home: tool rail left of latest tales */
+.home-grid { display: grid; grid-template-columns: 250px 1fr; gap: 40px; align-items: start; }
+.home-main .cards { grid-template-columns: 1fr 1fr; }
+.tool-rail ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+.tool-rail li a { display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--ink); }
+.tool-rail img { width: 68px; height: 68px; flex: none; border-radius: 50%; border: 3px solid var(--ink); background: var(--paper-dark); object-fit: cover; transition: transform .2s, border-color .2s; }
+.tool-rail strong { display: block; font-family: 'Anton'; font-weight: 400; text-transform: uppercase; font-size: 1.3rem; line-height: 1.05; }
+.tool-rail small { display: block; font-family: 'Inter'; font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+.tool-rail li a:hover img, .tool-rail li a:focus-visible img { transform: rotate(-8deg) scale(1.06); border-color: var(--red); }
+.tool-rail li a:hover strong { color: var(--red); }
+@media (max-width: 820px) {
+  .home-grid { grid-template-columns: 1fr; gap: 0; }
+  .tool-rail ul { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 18px; }
+}
+@media (max-width: 520px) {
+  .home-main .cards { grid-template-columns: 1fr; }
+  .tool-rail img { width: 56px; height: 56px; }
+  .tool-rail strong { font-size: 1.1rem; }
+  .tool-rail small { font-size: .65rem; letter-spacing: .08em; }
+}
