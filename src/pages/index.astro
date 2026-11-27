@@ -14,7 +14,8 @@ const tools = [
   { href: '/tools/pass-desk/', img: '/images/tool-head-pass.jpg', name: 'The Pass Desk', what: 'Passes and throws' },
   { href: '/tools/foul-desk/', img: '/images/tool-head-foul.jpg', name: 'The Foul Desk', what: 'Fouls and the ref' },
 ];
-// Mini game shortcuts below the tools, newest game first (same order as /play/)
+// Mini game shortcuts below the tools, newest game first (same order as /play/).
+// The rail shows three: the newest always, plus two others picked at random on each visit.
 const games = [
   { href: '/play/plant-your-feet/', img: '/images/play-head-golem.jpg', name: 'Plant Your Feet', what: 'Hold the line' },
   { href: '/play/sideline-slide/', img: '/images/head-sideline-slide.jpg', name: 'Sideline Slide', what: 'Slide on the ice' },
@@ -70,9 +71,9 @@ const games = [
         ))}
       </ul>
       <div class="section-head"><h2 id="games-head">Mini games</h2><a href="/play/">All &rarr;</a></div>
-      <ul aria-labelledby="games-head">
-        {games.map((t) => (
-          <li>
+      <ul class="game-rail" aria-labelledby="games-head">
+        {games.map((t, i) => (
+          <li class={i > 2 ? 'is-off' : undefined}>
             <a href={t.href}>
               <img src={t.img} alt="" width="240" height="240" loading="lazy" />
               <span><strong>{t.name}</strong><small>{t.what}</small></span>
@@ -80,6 +81,16 @@ const games = [
           </li>
         ))}
       </ul>
+      <script is:inline>
+        (function () {
+          var items = Array.prototype.slice.call(document.querySelectorAll('.game-rail li'));
+          if (items.length <= 3) return;
+          var rest = items.slice(1);
+          for (var i = rest.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = rest[i]; rest[i] = rest[j]; rest[j] = t; }
+          var show = [items[0]].concat(rest.slice(0, 2));
+          items.forEach(function (li) { li.classList.toggle('is-off', show.indexOf(li) === -1); });
+        })();
+      </script>
     </aside>
     <div class="home-main">
       <div class="section-head"><h2>Latest tales</h2><a href="/tales/">All tales &rarr;</a></div>
