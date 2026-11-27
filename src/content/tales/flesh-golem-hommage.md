@@ -4,6 +4,7 @@ subtitle: "A love letter to the Flesh Golem, the slowest, ugliest and most relia
 date: 2026-11-27T18:00:00
 section: "Coaching Corner"
 image: "/images/flesh-golem-sideline.jpg"
+head: "/images/head-flesh-golem.jpg"
 imageCaption: "A Bloodspawn tries to send a Flesh Golem crowd-surfing. The golem declines. Illustration: AI-generated."
 ---
 

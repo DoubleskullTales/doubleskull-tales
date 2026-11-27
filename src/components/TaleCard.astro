@@ -1,10 +1,15 @@
 ---
-const { tale } = Astro.props;
+// bubble: show the round head image (used on /tales/, not on the home page)
+const { tale, bubble = false } = Astro.props;
 const d = tale.data.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+const head = bubble ? tale.data.head : undefined;
 ---
-<article class="card">
-  <div class="label">{tale.data.section}</div>
-  <h3><a href={`/tales/${tale.id}/`}>{tale.data.title}</a></h3>
-  {tale.data.subtitle && <p>{tale.data.subtitle}</p>}
-  <div class="date">{d}</div>
+<article class={head ? 'card has-bubble' : 'card'}>
+  {head && <a class="card-bubble" href={`/tales/${tale.id}/`} tabindex="-1" aria-hidden="true"><img src={head} alt="" width="240" height="240" loading="lazy" /></a>}
+  <div class="card-body">
+    <div class="label">{tale.data.section}</div>
+    <h3><a href={`/tales/${tale.id}/`}>{tale.data.title}</a></h3>
+    {tale.data.subtitle && <p>{tale.data.subtitle}</p>}
+    <div class="date">{d}</div>
+  </div>
 </article>

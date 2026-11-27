@@ -4,6 +4,7 @@ subtitle: "In the Paradice League, old players don't fade away. They send an inv
 date: 2026-11-23T12:00:00
 section: "Team Portraits"
 image: "/images/mercs-hero.jpg"
+head: "/images/head-star-mercs.jpg"
 imageCaption: "David Hasselhoff, Connor McLeod and Beelzebub. Illustrations: AI-generated."
 ---
 

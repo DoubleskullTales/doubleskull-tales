@@ -4,6 +4,7 @@ subtitle: "Winter reached Vienna today. At the Krampusbowl it comes with its own
 date: 2026-11-26T17:00:00
 section: "Coaching Corner"
 image: "/images/winter-brisk.jpg"
+head: "/images/head-krampusbowl-weather.jpg"
 imageCaption: "Brisk: four goblins, one scarf, one unimpressed dwarf. Illustration: AI-generated."
 ---
 

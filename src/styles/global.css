@@ -77,6 +77,12 @@ main { padding: 40px 0 70px; }
 .card h3 a:hover { color: var(--red); }
 .card p { font-size: 1.1rem; }
 .card .date { font-family: 'Inter'; font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-top: 8px; }
+.card.has-bubble { display: flex; gap: 16px; align-items: flex-start; }
+.card-bubble { flex: none; margin-top: 2px; }
+.card-bubble img { width: 76px; height: 76px; border-radius: 50%; border: 3px solid var(--ink); object-fit: cover; background: var(--paper-dark); transition: transform .2s, border-color .2s; }
+.card.has-bubble:hover .card-bubble img { transform: rotate(-8deg) scale(1.06); border-color: var(--red); }
+.card.has-bubble:hover h3 a { color: var(--red); }
+.card-body { min-width: 0; }
 
 /* promo band */
 .band { background: var(--ink); color: var(--paper); padding: 40px; margin-top: 56px; display: flex; gap: 32px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
@@ -345,3 +351,4 @@ html, body { overflow-x: hidden; }
 /* links inside running text: easier to spot */
 .prose p a:not(.btn):not(.play-cta), .prose li a:not(.btn), .page p a:not(.btn):not(.play-cta), .page li a:not(.btn) { font-weight: 600; text-decoration-thickness: 2px; text-underline-offset: 3px; }
 .prose a[target="_blank"]:not(.btn)::after, .page p a[target="_blank"]:not(.btn)::after { content: " \2197"; font-size: .85em; }
+@media (max-width: 520px) { .card-bubble img { width: 60px; height: 60px; } }

@@ -4,6 +4,7 @@ subtitle: "Same night, same pub, second trophy. Ancient kings against Santa's li
 date: 2026-11-24T12:00:00
 section: "The Daily Skull"
 image: "/images/lower-final-illustration.jpg"
+head: "/images/head-lower-final.jpg"
 imageCaption: "Sand against sewer. Illustration: AI-generated."
 ---
 

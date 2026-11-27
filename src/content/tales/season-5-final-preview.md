@@ -4,6 +4,7 @@ subtitle: "Every former champion is out. On December 1, Paradice crowns a new on
 date: 2026-11-22T12:00:00
 section: "The Daily Skull"
 image: "/images/season-5-final-illustration.jpg"
+head: "/images/head-season-5-final.jpg"
 imageCaption: "Blood against roots. Illustration: AI-generated."
 ---
 

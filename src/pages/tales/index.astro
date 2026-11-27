@@ -21,7 +21,7 @@ const blurbs: Record<string, string> = {
       <section>
         <div class="section-head"><h2>{s}</h2></div>
         <p class="muted" style="margin:-10px 0 20px"><em>{blurbs[s]}</em></p>
-        {list.length ? <div class="cards">{list.map((t) => <TaleCard tale={t} />)}</div> : <p class="muted">Coming soon.</p>}
+        {list.length ? <div class="cards">{list.map((t) => <TaleCard tale={t} bubble />)}</div> : <p class="muted">Coming soon.</p>}
       </section>
     );
   })}

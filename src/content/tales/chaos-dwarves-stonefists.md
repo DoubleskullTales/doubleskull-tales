@@ -4,6 +4,7 @@ subtitle: "Ten games with the new Chaos Dwarves. Eight wins, two draws and a lot
 date: 2026-11-24T12:00:00
 section: "Team Portraits"
 image: "/images/stonefists-hero.jpg"
+head: "/images/head-stonefists.jpg"
 imageCaption: "The Zharr Bzharr Stonefists, as a machine imagines them. Illustration: AI-generated."
 ---
 

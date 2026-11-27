@@ -4,6 +4,7 @@ subtitle: "Two third places, two snow globes and one award that slipped away. Yo
 date: 2026-11-22T10:00:00
 section: "The Daily Skull"
 image: "/images/krampusbowl-trophies.jpg"
+head: "/images/head-krampusbowl-10.jpg"
 ---
 
 Ten years, ten tournaments. On Saturday, December 5, the Krampusbowl celebrates its tenth edition at the Louis Braille Haus in Vienna, and your correspondent will be there again. With a small side quest.

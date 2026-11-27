@@ -4,6 +4,7 @@ subtitle: "Nine mercenaries, a familiar troll and a conflict of interest. Pick t
 date: 2026-11-26T12:00:00
 section: "The Daily Skull"
 image: "/images/mercs-khorne-hero.jpg"
+head: "/images/head-mercs-khorne.jpg"
 teaser: "/images/mercs-khorne-teaser.jpg"
 imageCaption: "Nine for hire. Illustrations: AI-generated."
 ---

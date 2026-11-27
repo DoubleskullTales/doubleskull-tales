@@ -4,6 +4,7 @@ subtitle: "Five mercenaries, one final, one very interesting tree. Pick two for 
 date: 2026-11-25T12:00:00
 section: "The Daily Skull"
 image: "/images/mercs-roots-hall.jpg"
+head: "/images/head-mercs-roots.jpg"
 teaser: "/images/mercs-roots-teaser.jpg"
 imageCaption: "The hiring hall is open. Illustration: AI-generated."
 ---
