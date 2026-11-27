@@ -303,6 +303,7 @@ html, body { overflow-x: hidden; }
 .tool-rail small { display: block; font-family: 'Inter'; font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
 .tool-rail li a:hover img, .tool-rail li a:focus-visible img { transform: rotate(-8deg) scale(1.06); border-color: var(--red); }
 .tool-rail li a:hover strong { color: var(--red); }
+.tool-rail ul + .section-head { margin-top: 34px; }
 @media (max-width: 820px) {
   .home-grid { grid-template-columns: 1fr; gap: 0; }
   .tool-rail ul { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 18px; }
