@@ -106,10 +106,12 @@ const rest = tales.slice(1);
 
     const pause = () => { paused = true; restart(); };
     const resume = () => { paused = false; restart(); };
-    root.addEventListener('mouseenter', pause);
-    root.addEventListener('mouseleave', resume);
-    root.addEventListener('focusin', pause);
-    root.addEventListener('focusout', resume);
+    // no pause on hover or mouse clicks: the timer keeps running.
+    // only keyboard focus (Tab) pauses, so keyboard users can read in peace.
+    root.addEventListener('focusin', (e) => {
+      if ((e.target as HTMLElement).matches(':focus-visible')) pause();
+    });
+    root.addEventListener('focusout', () => { if (paused) resume(); });
     document.addEventListener('visibilitychange', () => (document.hidden ? pause() : resume()));
 
     // swipe on touch screens
