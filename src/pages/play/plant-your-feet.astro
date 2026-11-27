@@ -1,0 +1,508 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base title="Plant Your Feet" image="/images/flesh-golem-sideline.jpg" description="A mini game: you are a Flesh Golem with your back to the crowd and a Blood Beast in your face. Stand firm, or give way on purpose and spring the Frenzy trap.">
+  <div class="page pf-page">
+    <p class="pf-back"><a href="/play/">← All mini games</a></p>
+    <p class="pf-kicker">Mini game · Stand Firm</p>
+    <h1>Plant Your Feet</h1>
+    <p class="pf-intro"><em>You are a Flesh Golem. Behind you: the sideline and a crowd that would love to say hello. In front of you: a Blood Beast with Frenzy and no patience. Hold your ground. Or let him push you, once, on purpose, and watch your team spring the trap.</em></p>
+    <figure class="pf-hero"><img src="/images/flesh-golem-sideline.jpg" alt="A red, spiky beast tries to shove a stitched-together golem into a rowdy crowd at the sideline." width="1376" height="768" /><figcaption>He would like you to go and meet the fans. Illustration: AI-generated.</figcaption></figure>
+
+    <div class="pf-hud">
+      <div><span class="pf-l">To the crowd</span><span class="pf-v" id="pf-gap">3 sq</span><span class="pf-s" id="pf-gapsub">Safe distance</span></div>
+      <div><span class="pf-l">Score</span><span class="pf-v" id="pf-score">0</span><span class="pf-s" id="pf-scoresub"></span></div>
+      <div><span class="pf-l">Attack</span><span class="pf-v" id="pf-attack">-</span><span class="pf-s" id="pf-attacksub"></span></div>
+      <div><span class="pf-l">Your best</span><span class="pf-v" id="pf-best">-</span><span class="pf-s" id="pf-bestsub"></span></div>
+    </div>
+
+    <div class="pf-stage">
+      <canvas id="pf-canvas" width="960" height="480" aria-label="Plant Your Feet game"></canvas>
+      <div class="pf-msg" id="pf-msg"></div>
+    </div>
+    <div class="pf-btns">
+      <button class="btn dark pf-btn" id="pf-hold" type="button">Start the match</button>
+      <button class="btn pf-btn pf-give" id="pf-give" type="button" disabled>Give way</button>
+    </div>
+    <p class="pf-keys">Keyboard: space bar to stand firm, right arrow or G to give way.</p>
+
+    <h2>How to play</h2>
+    <ul>
+      <li>The Blood Beast charges. A bar appears above the fight. Hit <strong>Stand firm</strong> while the marker is inside the green zone and your golem does not move an inch. Miss it and he gets shoved one square towards the crowd.</li>
+      <li>Stand Firm is optional. Hit <strong>Give way</strong> and your golem steps back on purpose. The beast has Frenzy, so he follows up and hits again, faster.</li>
+      <li>If you gave way on purpose and then stand firm against the second hit, your team springs the <strong>Frenzy trap</strong>: big bonus, the beast gets dragged off and your golem walks back to his spot. Only works within two squares of the sideline, where your team is waiting.</li>
+      <li>Sometimes the beast comes in with a <strong>Juggernaut</strong> charge. Stand Firm does nothing against that. Give way in time and you lose one square. Try to hold and you lose two.</li>
+      <li>Pushed over the sideline means a trip into the crowd and an Injury roll. Thick Skull and Regeneration might help. Your score stays.</li>
+    </ul>
+    <p><strong>Points:</strong> 1 for every hit you hold, 2 for dodging a Juggernaut charge, 6 for a sprung trap. The beast gets a little faster after every attack.</p>
+    <p class="pf-fine"><strong>Unofficial fan game.</strong> Not affiliated with or endorsed by Games Workshop. All game graphics were made for this site.</p>
+    <p class="pf-fine">Your best score is saved only in this browser. Nothing is sent anywhere.</p>
+    <p>Why does any of this work? Read <a href="/tales/flesh-golem-hommage/">Stitched Together, Standing Firm</a>. Prefer something on ice? Try <a href="/play/sideline-slide/">Sideline Slide</a> or <a href="/play/goblin-toss/">Goblin Toss</a>.</p>
+  </div>
+
+  <style>
+    .pf-back { font-family: 'Inter', sans-serif; font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin: 0 0 .6em; }
+    .pf-back a { text-decoration: none; }
+    .pf-kicker { font-family: 'Inter', sans-serif; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; font-size: .8rem; color: var(--red); }
+    .pf-intro { font-size: 1.2rem; }
+    .pf-hero { margin: 1.2em 0 0; }
+    .pf-hero img { display: block; width: 100%; height: auto; aspect-ratio: 12 / 5; object-fit: cover; object-position: 50% 35%; border: 3px solid var(--ink); }
+    .pf-hero figcaption { font-family: 'Inter', sans-serif; font-size: .78rem; color: var(--muted); margin-top: 6px; }
+    .pf-hud { display: grid; grid-template-columns: repeat(4, 1fr); border: 3px solid var(--ink); margin: 1.4em 0 0; font-family: 'Inter', sans-serif; }
+    .pf-hud > div { padding: 10px 12px; border-right: 2px solid var(--ink); display: flex; flex-direction: column; gap: 2px; }
+    .pf-hud > div:last-child { border-right: none; }
+    .pf-l { font-family: 'Inter', sans-serif; font-size: .68rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); }
+    .pf-v { font-family: 'Anton', sans-serif; font-size: 1.35rem; text-transform: uppercase; line-height: 1.1; }
+    .pf-s { font-size: .75rem; color: var(--muted); }
+    .pf-stage { position: relative; border: 3px solid var(--ink); border-top: none; background: #dfe3d6; }
+    #pf-canvas { display: block; width: 100%; height: auto; touch-action: manipulation; cursor: pointer; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+    .pf-msg { position: absolute; left: 50%; top: 15%; transform: translateX(-50%); width: 86%; text-align: center; font-family: 'Anton', sans-serif; text-transform: uppercase; font-size: clamp(1.2rem, 3.6vw, 2.2rem); line-height: 1.05; color: var(--ink); text-shadow: 0 0 6px #f4f1ea, 0 0 12px #f4f1ea; pointer-events: none; }
+    .pf-msg :global(small) { display: block; font-family: 'Crimson Text', serif; font-style: italic; text-transform: none; font-size: .6em; margin-top: 6px; }
+    .pf-btns { display: grid; grid-template-columns: 1.4fr 1fr; gap: 10px; margin-top: 12px; }
+    .pf-btn { display: block; width: 100%; font-size: 1.05rem; padding: 14px; cursor: pointer; touch-action: manipulation; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+    .pf-btn:disabled { opacity: .4; cursor: not-allowed; }
+    .pf-give { background: transparent; color: var(--ink); border: 3px solid var(--ink); }
+    .pf-give.hot { background: var(--red); border-color: var(--red); color: var(--paper, #efe6d2); }
+    .pf-keys { font-family: 'Inter', sans-serif; font-size: .75rem; color: var(--muted); margin-top: 6px; }
+    .pf-fine { font-family: 'Inter', sans-serif; font-size: .8rem; color: var(--muted); }
+    @media (max-width: 560px) {
+      .pf-hud { grid-template-columns: 1fr 1fr; }
+      .pf-hud > div:nth-child(2) { border-right: none; }
+      .pf-hud > div:nth-child(-n+2) { border-bottom: 2px solid var(--ink); }
+      .pf-keys { display: none; }
+    }
+  </style>
+
+  <script is:inline>
+  (function () {
+    const cv = document.getElementById('pf-canvas');
+    const ctx = cv.getContext('2d');
+    const W = 960, H = 480, GROUND = 400, SQ = 72, LINE_X = 790, BAR_X = LINE_X + 20, ENGAGE = 160;
+    const INK = '#1b1712', RED = '#9b1c1c', PAPER = '#efe6d2', BRONZE = '#a8833a', GREEN = '#2e5a33';
+    const $ = (id) => document.getElementById(id);
+    const holdBtn = $('pf-hold'), giveBtn = $('pf-give'), msg = $('pf-msg');
+    const gx = (g) => LINE_X - (g + .5) * SQ;
+    const d6 = () => 1 + Math.floor(Math.random() * 6);
+    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+    const ease = (k) => k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+
+    function fit() { const r = Math.min(window.devicePixelRatio || 1, 2); cv.width = W * r; cv.height = H * r; ctx.setTransform(r, 0, 0, r, 0, 0); }
+    fit(); window.addEventListener('resize', fit);
+
+    // Best score (local only)
+    let best = null;
+    try { const b = parseInt(localStorage.getItem('dst-plant-your-feet-best'), 10); if (!isNaN(b)) best = b; } catch (e) {}
+    function showBest() { $('pf-best').textContent = best != null ? best + ' pts' : '-'; }
+    showBest();
+
+    // Game state
+    let state = 'ready', st = 0;          // st = time in current state
+    let g = 3, gVis = 3, score = 0, attack = 0, lastJugg = false;
+    let a = null;                          // current attack
+    let meter = null;                      // { D, zs, zw, t, jugg }
+    let out = null;                        // outcome of the last hit
+    let beastX = -120, beastFrom = -120, beastRot = 0, beastFade = 1;
+    let mates = 0;                         // 0..1 how far the team has jumped in
+    let fly = null, inj = null, floats = [], dust = [];
+
+    function say(main, sub) { msg.innerHTML = main ? main + (sub ? '<small>' + sub + '</small>' : '') : ''; }
+    function hud() {
+      $('pf-gap').textContent = g < 0 ? 'Crowd' : g + ' sq';
+      $('pf-gapsub').textContent = g < 0 ? 'Oh dear' : g >= 3 ? 'Safe distance' : g === 0 ? 'Heels on the paint' : g === 1 ? 'Getting warm' : 'Trap is set';
+      $('pf-score').textContent = score;
+      $('pf-attack').textContent = attack ? String(attack) : '-';
+      $('pf-attacksub').textContent = a ? (a.jugg ? 'Juggernaut charge' : a.shove === 2 ? 'Frenzy, second hit' : 'First hit') : '';
+    }
+    function buttons(play) {
+      holdBtn.textContent = play ? 'Stand firm' : (state === 'done' ? 'Play again' : 'Start the match');
+      giveBtn.disabled = !play;
+    }
+    function idle() { say('Plant your feet', 'Tap Start. Stand firm in the green zone, or give way on purpose.'); buttons(false); hud(); }
+    idle();
+
+    function addFloat(text, color) { floats.push({ text, x: gx(Math.max(gVis, 0)), y: GROUND - 140, life: 1.4, color: color || RED }); }
+    function addDust(x, n, k) { for (let i = 0; i < n; i++) dust.push({ x: x + Math.random() * 30 - 15, y: GROUND - 4, vx: (Math.random() - .5) * 220 * k, vy: -(40 + Math.random() * 160) * k, life: .5 + Math.random() * .5, r: 3 + Math.random() * 5 }); }
+
+    function newGame() {
+      g = 3; gVis = 3; score = 0; attack = 0; lastJugg = false; a = null; out = null;
+      beastX = -120; beastRot = 0; beastFade = 1; mates = 0; fly = null; inj = null; floats = []; dust = [];
+      say(''); nextAttack();
+    }
+    function speed() { return Math.min(attack - 1, 14); }
+    function nextAttack() {
+      attack++;
+      const jugg = attack >= 4 && !lastJugg && Math.random() < .22;
+      lastJugg = jugg;
+      a = { jugg, shove: 1, gaveWay: false };
+      beastFrom = beastX; beastRot = 0; beastFade = 1;
+      state = 'approach'; st = 0; buttons(true); hud();
+      if (jugg) say('Juggernaut charge!', 'Stand Firm won\'t help. Give way!');
+    }
+    function startMeter() {
+      const s = speed();
+      let D = Math.max(.5, 1.3 - s * .055);
+      if (a.shove === 2) D *= .82;
+      if (a.jugg) { meter = { D: D * 1.15, zs: 0, zw: 1, t: 0, jugg: true }; }
+      else {
+        const zw = Math.max(.1, .26 - s * .011);
+        const zs = .38 + Math.random() * (.9 - zw - .38);
+        meter = { D, zs, zw, t: 0, jugg: false };
+      }
+      state = 'meter'; st = 0; hud();
+    }
+
+    function input(kind) {
+      if (state === 'ready' || state === 'done') { if (kind === 'hold') newGame(); return; }
+      if (state !== 'meter') return;
+      const m = meter.t / meter.D;
+      if (meter.jugg) return resolve(kind === 'give' ? 'dodge' : 'flat');
+      if (kind === 'give') return resolve('give');
+      resolve(m >= meter.zs && m <= meter.zs + meter.zw ? 'hold' : 'miss');
+    }
+
+    function resolve(r) {
+      let dg = 0, pts = 0, next = 'end', t1 = '', t2 = '';
+      if (r === 'dodge') { dg = 1; pts = 2; t1 = 'Smart.'; t2 = 'You let the Juggernaut through. One square lost, dignity intact.'; }
+      else if (r === 'flat') { dg = 2; t1 = 'Flattened!'; t2 = 'Juggernaut ignores Stand Firm. Two squares lost.'; }
+      else if (r === 'give') {
+        dg = 1; a.gaveWay = a.shove === 1;
+        if (a.shove === 1) { next = 'shove2'; t1 = 'You give way...'; t2 = 'Frenzy! He follows up and hits again.'; }
+        else { t1 = 'Backing off.'; t2 = 'One more square gone.'; }
+      } else if (r === 'miss' || r === 'late') {
+        dg = 1; t1 = r === 'late' ? 'Too slow!' : 'Mistimed!'; t2 = 'Shoved one square.';
+        if (a.shove === 1) { next = 'shove2'; t2 += ' And Frenzy means he hits again.'; }
+      } else if (r === 'hold') {
+        pts = 1;
+        if (a.shove === 2 && a.gaveWay && g <= 2) { pts = 6; next = 'trap'; t1 = 'Trap sprung!'; t2 = 'He followed you right into your team.'; }
+        else { t1 = 'Not an inch.'; t2 = a.shove === 1 ? 'Stand Firm. No push, no follow-up.' : 'Held. He runs out of Frenzy.'; }
+      }
+      score += pts;
+      if (pts) addFloat('+' + pts, pts >= 6 ? GREEN : RED);
+      out = { r, from: g, to: g - dg, next };
+      if (dg) addDust(gx(g), 10, 1);
+      say(t1, t2);
+      state = 'resolve'; st = 0; meter = null; hud();
+    }
+
+    function afterResolve() {
+      g = out.to; gVis = g; hud();
+      if (g < 0) return toCrowd();
+      if (out.next === 'shove2') { a.shove = 2; startMeter(); return; }
+      if (out.next === 'trap') { state = 'trap'; st = 0; mates = 0; return; }
+      state = 'reset'; st = 0; beastFrom = beastX;
+    }
+
+    function toCrowd() {
+      state = 'crowd'; st = 0; buttons(false); holdBtn.disabled = true; giveBtn.disabled = true; holdBtn.textContent = 'Uh oh...';
+      fly = { x: gx(0), y: GROUND, vx: 150, vy: -560, rot: 0, landed: false };
+      const x1 = d6(), x2 = d6(), s = x1 + x2;
+      let res, txt;
+      if (s <= 7) { res = 'Stunned'; txt = 'The fans hand him back. He has had worse days.'; }
+      else if (s === 8) { res = 'Stunned'; txt = 'Thick Skull! An 8 would knock most players out. Not this one.'; }
+      else if (s === 9) { res = 'KO\'d'; txt = 'Out cold. Someone check his stitches.'; }
+      else { const rg = d6(); res = 'Casualty'; txt = rg >= 4 ? 'Regeneration ' + rg + ': the flesh-knitters sew him back together. Back in the reserves.' : 'Regeneration ' + rg + ': no luck. The flesh-knitters will need a bigger needle.'; }
+      inj = { x1, x2, s, res, txt };
+      say('');
+    }
+
+    function finish() {
+      state = 'done'; a = null;
+      let sub = 'Injury roll ' + inj.x1 + ' + ' + inj.x2 + ' = ' + inj.s + '. ' + inj.txt;
+      if (score > 0 && (best == null || score > best)) {
+        best = score; try { localStorage.setItem('dst-plant-your-feet-best', String(best)); } catch (e) {}
+        showBest(); sub += ' New personal best!';
+      }
+      holdBtn.disabled = false; buttons(false); hud();
+      say(score + ' points. ' + inj.res + '.', sub);
+    }
+
+    // Input
+    holdBtn.addEventListener('pointerdown', (e) => { if (e.button > 0) return; e.preventDefault(); if (!holdBtn.disabled) input('hold'); });
+    holdBtn.addEventListener('click', (e) => { if (e.detail === 0 && !holdBtn.disabled) input('hold'); });
+    giveBtn.addEventListener('pointerdown', (e) => { if (e.button > 0) return; e.preventDefault(); if (!giveBtn.disabled) input('give'); });
+    giveBtn.addEventListener('click', (e) => { if (e.detail === 0 && !giveBtn.disabled) input('give'); });
+    cv.addEventListener('pointerdown', (e) => { e.preventDefault(); if (!holdBtn.disabled) input('hold'); });
+    [holdBtn, giveBtn, cv].forEach((el) => el.addEventListener('contextmenu', (e) => e.preventDefault()));
+    const visible = () => { const r = cv.getBoundingClientRect(); return r.bottom > 0 && r.top < window.innerHeight; };
+    window.addEventListener('keydown', (e) => {
+      if (!visible() || e.repeat) return;
+      if (e.code === 'Space') { e.preventDefault(); if (!holdBtn.disabled) input('hold'); }
+      else if (e.code === 'ArrowRight' || e.code === 'KeyG') { e.preventDefault(); if (!giveBtn.disabled) input('give'); }
+    });
+
+    // Update
+    function update(dt) {
+      st += dt;
+      const engageX = gx(gVis) - ENGAGE;
+      if (state === 'approach') {
+        const k = clamp(st / .75, 0, 1);
+        beastX = beastFrom + (engageX - beastFrom) * ease(k);
+        if (k >= 1) { addDust(engageX + 90, 6, .6); if (!a.jugg) say(''); startMeter(); }
+      }
+      if (state === 'meter') {
+        meter.t += dt; beastX = engageX;
+        if (meter.t >= meter.D) { if (meter.jugg) resolve('flat'); else resolve('late'); }
+      }
+      if (state === 'resolve') {
+        const k = clamp(st / .55, 0, 1);
+        gVis = out.from + (out.to - out.from) * ease(k);
+        const base = gx(Math.max(gVis, -.6)) - ENGAGE;
+        beastX = out.r === 'hold' ? base - Math.sin(k * Math.PI) * 34 : base;
+        if (st >= .75) afterResolve();
+      }
+      if (state === 'trap') {
+        mates = clamp(st / .6, 0, 1);
+        if (st > .5 && st < .6) addDust(beastX + 30, 18, 1.4);
+        if (st > .55) { beastRot = -Math.min(1, (st - .55) / .35) * Math.PI / 2; beastX -= dt * 120; }
+        if (st > 1.4) beastFade = Math.max(0, 1 - (st - 1.4) / .5);
+        if (st > 1.6) { const k = clamp((st - 1.6) / .6, 0, 1); gVis = g + (3 - g) * ease(k); mates = 1 - k; }
+        if (st > 2.3) { g = 3; gVis = 3; mates = 0; beastX = -140; nextAttack(); }
+      }
+      if (state === 'reset') {
+        const k = clamp(st / .6, 0, 1);
+        beastX = beastFrom - 200 * ease(k);
+        if (k >= 1) { say(''); nextAttack(); }
+      }
+      if (state === 'crowd') {
+        const f = fly;
+        if (!f.landed) { f.vy += 900 * dt; f.x += f.vx * dt; f.y += f.vy * dt; f.rot += dt * 5; if (f.vy > 0 && f.y >= GROUND - 112) { f.landed = true; f.y = GROUND - 112; } }
+        else { const r = ((f.rot % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2); f.rot = r + (Math.PI * 1.5 - r) * Math.min(1, dt * 8); f.y = GROUND - 112 + Math.sin(st * 14) * 3; }
+        if (st > 2.6) finish();
+      }
+      for (const d of dust) { d.vy += 500 * dt; d.x += d.vx * dt; d.y += d.vy * dt; d.life -= dt; }
+      dust = dust.filter((d) => d.life > 0);
+      for (const f of floats) { f.y -= 40 * dt; f.life -= dt; }
+      floats = floats.filter((f) => f.life > 0);
+      giveBtn.classList.toggle('hot', state === 'meter' && meter && meter.jugg);
+    }
+
+    // Drawing helpers
+    function line(x1, y1, x2, y2, w, c) { ctx.strokeStyle = c || INK; ctx.lineWidth = w; ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke(); }
+    function ell(x, y, rx, ry, fill, w, rot) { ctx.beginPath(); ctx.ellipse(x, y, rx, ry, rot || 0, 0, Math.PI * 2); ctx.fillStyle = fill; ctx.fill(); ctx.lineWidth = w == null ? 3 : w; ctx.strokeStyle = INK; if (ctx.lineWidth > 0) ctx.stroke(); }
+    function poly(pts, fill, w) { ctx.beginPath(); ctx.moveTo(pts[0], pts[1]); for (let i = 2; i < pts.length; i += 2) ctx.lineTo(pts[i], pts[i + 1]); ctx.closePath(); ctx.fillStyle = fill; ctx.fill(); ctx.lineWidth = w || 2.5; ctx.strokeStyle = INK; ctx.stroke(); }
+    function limb(x1, y1, ang, len, w, col) {
+      const x2 = x1 + Math.sin(ang) * len, y2 = y1 + Math.cos(ang) * len;
+      ctx.lineCap = 'round'; line(x1, y1, x2, y2, w + 6, INK); line(x1, y1, x2, y2, w, col); ctx.lineCap = 'butt';
+      return { x: x2, y: y2 };
+    }
+    function stitches(x1, y1, x2, y2, n) {
+      line(x1, y1, x2, y2, 1.6, '#3b3a30');
+      const dx = x2 - x1, dy = y2 - y1, L = Math.hypot(dx, dy), nx = -dy / L * 4, ny = dx / L * 4;
+      for (let i = 1; i < n; i++) { const t = i / n, x = x1 + dx * t, y = y1 + dy * t; line(x - nx, y - ny, x + nx, y + ny, 1.6, '#3b3a30'); }
+    }
+
+    // Flesh Golem, facing left. lean > 0 = leaning into the beast
+    function drawGolem(x, y, lean, strain, rot) {
+      const skin = '#97a58e', skin2 = '#b9b49c', pants = '#4a4237', pad = '#5a4330';
+      ctx.save(); ctx.translate(x, y); if (rot) ctx.rotate(rot);
+      const sh = strain ? (Math.random() - .5) * strain * 3 : 0;
+      ctx.translate(sh, 0);
+      // legs: wide stance
+      for (const [hx, ang, col] of [[14, .32, '#3e372e'], [-8, -.18, pants]]) {
+        const knee = limb(hx, -78, ang, 36, 22, col);
+        const foot = limb(knee.x, knee.y, ang * .4, 38, 20, col);
+        ell(foot.x - 6, Math.min(foot.y, -6), 18, 8, '#4b3a28', 2.5);
+      }
+      ctx.save(); ctx.rotate(-lean);
+      // back arm (behind body)
+      limb(18, -150, -1.35 + lean * .3, 58, 18, '#7f8c77');
+      // torso
+      ell(4, -128, 44, 56, skin, 3.5);
+      ctx.save(); ctx.beginPath(); ctx.ellipse(4, -128, 44, 56, 0, 0, Math.PI * 2); ctx.clip();
+      ctx.fillStyle = skin2; ctx.fillRect(4, -190, 50, 70);
+      ctx.restore();
+      ctx.lineWidth = 3.5; ctx.strokeStyle = INK; ctx.beginPath(); ctx.ellipse(4, -128, 44, 56, 0, 0, Math.PI * 2); ctx.stroke();
+      stitches(4, -182, 4, -76, 9); stitches(-38, -120, 46, -122, 8);
+      // belt and pants top
+      poly([-40, -86, 46, -86, 42, -70, -38, -70], pants, 3);
+      // shoulder pads
+      ell(-30, -172, 24, 14, pad, 3, -.3); ell(34, -172, 22, 13, pad, 3, .3);
+      // head: round, bald, stitched
+      ctx.save(); ctx.translate(-14, -196);
+      ell(0, 0, 22, 23, skin, 3);
+      stitches(-18, -8, 14, -16, 5);
+      line(-16, -2, -5, 0, 3); ell(-11, 3, 2.6, 2.6, '#e8d36a', 1.2);
+      line(-20, 12, -8, 12, 2.5);
+      ctx.restore();
+      // front arm, hands on the beast
+      const fa = limb(-30, -158, -1.45 + lean * .2, 62, 20, skin);
+      ell(fa.x - 4, fa.y, 12, 11, skin, 3);
+      ctx.restore();
+      ctx.restore();
+    }
+
+    // Blood Beast, facing right. lunge 0..1
+    function drawBeast(x, y, lunge, rot, alpha) {
+      const red = '#a3322a', dark = '#7a221d', bone = '#eadfc4';
+      ctx.save(); ctx.globalAlpha = alpha; ctx.translate(x, y); if (rot) ctx.rotate(rot); ctx.scale(1.12, 1.12);
+      const L = lunge || 0;
+      for (const [hx, ang, col] of [[-6, -.55, dark], [14, .12, red]]) {
+        const knee = limb(hx, -70, ang, 34, 20, col);
+        const foot = limb(knee.x, knee.y, ang - .55, 36, 17, col);
+        ell(foot.x + 8, Math.min(foot.y, -6), 16, 7, col, 2.5);
+        for (let i = 0; i < 3; i++) line(foot.x + 18, Math.min(foot.y, -6) + i * 3 - 3, foot.x + 26, Math.min(foot.y, -6) + i * 4 - 2, 2.2, bone);
+      }
+      ctx.save(); ctx.translate(0, -78); ctx.rotate(.5 + L * .12);
+      limb(10, -64, 1.75, 62, 18, dark);
+      // body, hunched
+      ell(6, -46, 40, 52, red, 3.5);
+      // back spikes
+      for (let i = 0; i < 5; i++) { const t = i / 4, sx = -30 + t * 30, sy = -70 - Math.sin(t * Math.PI) * 18 + t * 10; poly([sx - 7, sy + 8, sx - 10, sy - 18, sx + 5, sy + 6], bone, 2); }
+      ctx.restore();
+      // head
+      ctx.save(); ctx.translate(44 + L * 6, -150);
+      ell(0, 0, 24, 20, red, 3);
+      poly([8, -6, 34, 0, 30, 18, 6, 14], red, 3);
+      ctx.fillStyle = '#3a0f0c'; ctx.beginPath(); ctx.moveTo(12, 6); ctx.lineTo(32, 6); ctx.lineTo(28, 16); ctx.lineTo(10, 13); ctx.closePath(); ctx.fill();
+      for (let i = 0; i < 4; i++) poly([13 + i * 5, 6, 15 + i * 5, 12, 17 + i * 5, 6], bone, 1.2);
+      ell(8, -6, 4, 3.2, '#f2d24c', 1.4); ell(9, -6, 1.6, 1.6, INK, 0);
+      line(0, -12, 16, -9, 3);
+      ctx.restore();
+      // front arm with claws, pushing
+      const fa = limb(34, -128, 1.45 - L * .1, 64 + L * 8, 20, red);
+      for (let i = -1; i <= 1; i++) { const cx = fa.x + 6, cy = fa.y + i * 8; poly([cx, cy - 3, cx + 16, cy + 1, cx, cy + 4], bone, 1.6); }
+      ctx.restore();
+    }
+
+    function drawZombie(x, y, s) {
+      ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+      const skin = '#8fa070', rag = '#5d5648';
+      limb(-6, -60, -.1, 30, 10, rag); limb(8, -60, .15, 30, 10, rag);
+      ell(0, -84, 18, 28, rag, 3);
+      limb(-10, -100, -1.4, 34, 9, skin); limb(12, -100, -1.25, 32, 9, skin);
+      ell(-4, -124, 14, 15, skin, 3); line(-12, -126, -6, -126, 2.5); line(-14, -116, -4, -117, 2);
+      ctx.restore();
+    }
+    function drawWraith(x, y, s, t) {
+      ctx.save(); ctx.translate(x, y - 10 + Math.sin(t * 3) * 5); ctx.scale(s, s);
+      const robe = '#2f3138';
+      ctx.beginPath(); ctx.moveTo(-26, 0); ctx.quadraticCurveTo(-34, -80, -14, -130); ctx.lineTo(18, -132); ctx.quadraticCurveTo(30, -80, 26, 0);
+      for (let i = 0; i < 4; i++) ctx.lineTo(26 - (i + .5) * 13, (i % 2) * 14 - 8);
+      ctx.closePath(); ctx.fillStyle = robe; ctx.fill(); ctx.lineWidth = 3; ctx.strokeStyle = INK; ctx.stroke();
+      ell(0, -128, 18, 20, robe, 3);
+      ell(-6, -122, 10, 11, '#0f1014', 0);
+      ell(-9, -124, 2.4, 2.4, '#9fe0d0', 0); ell(-2, -124, 2.4, 2.4, '#9fe0d0', 0);
+      ctx.restore();
+    }
+
+    function drawPitch() {
+      const g0 = ctx.createLinearGradient(0, 0, 0, GROUND);
+      g0.addColorStop(0, '#d9ddd2'); g0.addColorStop(1, '#eceade');
+      ctx.fillStyle = g0; ctx.fillRect(0, 0, W, H);
+      for (let i = 0; i < 4; i++) {
+        const x = i * 220 - 60;
+        ctx.fillStyle = '#b9b0a2'; ctx.fillRect(x, 200, 200, 110);
+        ctx.fillStyle = '#a89d8d'; for (let r = 0; r < 4; r++) ctx.fillRect(x, 216 + r * 24, 200, 6);
+        ctx.fillStyle = '#8f8476'; ctx.fillRect(x - 4, 190, 208, 12);
+      }
+      ctx.fillStyle = '#93a66a'; ctx.fillRect(0, GROUND, W, H - GROUND);
+      ctx.fillStyle = '#86995e'; for (let i = 0; i < 12; i++) ctx.fillRect(i * 80, GROUND, 40, H - GROUND);
+      line(0, GROUND, W, GROUND, 3);
+      // squares to the sideline
+      ctx.font = '700 12px Inter, sans-serif'; ctx.textAlign = 'center';
+      for (let i = 0; i <= 4; i++) {
+        const x = LINE_X - i * SQ;
+        line(x, GROUND + 2, x, H, 1.5, 'rgba(255,255,255,.55)');
+        if (i < 4) { ctx.fillStyle = i <= 2 ? '#f4f1ea' : 'rgba(244,241,234,.7)'; ctx.fillText(String(i), x - SQ / 2, H - 14); }
+      }
+      // trap zone marker
+      ctx.fillStyle = 'rgba(46,90,51,.25)'; ctx.fillRect(LINE_X - 3 * SQ, GROUND + 2, 3 * SQ, 10);
+      ctx.font = '700 11px Inter, sans-serif'; ctx.fillStyle = '#f4f1ea'; ctx.textAlign = 'left';
+      ctx.fillText('TRAP ZONE', LINE_X - 3 * SQ + 6, GROUND + 30);
+      // sideline
+      ctx.fillStyle = '#ffffff'; ctx.fillRect(LINE_X - 5, GROUND + 1, 10, H - GROUND);
+    }
+
+    function drawCrowd(t) {
+      const danger = state === 'crowd' ? 1 : clamp(1 - gVis / 3, 0, 1);
+      const cols = [RED, GREEN, BRONZE, '#4a5a6a'];
+      for (let i = 0; i < 5; i++) {
+        const fx = BAR_X + 16 + i * 30, bob = Math.sin(t / (320 - danger * 200) + i * 1.3) * (2 + danger * 7);
+        ell(fx, GROUND - 66 + bob, 12, 16, cols[i % 4], 2.5);
+        if (danger > .3) { line(fx - 8, GROUND - 74 + bob, fx - 18 - danger * 6, GROUND - 92 + bob - danger * 6, 4); line(fx + 8, GROUND - 74 + bob, fx + 14, GROUND - 96 + bob, 4); }
+        ell(fx, GROUND - 90 + bob, 9, 9, '#e2c3a0', 2.5);
+        ctx.fillStyle = cols[(i + 1) % 4]; ctx.fillRect(fx - 9, GROUND - 100 + bob, 18, 6);
+      }
+      ctx.fillStyle = '#6b4f32'; ctx.fillRect(BAR_X, GROUND - 52, W - BAR_X + 10, 52);
+      line(BAR_X, GROUND - 52, W + 10, GROUND - 52, 3); line(BAR_X, GROUND - 52, BAR_X, GROUND, 3);
+      for (let i = 0; i < 4; i++) line(BAR_X + 8 + i * 38, GROUND - 42, BAR_X + 8 + i * 38, GROUND - 6, 1.5, '#4e3a24');
+    }
+
+    function drawMeter() {
+      if (!meter) return;
+      const x = 250, y = 40, w = 460, h = 24, m = clamp(meter.t / meter.D, 0, 1);
+      ctx.fillStyle = PAPER; ctx.fillRect(x, y, w, h);
+      if (meter.jugg) {
+        ctx.fillStyle = RED; ctx.fillRect(x, y, w * m, h);
+        ctx.font = '400 20px Anton, sans-serif'; ctx.textAlign = 'center'; ctx.fillStyle = INK;
+        ctx.fillText('JUGGERNAUT · GIVE WAY!', x + w / 2, y - 10);
+      } else {
+        ctx.fillStyle = 'rgba(46,90,51,.85)'; ctx.fillRect(x + w * meter.zs, y, w * meter.zw, h);
+        ctx.font = '700 12px Inter, sans-serif'; ctx.textAlign = 'center'; ctx.fillStyle = GREEN;
+        ctx.fillText('STAND FIRM', x + w * (meter.zs + meter.zw / 2), y - 8);
+        ctx.font = '700 12px Inter, sans-serif'; ctx.textAlign = 'left'; ctx.fillStyle = INK;
+        ctx.fillText(a && a.shove === 2 ? 'FRENZY · HIT 2' : 'HIT 1', x, y - 8);
+        line(x + w * m, y - 6, x + w * m, y + h + 6, 4, INK);
+      }
+      ctx.lineWidth = 3; ctx.strokeStyle = INK; ctx.strokeRect(x, y, w, h);
+    }
+
+    function die(x, y, v) {
+      ctx.fillStyle = '#f4f1ea'; ctx.lineWidth = 3; ctx.strokeStyle = INK;
+      ctx.beginPath(); ctx.rect(x - 22, y - 22, 44, 44); ctx.fill(); ctx.stroke();
+      const pts = { 1: [[0, 0]], 2: [[-1, -1], [1, 1]], 3: [[-1, -1], [0, 0], [1, 1]], 4: [[-1, -1], [1, -1], [-1, 1], [1, 1]], 5: [[-1, -1], [1, -1], [0, 0], [-1, 1], [1, 1]], 6: [[-1, -1], [1, -1], [-1, 0], [1, 0], [-1, 1], [1, 1]] }[v];
+      ctx.fillStyle = INK; for (const [p, q] of pts) { ctx.beginPath(); ctx.arc(x + p * 11, y + q * 11, 4, 0, Math.PI * 2); ctx.fill(); }
+    }
+    function drawDice() {
+      const rolling = st < 1.8, a1 = rolling ? d6() : inj.x1, a2 = rolling ? d6() : inj.x2;
+      const cx = 380, cy = 230;
+      ctx.fillStyle = 'rgba(239,230,210,.94)'; ctx.fillRect(cx - 120, cy - 60, 320, 130);
+      ctx.lineWidth = 3; ctx.strokeStyle = INK; ctx.strokeRect(cx - 120, cy - 60, 320, 130);
+      ctx.font = '700 12px Inter, sans-serif'; ctx.fillStyle = INK; ctx.textAlign = 'center'; ctx.fillText('INJURY ROLL', cx + 40, cy - 38);
+      die(cx - 20, cy + 4, a1); die(cx + 40, cy + 4, a2);
+      ctx.font = '400 28px Anton, sans-serif'; ctx.textAlign = 'left'; ctx.fillStyle = rolling ? INK : RED;
+      ctx.fillText(rolling ? '?' : String(inj.s), cx + 82, cy + 14);
+      if (!rolling) { ctx.font = '400 20px Anton, sans-serif'; ctx.textAlign = 'center'; ctx.fillStyle = INK; ctx.fillText(inj.res.toUpperCase(), cx + 40, cy + 56); }
+    }
+
+    function draw(t) {
+      drawPitch();
+      drawCrowd(t);
+      // team-mates waiting near the sideline
+      const tz = gx(Math.max(gVis, 0));
+      const zx = 655 + (beastX + 40 - 655) * mates, wx = 735 + (beastX + 80 - 735) * mates;
+      ctx.save(); ctx.globalAlpha = .8 + mates * .2;
+      drawWraith(wx, GROUND - 40 + (mates > 0 ? -Math.sin(mates * Math.PI) * 40 : 0), .55 + mates * .1, t / 1000);
+      drawZombie(zx, GROUND - 36 - (mates > 0 ? Math.sin(mates * Math.PI) * 50 : 0), .55 + mates * .1);
+      ctx.restore();
+
+      const meterK = meter ? clamp(meter.t / meter.D, 0, 1) : 0;
+      if (state !== 'ready' || beastX > -100) drawBeast(beastX, GROUND, state === 'meter' ? .5 + Math.sin(t / 60) * .3 * meterK : .3, beastRot, beastFade);
+      if (fly) drawGolem(fly.x, fly.y, 0, 0, fly.rot);
+      else drawGolem(tz, GROUND, state === 'meter' ? .12 : .06, state === 'meter' ? meterK : 0, 0);
+      if (state === 'trap' && st > .45 && st < 1.2) {
+        ctx.font = '400 54px Anton, sans-serif'; ctx.textAlign = 'center'; ctx.fillStyle = RED; ctx.strokeStyle = PAPER; ctx.lineWidth = 6;
+        ctx.strokeText('POW!', beastX + 30, GROUND - 210); ctx.fillText('POW!', beastX + 30, GROUND - 210);
+      }
+      ctx.fillStyle = 'rgba(120,98,70,.75)';
+      for (const d of dust) { ctx.globalAlpha = clamp(d.life * 1.5, 0, 1); ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2); ctx.fill(); }
+      ctx.globalAlpha = 1;
+      drawMeter();
+      for (const f of floats) {
+        ctx.globalAlpha = clamp(f.life, 0, 1); ctx.font = '400 40px Anton, sans-serif'; ctx.textAlign = 'center';
+        ctx.fillStyle = f.color; ctx.strokeStyle = PAPER; ctx.lineWidth = 5; ctx.strokeText(f.text, f.x, f.y); ctx.fillText(f.text, f.x, f.y);
+      }
+      ctx.globalAlpha = 1;
+      if (state === 'crowd' && st > .9) drawDice();
+    }
+
+    let last = performance.now();
+    function loop(now) {
+      const dt = Math.min(.05, (now - last) / 1000); last = now;
+      update(dt); draw(now);
+      requestAnimationFrame(loop);
+    }
+    (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => requestAnimationFrame(loop));
+  })();
+  </script>
+</Base>

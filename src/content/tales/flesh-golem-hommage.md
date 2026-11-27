@@ -80,3 +80,5 @@ Exactly as it should be.
 <figure class="photo" style="max-width: 560px; margin-left: auto; margin-right: auto;"><img src="/images/flesh-golem-lightning.jpg" alt="Illustration: a stitched-together golem in a black leather jacket holds a spiked football on a stormy pitch while lightning strikes behind him."><figcaption>Not Frank himself, just a golem with a very similar job description. Illustration: AI-generated.</figcaption></figure>
 
 So next time your golem goes a whole game without a touchdown, a casualty or a single Star Player Point, remember the Bloodspawn at the sideline. Then buy him a Lightningade.
+
+Think you can hold the line yourself? Try the mini game [Plant Your Feet](/play/plant-your-feet/).

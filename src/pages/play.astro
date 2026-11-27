@@ -1,11 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
 ---
-<Base title="Play" image="/images/play-sideline-slide.jpg" description="Winter mini games from Doubleskull Tales: throw a goblin through Krampusbowl weather or slide as close to the sideline as you dare.">
+<Base title="Play" image="/images/play-sideline-slide.jpg" description="Mini games from Doubleskull Tales: throw a goblin through Krampusbowl weather, slide as close to the sideline as you dare, or hold the line as a Flesh Golem.">
   <div class="page pl-page">
-    <p class="pl-kicker">Mini games · Winter edition</p>
+    <p class="pl-kicker">Mini games</p>
     <h1>Play</h1>
-    <p class="pl-intro"><em>Two ways to lose a player before kick-off. Both run in your browser, both are free, and both keep your best score only on your device.</em></p>
+    <p class="pl-intro"><em>Three ways to lose a player before kick-off. All run in your browser, all are free, and all keep your best score only on your device.</em></p>
 
     <div class="pl-grid">
       <a class="pl-card" href="/play/goblin-toss/">
@@ -24,16 +24,24 @@ import Base from '../layouts/Base.astro';
         <span class="pl-best" data-key="dst-sideline-slide-best"></span>
         <span class="btn dark pl-btn">Play Sideline Slide</span>
       </a>
+      <a class="pl-card" href="/play/plant-your-feet/">
+        <img class="pl-img" src="/images/flesh-golem-sideline.jpg" alt="A red, spiky beast tries to shove a stitched-together golem into a rowdy crowd at the sideline." width="1376" height="768" loading="lazy" />
+        <span class="pl-label">Stand Firm</span>
+        <span class="pl-title">Plant Your Feet</span>
+        <span class="pl-text">You are a Flesh Golem with your back to the crowd. A Blood Beast with Frenzy wants you in the stands. Hold your ground, or give way on purpose and spring the trap.</span>
+        <span class="pl-best" data-key="dst-plant-your-feet-best" data-unit="points" data-dec="0"></span>
+        <span class="btn dark pl-btn">Play Plant Your Feet</span>
+      </a>
     </div>
     <p class="pl-fine">Illustrations: AI-generated.</p>
 
-    <p>Want to know what the weather really does at the Krampusbowl? Read <a href="/tales/krampusbowl-weather/">Brisk, With a Chance of Broken Ribs</a>.</p>
+    <p>Want to know what the weather really does at the Krampusbowl? Read <a href="/tales/krampusbowl-weather/">Brisk, With a Chance of Broken Ribs</a>. Wondering why a golem would ever give way on purpose? Read <a href="/tales/flesh-golem-hommage/">Stitched Together, Standing Firm</a>.</p>
   </div>
 
   <style>
     .pl-kicker { font-family: 'Inter', sans-serif; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; font-size: .8rem; color: var(--red); }
     .pl-intro { font-size: 1.2rem; }
-    .pl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 1.6em 0 2em; }
+    .pl-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; margin: 1.6em 0 2em; }
     .pl-card { display: flex; flex-direction: column; gap: 10px; border: 3px solid var(--ink); border-top-width: 10px; padding: 20px 22px 22px; color: var(--ink); text-decoration: none; background: var(--paper-dark, #e4d9c1); }
     .pl-card:hover { border-top-color: var(--red); color: var(--ink); }
     .pl-img { display: block; width: calc(100% + 44px); max-width: none; height: auto; aspect-ratio: 1200 / 670; object-fit: cover; margin: -20px -22px 6px; border-bottom: 3px solid var(--ink); }
@@ -52,7 +60,8 @@ import Base from '../layouts/Base.astro';
       try {
         var b = parseFloat(localStorage.getItem(el.dataset.key));
         var by = localStorage.getItem(el.dataset.key + '-by');
-        if (!isNaN(b)) el.textContent = 'Your best: ' + b.toFixed(1) + ' squares' + (by ? ' (' + by + ')' : '');
+        var unit = el.dataset.unit || 'squares', dec = el.dataset.dec ? parseInt(el.dataset.dec, 10) : 1;
+        if (!isNaN(b)) el.textContent = 'Your best: ' + b.toFixed(dec) + ' ' + unit + (by ? ' (' + by + ')' : '');
       } catch (e) {}
     });
   </script>
