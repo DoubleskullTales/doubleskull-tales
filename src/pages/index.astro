@@ -95,7 +95,7 @@ const games = [
     <div class="home-main">
       <div class="section-head"><h2>Latest tales</h2><a href="/tales/">All tales &rarr;</a></div>
       {rest.length > 0 ? (
-        <div class="cards">{rest.slice(0, 6).map((t) => <TaleCard tale={t} />)}</div>
+        <div class="cards">{rest.slice(0, 6).map((t) => <TaleCard tale={t} bubble />)}</div>
       ) : (
         <p class="muted"><em>More tales are on their way. Team portraits, league stories and painted teams, fresh from the pitch.</em></p>
       )}

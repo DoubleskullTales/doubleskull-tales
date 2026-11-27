@@ -1,5 +1,5 @@
 ---
-// bubble: show the round head image (used on /tales/, not on the home page)
+// bubble: show the round head image (used on /tales/ and on the home page)
 const { tale, bubble = false } = Astro.props;
 const d = tale.data.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 const head = bubble ? tale.data.head : undefined;

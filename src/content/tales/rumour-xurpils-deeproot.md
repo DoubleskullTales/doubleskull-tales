@@ -22,11 +22,9 @@ Today he signs for Woodland teams: halflings, gnomes and wood elves. So Back to 
 
 ## What he brings
 
-| MA | ST | AG | PA | AV |
-|---|---|---|---|---|
-| 2 | 7 | 5+ | 4+ | 11+ |
-
-**Skills:** Block, Bullseye, Loner (4+), Mighty Blow, Stand Firm, Strong Arm, Thick Skull, Throw Team-mate, Timmm-ber!
+<div class="starcards single">
+<img src="/images/card-star-deeproot.jpg" alt="Star Player card Deeproot Strongbranch, Treeman, rumoured for Coach Xurpils: MA 2, ST 7, AG 5+, PA 4+, AV 11+. Block, Bullseye, Loner (4+), Mighty Blow, Stand Firm, Strong Arm, Thick Skull, Throw Team-mate, Timmm-ber!, Reliable. Debut 2423, first treeman ever, 2 airborne touchdowns in 2434. Hire fee unknown." />
+</div>
 
 **Special rule, Reliable:** if he fumbles a Throw Team-mate, the thrown player bounces as usual but always lands safely.
 
