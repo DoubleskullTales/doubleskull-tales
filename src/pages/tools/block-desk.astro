@@ -2,12 +2,14 @@
 import Base from '../../layouts/Base.astro';
 import { SITE } from '../../site';
 ---
-<Base title="The Block Desk" description="Will he go down, or will you? Set strength, assists and skills, and the Block Desk works out every block result, armour and injury included, with Frenzy, Juggernaut, Horns, Mighty Blow and re-rolls.">
+<Base image="/images/tool-action-block.jpg" title="The Block Desk" description="Will he go down, or will you? Set strength, assists and skills, and the Block Desk works out every block result, armour and injury included, with Frenzy, Juggernaut, Horns, Mighty Blow and re-rolls.">
   <div class="page bd-page">
     <p class="bd-back"><a href="/tools/">← All tools</a></p>
     <p class="bd-kicker">Tools · Dice maths</p>
     <h1>The Block Desk</h1>
     <p class="bd-intro"><em>Two dice, a Block skill and a dream. Or one die, no skills and a team re-roll you really shouldn't spend. Before you throw, see what's actually waiting for you.</em></p>
+
+    <figure class="tool-hero"><img src="/images/tool-action-block.jpg" alt="A grinning orc in heavy armour slams a human lineman off his feet in a spray of mud." width="1200" height="600" /><figcaption>Our head of research, collecting data. Illustration: AI-generated.</figcaption></figure>
 
     <div id="bd-app">
       <div class="bd-sides">
@@ -117,6 +119,9 @@ import { SITE } from '../../site';
   </div>
 
   <style>
+    .tool-hero { margin: 1.2em 0 0; }
+    .tool-hero img { display: block; width: 100%; height: auto; border: 3px solid var(--ink); }
+    .tool-hero figcaption { font-family: 'Inter', sans-serif; font-size: .78rem; color: var(--muted); margin-top: 6px; }
     .bd-back { font-family: 'Inter', sans-serif; font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin: 0 0 .6em; }
     .bd-back a { text-decoration: none; }
     .bd-kicker { font-family: 'Inter', sans-serif; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; font-size: .8rem; color: var(--red); }
