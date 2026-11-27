@@ -81,4 +81,4 @@ Exactly as it should be.
 
 So next time your golem goes a whole game without a touchdown, a casualty or a single Star Player Point, remember the Bloodspawn at the sideline. Then buy him a Lightningade.
 
-Think you can hold the line yourself? Try the mini game [Plant Your Feet](/play/plant-your-feet/).
+<a class="play-cta" href="/play/plant-your-feet/"><img src="/images/play-head-golem.jpg" alt="" width="240" height="240"><span class="play-cta-text"><span class="play-cta-label">Mini game</span><span class="play-cta-title">Plant Your Feet</span><span class="play-cta-sub">Think you can hold the line yourself? Stand firm, or give way on purpose and spring the Frenzy trap.</span></span><span class="btn dark play-cta-btn">Play now</span></a>

@@ -7,7 +7,16 @@ import Base from '../layouts/Base.astro';
     <h1>Play</h1>
     <p class="pl-intro"><em>Three ways to lose a player before kick-off. All run in your browser, all are free, and all keep your best score only on your device.</em></p>
 
+    <!-- Newest game first: put a new game at the top with class "pl-new" and remove "pl-new" from the previous one. -->
     <div class="pl-grid">
+      <a class="pl-card pl-new" href="/play/plant-your-feet/">
+        <img class="pl-img" src="/images/flesh-golem-sideline.jpg" alt="A red, spiky beast tries to shove a stitched-together golem into a rowdy crowd at the sideline." width="1376" height="768" />
+        <span class="pl-label"><span class="pl-badge">New</span> Stand Firm</span>
+        <span class="pl-title">Plant Your Feet</span>
+        <span class="pl-text">You are a Flesh Golem with your back to the crowd. A Blood Beast with Frenzy wants you in the stands. Hold your ground, or give way on purpose and spring the trap.</span>
+        <span class="pl-best" data-key="dst-plant-your-feet-best" data-unit="points" data-dec="0"></span>
+        <span class="btn dark pl-btn">Play Plant Your Feet</span>
+      </a>
       <a class="pl-card" href="/play/goblin-toss/">
         <img class="pl-img" src="/images/play-goblin-toss.jpg" alt="A troll throws a panicking goblin across a snowy pitch towards a cheering crowd." width="1200" height="670" loading="lazy" />
         <span class="pl-label">Throw Team-mate</span>
@@ -23,14 +32,6 @@ import Base from '../layouts/Base.astro';
         <span class="pl-text">Werewolf, Wardancer or Gutter Runner: sprint onto the ice and slide as close to the sideline as you dare. One square too far and the crowd rolls for injury.</span>
         <span class="pl-best" data-key="dst-sideline-slide-best"></span>
         <span class="btn dark pl-btn">Play Sideline Slide</span>
-      </a>
-      <a class="pl-card" href="/play/plant-your-feet/">
-        <img class="pl-img" src="/images/flesh-golem-sideline.jpg" alt="A red, spiky beast tries to shove a stitched-together golem into a rowdy crowd at the sideline." width="1376" height="768" loading="lazy" />
-        <span class="pl-label">Stand Firm</span>
-        <span class="pl-title">Plant Your Feet</span>
-        <span class="pl-text">You are a Flesh Golem with your back to the crowd. A Blood Beast with Frenzy wants you in the stands. Hold your ground, or give way on purpose and spring the trap.</span>
-        <span class="pl-best" data-key="dst-plant-your-feet-best" data-unit="points" data-dec="0"></span>
-        <span class="btn dark pl-btn">Play Plant Your Feet</span>
       </a>
     </div>
     <p class="pl-fine">Illustrations: AI-generated.</p>
@@ -52,6 +53,14 @@ import Base from '../layouts/Base.astro';
     .pl-best { font-family: 'Inter', sans-serif; font-size: .8rem; color: var(--muted); min-height: 1em; }
     .pl-btn { text-align: center; }
     .pl-card:hover .pl-btn { background: var(--red); border-color: var(--red); color: var(--paper); }
+    .pl-new { grid-column: 1 / -1; display: grid; grid-template-columns: 1.25fr 1fr; grid-template-rows: auto auto 1fr auto auto; column-gap: 26px; row-gap: 10px; border-top-color: var(--red); }
+    .pl-new .pl-img { grid-column: 1; grid-row: 1 / -1; width: calc(100% + 22px); height: calc(100% + 42px); aspect-ratio: auto; margin: -20px 0 -22px -22px; border-bottom: none; border-right: 3px solid var(--ink); }
+    .pl-new > *:not(.pl-img) { grid-column: 2; }
+    .pl-badge { display: inline-block; background: var(--red); color: var(--paper, #efe6d2); padding: 2px 7px; margin-right: 6px; letter-spacing: .15em; }
+    @media (max-width: 760px) {
+      .pl-new { display: flex; }
+      .pl-new .pl-img { width: calc(100% + 44px); height: auto; aspect-ratio: 1200 / 670; margin: -20px -22px 6px; border-right: none; border-bottom: 3px solid var(--ink); }
+    }
     @media (max-width: 640px) { .pl-grid { grid-template-columns: 1fr; } }
   </style>
 
