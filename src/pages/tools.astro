@@ -7,28 +7,32 @@ import Base from '../layouts/Base.astro';
     <h1>Tools</h1>
     <p class="tl-intro"><em>Small helpers for the moments between "I've got this" and "why did I do that". They run in your browser, they're free, and they don't judge. Much.</em></p>
 
-    <figure class="tl-hero"><img src="/images/tools-troll.jpg" alt="A troll sits on a crate at the sideline, counting on his fingers and sliding beads on a tiny abacus, while a nervous goblin holds up a measuring ruler." width="1200" height="670" /><figcaption>Our head of analytics, hard at work. Illustration: AI-generated.</figcaption></figure>
+    <figure class="tl-hero"><img src="/images/tools-troll.jpg" alt="A troll sits on a crate at the sideline, counting on his fingers and sliding beads on a tiny abacus, while a nervous goblin holds up a measuring ruler." width="1200" height="670" /><figcaption>Our head of analytics, hard at work. Illustrations: AI-generated.</figcaption></figure>
 
     <div class="tl-grid">
       <a class="tl-card" href="/tools/odds-desk/">
+        <img class="tl-head" src="/images/tool-head-odds.jpg" alt="A sweaty human blitzer doing sums in his head" width="240" height="240" loading="lazy" />
         <span class="tl-label">Dice maths</span>
         <span class="tl-title">The Odds Desk</span>
         <span class="tl-text">Dodge, rush, pick-up, pass, catch: line up your rolls and see your real chances, with team re-roll, skills, Pro and Loner spent in the smartest order.</span>
         <span class="btn dark tl-btn">Open the Odds Desk</span>
       </a>
       <a class="tl-card" href="/tools/block-desk/">
+        <img class="tl-head" src="/images/tool-head-block.jpg" alt="A grinning orc in a battered helmet" width="240" height="240" loading="lazy" />
         <span class="tl-label">Dice maths</span>
         <span class="tl-title">The Block Desk</span>
         <span class="tl-text">Strength, assists and all the usual hitting skills: see how often he goes down, how often you do, and how often he leaves on a stretcher.</span>
         <span class="btn dark tl-btn">Open the Block Desk</span>
       </a>
       <a class="tl-card" href="/tools/pass-desk/">
+        <img class="tl-head" src="/images/tool-head-pass.jpg" alt="A smug high elf" width="240" height="240" loading="lazy" />
         <span class="tl-label">Dice maths</span>
         <span class="tl-title">The Pass Desk</span>
         <span class="tl-text">Tap the target square to see the range and what you need to roll, then the odds that the ball is caught. Throwing a goblin instead? Covered too.</span>
         <span class="btn dark tl-btn">Open the Pass Desk</span>
       </a>
       <a class="tl-card" href="/tools/foul-desk/">
+        <img class="tl-head" src="/images/tool-head-foul.jpg" alt="A winking goblin hooligan" width="240" height="240" loading="lazy" />
         <span class="tl-label">Dice maths</span>
         <span class="tl-title">The Foul Desk</span>
         <span class="tl-text">Assists, Dirty Player, Sneaky Git: how often the boot hurts him, and how often the referee sends you off for it.</span>
@@ -49,14 +53,22 @@ import Base from '../layouts/Base.astro';
     .tl-hero img { display: block; width: 100%; height: auto; border: 3px solid var(--ink); }
     .tl-hero figcaption { font-family: 'Inter', sans-serif; font-size: .78rem; color: var(--muted); margin-top: 6px; }
     .tl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 1.6em 0 2em; }
-    .tl-card { display: flex; flex-direction: column; gap: 10px; border: 3px solid var(--ink); border-top-width: 10px; padding: 20px 22px 22px; color: var(--ink); text-decoration: none; background: var(--paper-dark); }
+    .tl-card { position: relative; display: flex; flex-direction: column; gap: 10px; border: 3px solid var(--ink); border-top-width: 10px; padding: 20px 22px 22px; color: var(--ink); text-decoration: none; background: var(--paper-dark); }
     a.tl-card:hover { border-top-color: var(--red); color: var(--ink); }
     .tl-soon { background: transparent; border-style: dashed; border-top-style: solid; border-top-color: var(--muted); }
+    .tl-head { position: absolute; top: -22px; right: 14px; width: 88px; height: 88px; border-radius: 50%; border: 3px solid var(--ink); background: var(--paper); object-fit: cover; transition: transform .2s; }
+    a.tl-card:hover .tl-head { transform: rotate(-8deg) scale(1.06); }
+    a.tl-card .tl-label, a.tl-card .tl-title { padding-right: 92px; }
     .tl-label { font-family: 'Inter', sans-serif; font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--red); }
     .tl-title { font-family: 'Anton', sans-serif; font-size: 2.2rem; line-height: 1; text-transform: uppercase; }
     .tl-text { font-size: 1.1rem; flex: 1; }
     .tl-btn { text-align: center; }
     a.tl-card:hover .tl-btn { background: var(--red); border-color: var(--red); color: var(--paper); }
-    @media (max-width: 640px) { .tl-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 640px) {
+      .tl-grid { grid-template-columns: 1fr; }
+      .tl-head { width: 64px; height: 64px; top: -28px; }
+      a.tl-card .tl-title { padding-right: 0; }
+      a.tl-card .tl-label { padding-right: 70px; }
+    }
   </style>
 </Base>
