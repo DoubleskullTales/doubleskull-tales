@@ -100,7 +100,9 @@ Rats and runners take the coldest seat. Their whole game is speed, light armour 
 
 Five times out of six, none of this matters. The sixth time, the coach who read the table before kick-off has an edge. Our winter tips: Sure Feet on your runners, a plan for scoring short, and no long runs along the sideline.
 
-Can't wait until December 5? Throw a goblin through the Krampusbowl weather in <a href="/play/goblin-toss/">Goblin Toss</a>, or find out how close to the crowd you dare to slide on a Frozen Pitch in <a href="/play/sideline-slide/">Sideline Slide</a>.
+Can't wait until December 5? Throw a goblin through the Krampusbowl weather, or find out how close to the crowd you dare to slide on a Frozen Pitch.
+
+<div class="cta-row"><a class="play-cta" href="/play/goblin-toss/"><img src="/images/head-goblin-toss.jpg" alt="" width="240" height="240" loading="lazy"><span class="play-cta-text"><span class="play-cta-label">Mini game</span><span class="play-cta-title">Goblin Toss</span><span class="play-cta-sub">Pick a big guy, throw a goblin and let the Krampusbowl weather decide the rest.</span></span><span class="btn dark play-cta-btn">Play now</span></a><a class="play-cta" href="/play/sideline-slide/"><img src="/images/head-sideline-slide.jpg" alt="" width="240" height="240" loading="lazy"><span class="play-cta-text"><span class="play-cta-label">Mini game</span><span class="play-cta-title">Sideline Slide</span><span class="play-cta-sub">Sprint onto the Frozen Pitch and slide as close to the crowd as you dare.</span></span><span class="btn dark play-cta-btn">Play now</span></a></div>
 
 Still want to test your team against the weather? Sign-up for Krampusbowl 10 is open until Sunday, November 29, on <a href="https://tourplay.net/en/blood-bowl/krampusbowl-10" target="_blank" rel="noopener noreferrer">Tourplay</a>. Rules, tiers and the full weather table are on the <a href="https://krampusbowl.jimdofree.com/" target="_blank" rel="noopener noreferrer">Krampusbowl website</a>.
 

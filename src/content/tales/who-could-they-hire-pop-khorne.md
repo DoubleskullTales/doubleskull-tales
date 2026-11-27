@@ -110,4 +110,4 @@ Nine mercenaries, one inducement pot and an opponent who decides how big it gets
 
 <div class="tippspiel" data-poll="mercs-pop-khorne"></div>
 
-> Missed part one? Read [who Xurpils could bring for Back to the Roots](/tales/who-could-they-hire-back-to-the-roots/), and cast your vote there too.
+<a class="play-cta" href="/tales/who-could-they-hire-back-to-the-roots/"><img src="/images/head-mercs-roots.jpg" alt="" width="240" height="240" loading="lazy"><span class="play-cta-text"><span class="play-cta-label">Missed part one?</span><span class="play-cta-title">Who Could They Hire? Back to the Roots</span><span class="play-cta-sub">Who could Xurpils bring? Cast your vote there too.</span></span><span class="btn dark play-cta-btn">Read part one</span></a>

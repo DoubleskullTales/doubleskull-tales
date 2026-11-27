@@ -330,3 +330,16 @@ html, body { overflow-x: hidden; }
   .play-cta img { width: 72px; height: 72px; }
   .play-cta-btn { width: 100%; text-align: center; }
 }
+
+/* several call-to-action cards side by side (games, tales, tools) */
+.cta-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 1.4em 0 2em; }
+.cta-row .play-cta { margin: 0; flex-wrap: wrap; align-content: flex-start; gap: 12px 14px; padding: 16px; }
+.cta-row .play-cta img { width: 72px; height: 72px; }
+.cta-row .play-cta-text { flex: 1 1 140px; }
+.cta-row .play-cta-title { font-size: 1.35rem; }
+.cta-row .play-cta-sub { font-size: .98rem; }
+.cta-row .play-cta-btn { width: 100%; text-align: center; margin-top: auto; }
+
+/* links inside running text: easier to spot */
+.prose p a:not(.btn):not(.play-cta), .prose li a:not(.btn), .page p a:not(.btn):not(.play-cta), .page li a:not(.btn) { font-weight: 600; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.prose a[target="_blank"]:not(.btn)::after, .page p a[target="_blank"]:not(.btn)::after { content: " \2197"; font-size: .85em; }
